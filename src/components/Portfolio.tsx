@@ -1,10 +1,10 @@
 const WORKS = [
-  { src: "siteweb/cyberpunk-react-business-website/medias/WhatsApp Image 2026-08-29 at 03.51.31 (1).jpeg", title: "Mariage L. & A.", tag: "Site de mariage" },
-  { src: "https://picsum.photos/seed/bapteme/800/600", title: "Baptême d'Ella", tag: "Baptême" },
-  { src: "https://picsum.photos/seed/jubile/800/600", title: "70 ans de Grand-Père", tag: "Anniversaire" },
-  { src: "https://picsum.photos/seed/gala/800/600", title: "Gala de charité", tag: "Événement" },
-  { src: "https://picsum.photos/seed/commem/800/600", title: "Hommage M. Dupont", tag: "Commémoration" },
-  { src: "https://picsum.photos/seed/soiree/800/600", title: "Soirée retrouvailles", tag: "Événement" },
+  { src: "/medias/mariage.jpeg", title: "Mariage L. & A.", tag: "Site de mariage" },
+  { src: "/medias/naissance.jpeg", title: "Baptême d'Ella", tag: "Baptême" },
+  { src: "/medias/anniverssaire.jpeg", title: "70 ans de Grand-Père", tag: "Anniversaire" },
+  { src: "/medias/diplome.jpeg", title: "Gala de charité", tag: "Événement" },
+  { src: "/medias/enterement.jpeg", title: "Hommage M. Dupont", tag: "Commémoration" },
+  { src: "/medias/calin.jpeg", title: "Soirée retrouvailles", tag: "Événement" },
 ];
 
 /**
