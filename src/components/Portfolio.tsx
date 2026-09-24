@@ -1,10 +1,10 @@
 const WORKS = [
-  { src: "/medias/mariage.jpeg", title: "Mariage L. & A.", tag: "Site de mariage" },
-  { src: "/medias/naissance.jpeg", title: "Baptême d'Ella", tag: "Baptême" },
-  { src: "/medias/anniverssaire.jpeg", title: "70 ans de Grand-Père", tag: "Anniversaire" },
-  { src: "/medias/diplome.jpeg", title: "Gala de charité", tag: "Événement" },
-  { src: "/medias/enterement.jpeg", title: "Hommage M. Dupont", tag: "Commémoration" },
-  { src: "/medias/calin.jpeg", title: "Soirée retrouvailles", tag: "Événement" },
+  { src: "/assets/images/mariage.jpeg", title: "Mariage L. & A.", tag: "Site de mariage" },
+  { src: "/assets/images/naissance.jpeg", title: "Baptême d'Ella", tag: "Baptême" },
+  { src: "/assets/images/anniverssaire.jpeg", title: "70 ans de Grand-Père", tag: "Anniversaire" },
+  { src: "/assets/images/diplome.jpeg", title: "Gala de charité", tag: "Événement" },
+  { src: "/assets/images/enterement.jpeg", title: "Hommage M. Dupont", tag: "Commémoration" },
+  { src: "/assets/images/calin.jpeg", title: "Soirée retrouvailles", tag: "Événement" },
 ];
 
 /**

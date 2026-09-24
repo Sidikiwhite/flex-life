@@ -6,31 +6,31 @@ const SERVICES = [
     icon: Heart,
     title: "Sites de mariage",
     desc: "Soyez le couple qui change la donne ! Offrez-vous un portail numérique unique : cartes d'invitation stylées, enregistrement fluide des invités, médiathèque partagée et bien plus encore.",
-    image: "/medias/mariage.jpeg",
+    image: "/assets/images/mariage.jpeg",
   },
   {
     icon: Baby,
     title: "Baptêmes & naissances",
     desc: "Célébrez l'arrivée d'une nouvelle vie avec un site tendre et moderne, conçu pour partager ce bonheur en famille.",
-    image: "/medias/naissance.jpeg",
+    image: "/assets/images/naissance.jpeg",
   },
   {
     icon: Cake,
     title: "Anniversaires",
     desc: "Marquez le coup avec une expérience immersive : compte à rebours, livret d'or et souvenirs interactifs.",
-    image: "/medias/anniverssaire.jpeg",
+    image: "/assets/images/anniverssaire.jpeg",
   },
   {
     icon: Flame,
     title: "Commémorations",
     desc: "Un espace solennel et respectueux pour honorer une mémoire, rassembler les témoignages et partager des hommages.",
-    image: "/medias/enterement.jpeg",
+    image: "/assets/images/enterement.jpeg",
   },
   {
     icon: Globe,
     title: "Événements spéciaux",
     desc: "Galas, festivals ou retrouvailles : nous concevons l'architecture digitale parfaite pour vos moments d'exception.",
-    image: "/medias/calin.jpeg",
+    image: "/assets/images/calin.jpeg",
   },
 ];
 

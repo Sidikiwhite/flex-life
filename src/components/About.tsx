@@ -9,12 +9,12 @@ const FEATURES = [
 ];
 
 const IMAGES = [
-  "/medias/calin.jpeg",
-  "/medias/diplome-2.jpeg",
-  "/medias/diplome.jpeg",
-  "/medias/enterement.jpeg",
-  "/medias/mariage.jpeg",
-  "/medias/naissance.jpeg",
+  "/assets/images/calin.jpeg",
+  "/assets/images/diplome-2.jpeg",
+  "/assets/images/diplome.jpeg",
+  "/assets/images/enterement.jpeg",
+  "/assets/images/mariage.jpeg",
+  "/assets/images/naissance.jpeg",
 ];
 
 /**
