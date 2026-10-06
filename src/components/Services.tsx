@@ -44,7 +44,6 @@ export default function Services() {
   return (
     <section id="services" className="section">
       <div className="container">
-        <span className="eyebrow reveal">Services / Modules</span>
         <h2
           className="reveal reveal-delay-1"
           style={{ fontSize: "clamp(1.8rem, 4vw, 2.6rem)", textTransform: "uppercase", margin: "16px 0 12px" }}

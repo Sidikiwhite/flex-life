@@ -55,7 +55,7 @@ function SurpriseEffect() {
         />
       ))}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-4xl animate-bounce">
-        ✨🎉
+
       </div>
     </div>
   );
@@ -67,7 +67,6 @@ export default function Timeline() {
   return (
     <section id="parcours" className="section pb-40" style={{ backgroundColor: "var(--bg-soft, #faf9f6)", color: "#4a4a4a", transition: "all 0.5s ease", position: "relative" }}>
       <div className="container">
-        <span className="eyebrow reveal" style={{ color: "#a3a3a3" }}>Parcours / Accompagnement</span>
         <h2
           className="reveal reveal-delay-1"
           style={{ fontSize: "clamp(1.8rem, 4vw, 2.6rem)", textTransform: "none", margin: "16px 0 50px", color: "#2d2d2d", fontWeight: "500" }}

@@ -20,11 +20,6 @@ export default function Hero() {
       <div className="hero-grid" aria-hidden="true" />
 
       <div className="hero-content">
-        <div className="hero-badge reveal visible">
-          <span className="dot" aria-hidden="true" />
-          SYSTÈME EN LIGNE · AGENCE CRÉATIVE
-        </div>
-
         <h1>
           <span className="line">Des expériences</span>
           <span className="line neon-text">digitales</span>
@@ -40,9 +35,6 @@ export default function Hero() {
         <div style={{ display: "flex", flexWrap: "wrap", gap: 16 }}>
           <a href="#contact" className="btn btn-primary" onClick={scrollTo("contact")}>
             commander un site
-          </a>
-          <a href="#realisations" className="btn btn-ghost" onClick={scrollTo("realisations")}>
-            Voir les réalisations
           </a>
         </div>
 
