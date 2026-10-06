@@ -84,7 +84,6 @@ export default function Contact() {
     return (
       <section id="contact" className="section">
         <div className="container">
-          <span className="eyebrow reveal">Contact / Transmission</span>
           <h2
             className="reveal reveal-delay-1"
             style={{ fontSize: "clamp(1.8rem, 4vw, 2.6rem)", textTransform: "uppercase", margin: "16px 0 50px" }}
@@ -106,7 +105,6 @@ export default function Contact() {
   return (
     <section id="contact" className="section">
       <div className="container">
-        <span className="eyebrow reveal">Contact / Transmission</span>
         <h2
           className="reveal reveal-delay-1"
           style={{ fontSize: "clamp(1.8rem, 4vw, 2.6rem)", textTransform: "uppercase", margin: "16px 0 50px" }}
@@ -162,29 +160,6 @@ export default function Contact() {
               En envoyant, vous acceptez notre politique de confidentialité.
             </div>
           </form>
-
-          {/* Contact info */}
-          <div className="info-list reveal reveal-delay-3">
-            {INFO.map((it, i) => {
-              const Icon = it.icon;
-              return (
-                <div className="info-row" key={i}>
-                  <div className="info-icon"><Icon size={20} /></div>
-                  <div>
-                    <h4>{it.title}</h4>
-                    <p>{it.value}</p>
-                  </div>
-                </div>
-              );
-            })}
-            <div className="info-row">
-              <div className="info-icon"><Send size={20} /></div>
-              <div>
-                <h4>Disponibilité</h4>
-                <p>Réponse sous 24h, 7j/7 — devis gratuit.</p>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </section>

@@ -1,3 +1,5 @@
+import { Mail, MapPin, Phone, Send } from "lucide-react";
+
 /**
  * Social icons are provided as inline SVGs because brand icons are no
  * longer shipped with lucide-react. Each path is the standard brand glyph.
@@ -47,6 +49,13 @@ const SOCIALS = [
   },
 ];
 
+const CONTACT_INFO = [
+  { icon: Mail, title: "Email", value: "ghostgolem25@gmail.com" },
+  { icon: Phone, title: "Téléphone", value: "+225 05 04 81 81 48" },
+  { icon: MapPin, title: "Lieu", value: "grand bassam cote d ivoire" },
+  { icon: Send, title: "Réponse", value: "Sous 24h, 7j/7" },
+];
+
 /**
  * Footer
  * ------
@@ -56,6 +65,22 @@ export default function Footer() {
   return (
     <footer className="footer">
       <div className="footer-inner">
+        <div className="footer-top" style={{
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "center",
+          gap: "30px",
+          marginBottom: "20px",
+          color: "var(--text-muted, #666)",
+          fontSize: "0.85rem"
+        }}>
+          {CONTACT_INFO.map((info, i) => (
+            <div key={i} style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+              <info.icon size={14} />
+              <span>{info.value}</span>
+            </div>
+          ))}
+        </div>
         <p className="f-text">
           © {new Date().getFullYear()}{" "}
           <span className="neon-text">flex-code</span> / flex-life · Tous droits

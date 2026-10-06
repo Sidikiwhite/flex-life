@@ -7,9 +7,8 @@ export const NAV_LINKS = [
   { id: "apropos", label: "À propos", index: "02" },
   { id: "services", label: "Services", index: "03" },
   { id: "parcours", label: "Parcours", index: "04" },
-  { id: "realisations", label: "Réalisations", index: "05" },
-  { id: "faq", label: "FAQ", index: "06" },
-  { id: "contact", label: "Contact", index: "07" },
+  { id: "faq", label: "FAQ", index: "05" },
+  { id: "contact", label: "Contact", index: "06" },
 ];
 
 interface NavbarProps {

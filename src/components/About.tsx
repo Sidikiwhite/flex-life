@@ -36,7 +36,6 @@ export default function About() {
   return (
     <section id="apropos" className="section">
       <div className="container">
-        <span className="eyebrow reveal">À propos / Identity</span>
         <h2
           className="reveal reveal-delay-1"
           style={{ fontSize: "clamp(1.8rem, 4vw, 2.6rem)", textTransform: "uppercase", margin: "16px 0 12px" }}
