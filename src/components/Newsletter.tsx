@@ -24,9 +24,9 @@ export default function Newsletter() {
     <section className="section" style={{ paddingTop: 0 }}>
       <div className="container">
         <div className="newsletter reveal">
-          <Zap size={30} style={{ color: "var(--primary)", margin: "0 auto 18px" }} />
+          <Zap size={30} style={{ color: "var(--accent)", margin: "0 auto 18px" }} />
           <h2 style={{ fontSize: "clamp(1.5rem, 3.4vw, 2.2rem)" }}>
-            Restez <span className="neon-text">branché.e</span>
+            Restez <span className="neon-text">inspiré.e</span>
           </h2>
           <p>
             Recevez nos inspirations événementielles, nos nouveautés et nos

@@ -17,7 +17,7 @@ interface Errors {
 const INFO = [
   { icon: Mail, title: "Email", value: "ghostgolem25@gmail.com" },
   { icon: Phone, title: "Téléphone", value: "+225 05 04 81 81 48" },
-  { icon: MapPin, title: "modeste", value: "grand bassam cote d ivoire" },
+  { icon: MapPin, title: "Lieu", value: "Grand Bassam, Côte d'Ivoire" },
 ];
 
 /**
@@ -83,17 +83,17 @@ export default function Contact() {
   if (sent) {
     return (
       <section id="contact" className="section">
-        <div className="container">
+        <div className="container" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <h2
             className="reveal reveal-delay-1"
-            style={{ fontSize: "clamp(1.8rem, 4vw, 2.6rem)", textTransform: "uppercase", margin: "16px 0 50px" }}
+            style={{ fontSize: "clamp(1.8rem, 4vw, 2.6rem)", textTransform: "none", margin: "16px 0 50px", fontWeight: "500", textAlign: 'center' }}
           >
-            Prenons <span className="neon-text">contact</span>
+            Prenons <span style={{ color: "var(--accent)", fontStyle: "italic" }}>contact</span>
           </h2>
-          <div className="form-success reveal visible" style={{ maxWidth: 640, margin: "0 auto" }}>
+          <div className="form-success reveal visible" style={{ maxWidth: 640, margin: "0 auto", textAlign: 'center' }}>
             <CheckCircle2 size={44} style={{ margin: "0 auto 16px" }} />
-            <h3>Message envoyé !</h3>
-            <p style={{ fontFamily: "Space Grotesk", color: "var(--text-muted)", marginTop: 10, fontWeight: 400 }}>
+            <h3 style={{ color: "var(--text)" }}>Message envoyé !</h3>
+            <p style={{ fontFamily: "Poppins", color: "var(--text-muted)", marginTop: 10, fontWeight: 400 }}>
               Merci {form.name.split(" ")[0]} ! Notre équipe vous répondra sous 24h.
             </p>
           </div>
@@ -104,53 +104,57 @@ export default function Contact() {
 
   return (
     <section id="contact" className="section">
-      <div className="container">
+      <div className="container" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <h2
           className="reveal reveal-delay-1"
-          style={{ fontSize: "clamp(1.8rem, 4vw, 2.6rem)", textTransform: "uppercase", margin: "16px 0 50px" }}
+          style={{ fontSize: "clamp(1.8rem, 4vw, 2.6rem)", textTransform: "none", margin: "16px 0 50px", fontWeight: "500", textAlign: 'center' }}
         >
-          Prenons <span className="neon-text">contact</span>
+          Prenons <span style={{ color: "var(--accent)", fontStyle: "italic" }}>contact</span>
         </h2>
 
-        <div className="contact-grid">
+        <div className="contact-grid" style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '40px' }}>
           {/* Form */}
-          <form className="card reveal reveal-delay-2" onSubmit={handleSubmit} noValidate>
+          <form className="card reveal reveal-delay-2" onSubmit={handleSubmit} noValidate style={{ width: '100%', maxWidth: '800px', margin: '0 auto' }}>
             <div className="field">
-              <label htmlFor="c-name">Nom & prénom</label>
+              <label htmlFor="c-name" style={{ fontSize: '1rem' }}>Nom & prénom</label>
               <input
                 id="c-name" type="text" placeholder="Jean Dupont" value={form.name}
                 onChange={handleChange("name")} className={errors.name ? "error" : ""}
                 aria-invalid={!!errors.name}
+                style={{ fontSize: '1.1rem' }}
               />
-              {errors.name && <div className="error-msg" role="alert">{errors.name}</div>}
+              {errors.name && <div className="error-msg" role="alert" style={{ fontSize: '0.9rem' }}>{errors.name}</div>}
             </div>
 
             <div className="field">
-              <label htmlFor="c-email">Email</label>
+              <label htmlFor="c-email" style={{ fontSize: '1rem' }}>Email</label>
               <input
                 id="c-email" type="email" placeholder="jean@email.fr" value={form.email}
                 onChange={handleChange("email")} className={errors.email ? "error" : ""}
                 aria-invalid={!!errors.email}
+                style={{ fontSize: '1.1rem' }}
               />
-              {errors.email && <div className="error-msg" role="alert">{errors.email}</div>}
+              {errors.email && <div className="error-msg" role="alert" style={{ fontSize: '0.9rem' }}>{errors.email}</div>}
             </div>
 
             <div className="field">
-              <label htmlFor="c-event">Type d'événement</label>
+              <label htmlFor="c-event" style={{ fontSize: '1rem' }}>Type d'événement</label>
               <input
                 id="c-event" type="text" placeholder="Mariage / Baptême / Anniversaire…"
                 value={form.event} onChange={handleChange("event")}
+                style={{ fontSize: '1.1rem' }}
               />
             </div>
 
             <div className="field">
-              <label htmlFor="c-message">Votre projet</label>
+              <label htmlFor="c-message" style={{ fontSize: '1rem' }}>Votre projet</label>
               <textarea
                 id="c-message" placeholder="Décrivez votre événement et vos envies…"
                 value={form.message} onChange={handleChange("message")}
                 className={errors.message ? "error" : ""} aria-invalid={!!errors.message}
+                style={{ fontSize: '1.1rem' }}
               />
-              {errors.message && <div className="error-msg" role="alert">{errors.message}</div>}
+              {errors.message && <div className="error-msg" role="alert" style={{ fontSize: '0.9rem' }}>{errors.message}</div>}
             </div>
 
             <button className="btn btn-primary" type="submit" disabled={sending} style={{ width: "100%", justifyContent: "center", opacity: sending ? 0.6 : 1 }}>

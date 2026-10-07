@@ -43,7 +43,7 @@ export default function CustomCursor() {
     // Grow the ring over interactive elements
     const onOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      if (target.closest("a, button, input, textarea, .g-item")) {
+      if (target.closest("a, button, input, textarea")) {
         ringRef.current?.classList.add("is-hover");
       } else {
         ringRef.current?.classList.remove("is-hover");

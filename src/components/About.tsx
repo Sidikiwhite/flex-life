@@ -3,8 +3,8 @@ import { CheckCircle2 } from "lucide-react";
 
 const FEATURES = [
   "Sites sur-mesure conçus autour de votre histoire",
-  "Designs modernes avec animations fluides",
-  "Hébergement, maintenance et mise à jour inclus",
+  "Designs élégants avec animations fluides",
+  "Hébergement, maintenance et mises à jour selon la formule choisie",
   "Interface intuitive et responsive sur tous les écrans",
 ];
 
@@ -38,7 +38,7 @@ export default function About() {
       <div className="container">
         <h2
           className="reveal reveal-delay-1"
-          style={{ fontSize: "clamp(1.8rem, 4vw, 2.6rem)", textTransform: "uppercase", margin: "16px 0 12px" }}
+          style={{ fontSize: "clamp(1.8rem, 4vw, 2.6rem)", textTransform: "none", margin: "16px 0 12px" }}
         >
           Nous donnons <span className="neon-text">vie</span> à vos moments
         </h2>
@@ -50,7 +50,7 @@ export default function About() {
               Nous transformons vos moments précieux en expériences digitales
               originales, élégantes et mémorables. Chaque projet est une
               exploration créative : nous écoutons, concevons et codons un site
-              qui raconte votre histoire avec un style  distinctif et
+              qui raconte votre histoire avec un style distinctif et
               des micro-interactions qui captivent vos visiteurs.
             </p>
 
@@ -64,9 +64,9 @@ export default function About() {
             </ul>
           </div>
 
-          {/* Holographic visual with Slider */}
+          {/* Premium visual with Slider */}
           <div className="reveal reveal-delay-3" style={{ animation: "floaty 6s ease-in-out infinite" }}>
-            <div className="holo-card" style={{ position: "relative", overflow: "hidden" }}>
+            <div className="holo-card" style={{ position: 'relative' }}>
               {IMAGES.map((src, index) => (
                 <img
                   key={src}
@@ -86,12 +86,9 @@ export default function About() {
                   }}
                 />
               ))}
-              <div className="scan" aria-hidden="true" />
-              <div className="frame" aria-hidden="true" />
-              <span className="corner tl" aria-hidden="true" />
-              <span className="corner tr" aria-hidden="true" />
-              <span className="corner bl" aria-hidden="true" />
-              <span className="corner br" aria-hidden="true" />
+
+              {/* Mascot Integration: Focused posture */}
+              {/* Mascot removed as per premium brand guidelines */}
             </div>
           </div>
         </div>

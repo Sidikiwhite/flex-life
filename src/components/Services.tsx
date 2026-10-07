@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Cake, Heart, Baby, Flame, Globe, Layers } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { Cake, Heart, Baby, Flame, Globe } from "lucide-react";
 
 const SERVICES = [
   {
@@ -37,20 +37,82 @@ const SERVICES = [
 /**
  * Services
  * --------
- * Grid of six offer cards with a flip/transition effect:
- * Image by default -> Content on hover/click.
+ * Grid of la carte services.
  */
 export default function Services() {
+  const [activeService, setActiveService] = useState<number | null>(null);
+  const dotsContainerRef = useRef<HTMLDivElement>(null);
+  const dotRefs = useRef<(HTMLSpanElement | null)[]>([]);
+
+  useEffect(() => {
+    const container = dotsContainerRef.current;
+    const dots = dotRefs.current.filter((dot): dot is HTMLSpanElement => dot !== null);
+    if (!container || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const movers = dots.map((element, index) => ({
+      element,
+      x: element.offsetLeft,
+      y: element.offsetTop,
+      angle: index * 2.399,
+      speed: 6 + ((index * 7.13) % 8),
+      phase: index * 1.731,
+      phaseB: index * 2.417,
+      driftRateA: 0.00011 + (index % 7) * 0.000021,
+      driftRateB: 0.000043 + (index % 11) * 0.000009,
+      driftAmountA: 0.13 + (index % 4) * 0.04,
+      driftAmountB: 0.06 + (index % 6) * 0.02,
+    }));
+
+    let frameId = 0;
+    let previousTime = 0;
+    const animate = (time: number) => {
+      const delta = previousTime ? Math.min((time - previousTime) / 1000, 0.05) : 0;
+      previousTime = time;
+      const width = container.clientWidth;
+      const height = container.clientHeight;
+
+      movers.forEach((mover) => {
+        const drift = Math.sin(time * mover.driftRateA + mover.phase) * mover.driftAmountA
+          + Math.sin(time * mover.driftRateB + mover.phaseB) * mover.driftAmountB;
+        mover.angle += drift * delta;
+        mover.x = (mover.x + Math.cos(mover.angle) * mover.speed * delta + width) % width;
+        mover.y = (mover.y + Math.sin(mover.angle) * mover.speed * delta + height) % height;
+        mover.element.style.transform = `translate3d(${mover.x - mover.element.offsetLeft}px, ${mover.y - mover.element.offsetTop}px, 0)`;
+      });
+
+      frameId = window.requestAnimationFrame(animate);
+    };
+
+    frameId = window.requestAnimationFrame(animate);
+    return () => window.cancelAnimationFrame(frameId);
+  }, []);
+
   return (
-    <section id="services" className="section">
+    <section id="services" className="section services-section">
+      <div ref={dotsContainerRef} className="services-bg-dots" aria-hidden="true">
+        {Array.from({ length: 42 }).map((_, index) => (
+          <span
+            key={index}
+            className="services-dot"
+            ref={(element) => { dotRefs.current[index] = element; }}
+            style={{
+              left: `${(index * 11 + 7) % 100}%`,
+              top: `${(index * 15 + 9) % 100}%`,
+            }}
+          />
+        ))}
+      </div>
       <div className="container">
         <h2
           className="reveal reveal-delay-1"
-          style={{ fontSize: "clamp(1.8rem, 4vw, 2.6rem)", textTransform: "uppercase", margin: "16px 0 12px" }}
+          style={{ fontSize: "clamp(2.3rem, 4vw, 3.2rem)", textTransform: "none", margin: "16px 0 12px", lineHeight: 1.2, color: "#111111" }}
         >
-          Nos <span className="neon-text">modules</span> créatifs
+          Nos <span style={{ color: "#8d2d4d", textShadow: "0 0 16px rgba(212, 167, 124, 0.42)" }}>expériences</span> créatives
         </h2>
-        <p className="reveal reveal-delay-2" style={{ color: "var(--text-muted)", maxWidth: 560, marginBottom: 50 }}>
+        <p
+          className="reveal reveal-delay-2"
+          style={{ color: "#111111", maxWidth: 700, marginBottom: 50, fontSize: "1.2rem", lineHeight: 1.8 }}
+        >
           Chaque événement mérite un site à son image. Voici ce que nous
           pouvons concevoir pour vous, entièrement sur-mesure.
         </p>
@@ -58,33 +120,40 @@ export default function Services() {
         <div className="services-grid">
           {SERVICES.map((s, i) => {
             const Icon = s.icon;
+            const isActive = activeService === i;
             return (
               <article
-                className="card service-card reveal reveal-delay-2 group relative overflow-hidden cursor-pointer"
+                className={`card service-card reveal reveal-delay-2${isActive ? " is-active" : ""}`}
                 key={i}
-                style={{ minHeight: "350px" }}
+                onClick={(event) => {
+                  const isTouch = window.matchMedia("(hover: none), (pointer: coarse)").matches;
+                  const clickedControl = event.target instanceof Element && event.target.closest("a, button");
+                  if (isTouch && isActive && !clickedControl) setActiveService(null);
+                }}
               >
-                {/* IMAGE STATE (Default) */}
-                <div
-                  className="absolute inset-0 transition-all duration-500 ease-in-out group-hover:opacity-0 group-hover:scale-110 z-10"
-                >
+                <div className="service-card-image">
                   <img
                     src={s.image}
                     alt={s.title}
-                    className="w-full h-full object-cover"
                   />
-                  <div className="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors duration-500" />
+                  <button
+                    type="button"
+                    className="service-card-trigger"
+                    aria-label={`${isActive ? "Masquer" : "Découvrir"} ${s.title}`}
+                    aria-expanded={isActive}
+                    onClick={() => setActiveService(isActive ? null : i)}
+                  />
                 </div>
 
-                {/* CONTENT STATE (Hover) */}
-                <div
-                  className="absolute inset-0 p-8 flex flex-col items-center justify-center text-center transition-all duration-500 ease-in-out opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 z-20 bg-[#f5f5f0] backdrop-blur-md"
-                >
-                  <div className="icon mb-6 bg-black/5 p-3 rounded-lg w-fit text-black"><Icon size={28} /></div>
-                  <h3 className="mb-3 text-2xl font-bold tracking-tight leading-tight text-black" style={{ fontFamily: "var(--font-playfair, serif)" }}>{s.title}</h3>
-                  <p className="text-base mb-6 text-gray-700 leading-relaxed font-medium max-w-[80%] mx-auto">
+                <div className="service-card-content">
+                  <div className="icon"><Icon size={28} /></div>
+                  <h3>{s.title}</h3>
+                  <p>
                     {s.desc}
                   </p>
+                  <a className="btn btn-primary service-card-order" href="#contact">
+                    Commander
+                  </a>
                 </div>
               </article>
             );
