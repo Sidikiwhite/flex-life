@@ -3,12 +3,16 @@ import { Plus } from "lucide-react";
 
 const FAQS = [
   {
+    q: "Que comprend la création de mon site événement ?",
+    a: "La prestation comprend la conception d'un site personnalisé et adapté aux mobiles. Les pages et fonctionnalités (comme l'invitation, les réponses des invités, la galerie ou le livre d'or) sont définies selon votre événement. Le devis précise le délai, l'hébergement, le suivi et les modifications inclus.",
+  },
+  {
     q: "Combien de temps faut-il pour créer un site événement ?",
-    a: "En général, un site complet est livré entre 2 jours et 1 semaines selon la complexité. Pour les projets express, nous proposons une formule accélérée en 7 jours. Le délai exact est confirmé après le premier échange.",
+    a: "Le délai dépend du contenu, du nombre de pages et des fonctionnalités retenues. Il est confirmé dans le devis avant le démarrage du projet. Une formule express peut être proposée selon les disponibilités.",
   },
   {
     q: "Ai-je besoin de compétences techniques pour gérer le site ?",
-    a: "Absolument pas. Nous nous occupons de tout : création, hébergement, mises à jour et maintenance. Vous recevez un site clé en main, simple à consulter et à partager, sans aucune technicité requise.",
+    a: "Aucune compétence technique n'est nécessaire pour consulter et partager le site. L'hébergement, les mises à jour et la maintenance sont pris en charge selon la formule retenue ; leurs modalités sont détaillées dans le devis.",
   },
   {
     q: "Les sites sont-ils adaptés aux mobiles et tablettes ?",
@@ -16,11 +20,11 @@ const FAQS = [
   },
   {
     q: "Puis-je mettre à jour le contenu après la mise en ligne ?",
-    a: "Oui. Selon la formule choisie, nous incluons un nombre d'heures de modification. Vous pouvez demander des changements (photos, textes, galerie) à tout moment, et nous nous en chargeons rapidement.",
+    a: "Les modifications après la mise en ligne (textes, photos ou galerie) dépendent de la formule choisie. Le devis indique précisément le volume de modifications inclus et les conditions pour demander des changements supplémentaires.",
   },
   {
     q: "Quel est le tarif d'un site événement ?",
-    a: "Le tarif dépend de la formule, du nombre de pages et des fonctionnalités. Nous offrons toujours un devis transparent et sur-mesure après un appel découverte. Contactez-nous pour un chiffrage gratuit.",
+    a: "Le tarif dépend du nombre de pages, des fonctionnalités et du niveau d'accompagnement souhaité. Vous recevez un devis détaillé avant le début du projet, avec le périmètre et les services inclus. Contactez-nous pour en discuter.",
   },
 ];
 
@@ -40,7 +44,7 @@ export default function FAQ() {
       <div className="container">
         <h2
           className="reveal reveal-delay-1"
-          style={{ fontSize: "clamp(1.8rem, 4vw, 2.6rem)", textTransform: "uppercase", margin: "16px 0 40px" }}
+          style={{ fontSize: "clamp(1.8rem, 4vw, 2.6rem)", textTransform: "none", margin: "16px 0 40px" }}
         >
           Questions <span className="neon-text">fréquentes</span>
         </h2>

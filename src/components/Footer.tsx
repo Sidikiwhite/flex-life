@@ -7,6 +7,7 @@ import { Mail, MapPin, Phone, Send } from "lucide-react";
 const SOCIALS = [
   {
     label: "Instagram",
+    href: "https://www.instagram.com/flex.code.flex.life/",
     path: (
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <rect x="2" y="2" width="20" height="20" rx="5" />
@@ -17,6 +18,7 @@ const SOCIALS = [
   },
   {
     label: "Facebook",
+    href: "https://www.facebook.com/share/14uzC7nwFni/",
     path: (
       <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
         <path d="M14 13.5h2.5l1-4H14v-2c0-1.03 0-2 2-2h1.5V2.14C17.17 2.09 15.96 2 14.64 2 12.4 2 11 3.32 11 5.86V9.5H8.5v4H11v8.5h3v-8.5z" />
@@ -24,42 +26,27 @@ const SOCIALS = [
     ),
   },
   {
-    label: "Twitter / X",
+    label: "TikTok",
+    href: "https://www.tiktok.com/@flexlife43?is_from_webapp=1&sender_device=pc",
     path: (
       <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-      </svg>
-    ),
-  },
-  {
-    label: "LinkedIn",
-    path: (
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.55V9h3.57zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.55C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.72C24 .77 23.2 0 22.22 0z" />
-      </svg>
-    ),
-  },
-  {
-    label: "YouTube",
-    path: (
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M23.5 6.2a3.02 3.02 0 0 0-2.12-2.14C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.38.51A3.02 3.02 0 0 0 .5 6.2C0 8.08 0 12 0 12s0 3.92.5 5.8a3.02 3.02 0 0 0 2.12 2.14c1.88.51 9.38.51 9.38.51s7.5 0 9.38-.51a3.02 3.02 0 0 0 2.12-2.14C24 15.92 24 12 24 12s0-3.92-.5-5.8zM9.55 15.57V8.43L15.82 12l-6.27 3.57z" />
+        <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 2.04 1.72 2.04 1.5C16.45 2.0 l 17.5 2.04 17.5 2.04v11.14h-3.33v-6.43c0-1.43-.4-2.45-1.65-2.45-1.15 0-1.86.83-1.86 2.12V13.14H7.5v-6.43c0-1.54 1.1-2.5 2.6-2.5.9 0 1.6.3 2.1.8V.02z" />
       </svg>
     ),
   },
 ];
 
 const CONTACT_INFO = [
-  { icon: Mail, title: "Email", value: "ghostgolem25@gmail.com" },
-  { icon: Phone, title: "Téléphone", value: "+225 05 04 81 81 48" },
-  { icon: MapPin, title: "Lieu", value: "grand bassam cote d ivoire" },
+  { icon: Mail, title: "Email", value: "flex.code.flex.life@gmail.com" },
+  { icon: Phone, title: "Téléphone", value: "05 64 40 20 36" },
+  { icon: MapPin, title: "Lieu", value: "Grand Bassam, Côte d'Ivoire" },
   { icon: Send, title: "Réponse", value: "Sous 24h, 7j/7" },
 ];
 
 /**
  * Footer
  * ------
- * Minimal single-line footer with copyright and social icon links.
+ * Elegant footer for Flex-Life.
  */
 export default function Footer() {
   return (
@@ -72,26 +59,33 @@ export default function Footer() {
           gap: "30px",
           marginBottom: "20px",
           color: "var(--text-muted, #666)",
-          fontSize: "0.85rem"
+          fontSize: "0.95rem"
         }}>
           {CONTACT_INFO.map((info, i) => (
-            <div key={i} style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-              <info.icon size={14} />
+            <div key={i} style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+              <info.icon size={18} />
               <span>{info.value}</span>
             </div>
           ))}
         </div>
-        <p className="f-text">
-          © {new Date().getFullYear()}{" "}
-          <span className="neon-text">flex-code</span> / flex-life · Tous droits
-          réservés.
-        </p>
-        <div className="footer-links">
-          {SOCIALS.map((s, i) => (
-            <a key={i} href="#" className="social-link" aria-label={s.label} title={s.label}>
-              {s.path}
-            </a>
-          ))}
+        <div style={{ textAlign: "center", width: "100%", marginBottom: "24px" }}>
+          <p style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.4rem", marginBottom: "8px" }}>
+            "Nous transformons vos désirs en souvenirs numériques."
+          </p>
+        </div>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%", flexWrap: "wrap", gap: "20px" }}>
+          <p className="f-text" style={{ fontSize: "0.9rem" }}>
+            © {new Date().getFullYear()} <span style={{ fontWeight: 700 }}>Flex-Life</span> · Tous droits réservés.
+          </p>
+          <div className="footer-links">
+            {SOCIALS.map((s, i) => (
+              <a key={i} href={s.href} target="_blank" rel="noopener noreferrer" className="social-link" aria-label={s.label} title={s.label}>
+                <div style={{ transform: 'scale(1.2)', display: 'flex' }}>
+                  {s.path}
+                </div>
+              </a>
+            ))}
+          </div>
         </div>
       </div>
     </footer>
