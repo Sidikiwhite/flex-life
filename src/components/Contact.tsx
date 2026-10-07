@@ -4,6 +4,7 @@ import { Mail, MapPin, Phone, Send, CheckCircle2 } from "lucide-react";
 interface FormState {
   name: string;
   email: string;
+  phone: string;
   event: string;
   message: string;
 }
@@ -28,7 +29,7 @@ const INFO = [
  * confirmation (a real API endpoint could be plugged in).
  */
 export default function Contact() {
-  const [form, setForm] = useState<FormState>({ name: "", email: "", event: "", message: "" });
+  const [form, setForm] = useState<FormState>({ name: "", email: "", phone: "", event: "", message: "" });
   const [errors, setErrors] = useState<Errors>({});
   const [sent, setSent] = useState(false);
   const [sending, setSending] = useState(false);
@@ -135,6 +136,15 @@ export default function Contact() {
                 style={{ fontSize: '1.1rem' }}
               />
               {errors.email && <div className="error-msg" role="alert" style={{ fontSize: '0.9rem' }}>{errors.email}</div>}
+            </div>
+
+            <div className="field">
+              <label htmlFor="c-phone" style={{ fontSize: '1rem' }}>Téléphone</label>
+              <input
+                id="c-phone" type="tel" placeholder="+225 00 00 00 00 00" value={form.phone}
+                onChange={handleChange("phone")}
+                style={{ fontSize: '1.1rem' }}
+              />
             </div>
 
             <div className="field">
