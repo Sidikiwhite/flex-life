@@ -28,11 +28,7 @@ const SOCIALS = [
   {
     label: "TikTok",
     href: "https://www.tiktok.com/@flexlife43?is_from_webapp=1&sender_device=pc",
-    path: (
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 2.04 1.72 2.04 1.5C16.45 2.0 l 17.5 2.04 17.5 2.04v11.14h-3.33v-6.43c0-1.43-.4-2.45-1.65-2.45-1.15 0-1.86.83-1.86 2.12V13.14H7.5v-6.43c0-1.54 1.1-2.5 2.6-2.5.9 0 1.6.3 2.1.8V.02z" />
-      </svg>
-    ),
+    path: null,
   },
 ];
 
