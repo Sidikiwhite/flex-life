@@ -22,7 +22,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { name, email, event, message } = req.body;
+    const { name, email, phone, event, message } = req.body;
 
     // 1. Server-side Validation
     if (!name || !email || !message) {
@@ -43,6 +43,7 @@ export default async function handler(req, res) {
     // 2. Sanitization to prevent HTML Injection
     const safeName = escapeHtml(name);
     const safeEmail = escapeHtml(email);
+    const safePhone = phone ? escapeHtml(phone) : 'Non précisé';
     const safeEvent = event ? escapeHtml(event) : 'Non précisé';
     const safeMessage = escapeHtml(message);
 
@@ -55,6 +56,7 @@ export default async function handler(req, res) {
           <h2 style="color: #000;">Nouveau message reçu !</h2>
           <p><strong>Nom :</strong> ${safeName}</p>
           <p><strong>Email :</strong> ${safeEmail}</p>
+          <p><strong>Téléphone :</strong> ${safePhone}</p>
           <p><strong>Événement :</strong> ${safeEvent}</p>
           <p><strong>Message :</strong></p>
           <p style="background: #f4f4f4; padding: 15px; border-radius: 5px; border: 1px solid #ddd;">${safeMessage}</p>
