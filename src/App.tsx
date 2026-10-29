@@ -1,5 +1,6 @@
 import { useReveal } from "./hooks/useReveal";
 import { useTheme } from "./hooks/useTheme";
+import { BrowserRouter as Router, Routes, Route, useParams } from "react-router-dom";
 import CustomCursor from "./components/CustomCursor";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
@@ -11,6 +12,12 @@ import Contact from "./components/Contact";
 import Newsletter from "./components/Newsletter";
 import Footer from "./components/Footer";
 import BackToTop from "./components/BackToTop";
+import TemplateGallery from "./pages/templates/TemplateGallery";
+import DemoPlaceholder from "./pages/templates/DemoPlaceholder";
+import Demos from "./pages/Demos";
+import JungleBirthday from "./pages/templates/birthdays/demos/children/JungleBirthday/JungleBirthday.tsx";
+import SpaceBirthday from "./pages/templates/birthdays/demos/children/SpaceBirthday/SpaceBirthday.tsx";
+import MagicGrimoireBirthday from "./pages/templates/birthdays/demos/children/MagicGrimoireBirthday/MagicGrimoireBirthday.tsx";
 
 /**
  * App
@@ -25,29 +32,56 @@ export default function App() {
   const pageRef = useReveal();
 
   return (
-    <div ref={pageRef}>
-      {/* Decorative neon cursor */}
-      <CustomCursor />
+    <Router>
+      <div ref={pageRef}>
+        {/* Decorative neon cursor */}
+        <CustomCursor />
 
-      {/* Fixed navigation (hamburger only) */}
-      <Navbar theme={theme} onToggleTheme={toggleTheme} />
+        {/* Fixed navigation (hamburger only) */}
+        <Navbar theme={theme} onToggleTheme={toggleTheme} />
 
-      {/* Scroll-based storytelling sections */}
-      <main>
-        <Hero />
-        <About />
-        <Services />
-        <Timeline />
-        <FAQ />
-        <Newsletter />
-        <Contact />
-      </main>
+        <Routes>
+          <Route path="/" element={
+            <main key="home-page">
+              <Hero />
+              <About />
+              <Services />
+              <Timeline />
+              <FAQ />
+              <Newsletter />
+              <Contact />
+            </main>
+          } />
 
-      {/* Single-line footer */}
-      <Footer />
+          <Route path="/demos" element={<Demos />} />
+          <Route path="/demos/birthdays/jungle" element={<JungleBirthday />} />
+          <Route path="/demos/birthdays/space" element={<SpaceBirthday />} />
+          <Route path="/demos/birthdays/grimoire" element={<MagicGrimoireBirthday />} />
 
-      {/* Floating back-to-top control */}
-      <BackToTop />
-    </div>
+          <Route path="/templates/:category" element={<TemplateGalleryWrapper />} />
+          <Route path="/templates/:category/demo/:themeId" element={<DemoWrapper />} />
+        </Routes>
+
+        <Footer />
+        <BackToTop />
+      </div>
+    </Router>
   );
+}
+
+function TemplateGalleryWrapper() {
+  const { category } = useParams();
+  const categoryMap = {
+    birthdays: "Anniversaire",
+    weddings: "Mariage",
+    corporate: "Entreprise",
+    baptisms: "Baptême",
+    parties: "Fête"
+  };
+  return <TemplateGallery category={category} title={categoryMap[category as keyof typeof categoryMap] || "Événement"} />;
+}
+
+function DemoWrapper() {
+  const { themeId } = useParams();
+  return <DemoPlaceholder themeId={themeId} />;
 }

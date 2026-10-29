@@ -5,7 +5,9 @@
       "Bash(git commit -m 'feat: refine UI and restructure contact info *)",
       "Bash(git push *)",
       "Bash(npm run *)",
-      "Skill(fewer-permission-prompts)"
+      "Skill(fewer-permission-prompts)",
+      "Bash(mkdir *)",
+      "Bash(npm install *)"
     ]
   }
 }
