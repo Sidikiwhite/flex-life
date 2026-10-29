@@ -22,6 +22,11 @@ The project is a high-performance, one-page business website with a "cyberpunk" 
 - **Navbar**: Fixed navigation with theme toggle.
 - **Hero, About, Services, Timeline, FAQ, Newsletter, Contact**: Main content sections.
 - **ParticleCanvas**: Visual background effects.
+- **Templates (`src/pages/templates`)**: Reusable page structures for expanding beyond the one-page layout.
+
+## 🎯 Current Objectives
+- **Services Enhancement**: Improving the `Services.tsx` component and potentially creating detailed service pages.
+- **Template System**: Implementing a flexible system of templates in `src/pages/templates` to allow for scalable page creation while maintaining the cyberpunk aesthetic.
 
 ## 🎨 Key Features
 - **Scroll Reveal:** Uses an Intersection Observer via `useReveal` to trigger animations as the user scrolls.

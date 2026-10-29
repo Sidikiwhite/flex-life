@@ -4,8 +4,7 @@ import { useEffect, useRef } from "react";
  * useReveal
  * ---------
  * Adds an IntersectionObserver to any element with the `reveal` class so
- * sections fade & slide in as they enter the viewport. This powers the
- * scroll-based storytelling effect used across the whole one-page site.
+ * sections fade & slide in as they enter the viewport.
  */
 export function useReveal() {
   const ref = useRef<HTMLDivElement | null>(null);
@@ -14,14 +13,16 @@ export function useReveal() {
     const root = ref.current;
     if (!root) return;
 
-    // Observe all elements marked with `.reveal`
     const targets = root.querySelectorAll<HTMLElement>(".reveal");
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add("visible");
-            observer.unobserve(entry.target); // animate only once
+            // On arrête d'observer une fois que c'est visible.
+            // L'élément GARDERA la classe 'visible' définitivement.
+            observer.unobserve(entry.target);
           }
         });
       },
@@ -34,7 +35,3 @@ export function useReveal() {
 
   return ref;
 }
-
-/**
- * useScrollSpy / scroll helpers are kept inline in components to stay lean.
- */

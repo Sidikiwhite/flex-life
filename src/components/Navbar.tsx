@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Heart } from "lucide-react";
+import { Link } from "react-router-dom";
 
 /** Navigation items used by both the hidden overlay menu and the app. */
 export const NAV_LINKS = [
@@ -39,9 +40,19 @@ export default function Navbar({ theme, onToggleTheme }: NavbarProps) {
   const goTo = (id: string) => (e: React.MouseEvent) => {
     e.preventDefault();
     setOpen(false);
-    setTimeout(() => {
-      document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-    }, 150);
+
+    if (window.location.pathname !== "/") {
+      // Forcing a full page reload to the anchor is the most reliable way
+      // to ensure the browser handles the scroll to the element
+      window.location.assign(`/#${id}`);
+    } else {
+      setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 150);
+    }
   };
 
   return (
@@ -92,9 +103,14 @@ export default function Navbar({ theme, onToggleTheme }: NavbarProps) {
 
         {/* Right side controls */}
         <div className="nav-actions">
-          <a href="#contact" className="btn btn-primary navbar-cta" onClick={goTo("contact")}>
+          <a href="/#contact" className="btn btn-primary navbar-cta" onClick={(e) => {
+            e.preventDefault();
+            setOpen(false);
+            window.location.href = "/#contact";
+          }}>
             Créer mon événement
           </a>
+
 
           <button
             className={`menu-btn ${open ? "open" : ""}`}
@@ -123,7 +139,7 @@ export default function Navbar({ theme, onToggleTheme }: NavbarProps) {
         </button>
 
         {NAV_LINKS.map((l) => (
-          <a key={l.id} href={`#${l.id}`} onClick={goTo(l.id)}>
+          <a key={l.id} href={`/#${l.id}`} onClick={goTo(l.id)}>
             <span className="nav-index">{l.index}</span>
             {l.label}
           </a>
