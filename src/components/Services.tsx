@@ -51,6 +51,24 @@ export default function Services() {
   const dotsContainerRef = useRef<HTMLDivElement>(null);
   const dotRefs = useRef<(HTMLSpanElement | null)[]>([]);
 
+  // Modale « démos indisponibles » : fermeture via Échap + blocage du scroll
+  useEffect(() => {
+    if (!showToast) return;
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setShowToast(false);
+    };
+
+    document.addEventListener("keydown", onKeyDown);
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [showToast]);
+
   useEffect(() => {
     const container = dotsContainerRef.current;
     const dots = dotRefs.current.filter((dot): dot is HTMLSpanElement => dot !== null);
@@ -183,13 +201,10 @@ export default function Services() {
                         Commander
                       </a>
                       <button
+                        type="button"
                         onClick={(e) => {
                           e.stopPropagation();
-                          if (s.id === 'birthdays') {
-                            window.location.href = '/demos?service=birthdays';
-                          } else {
-                            setShowToast(true);
-                          }
+                          setShowToast(true);
                         }}
                         className="btn btn-primary service-card-demos"
                         style={{ backgroundColor: 'black', color: 'white', border: '1px solid rgba(255,255,255,0.2)' }}
@@ -207,18 +222,33 @@ export default function Services() {
         </div>
       </section>
       {showToast && (
-        <div className="fixed inset-0 z-[1000] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-300">
-          <div className="bg-surface-container border-2 border-gold/50 p-8 rounded-3xl shadow-2xl text-center max-w-md relative animate-in zoom-in-95 duration-300">
-            <div className="w-20 h-20 bg-gold/20 rounded-full flex items-center justify-center mx-auto mb-6 text-gold">
-              <Sparkles size={40} />
+        <div
+          className="demo-modal-overlay"
+          onClick={() => setShowToast(false)}
+        >
+          <div
+            className="demo-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="demo-modal-title"
+            aria-describedby="demo-modal-text"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="demo-modal-icon" aria-hidden="true">
+              <Sparkles size={34} />
             </div>
-            <h3 className="text-2xl font-bold text-white mb-4">Bientôt disponible !</h3>
-            <p className="text-on-surface-variant mb-8 text-lg">
-              Les démos pour ce service sont en cours de préparation et seront disponibles très prochainement.
+            <h3 id="demo-modal-title" className="demo-modal-title">
+              Modèles non disponibles
+            </h3>
+            <p id="demo-modal-text" className="demo-modal-text">
+              Nos modèles ne sont pas disponibles pour le moment. Revenez bientôt
+              pour découvrir nos nouvelles créations.
             </p>
             <button
+              type="button"
               onClick={() => setShowToast(false)}
-              className="btn btn-primary px-8 py-3 rounded-full font-bold w-full"
+              className="btn btn-primary"
+              autoFocus
             >
               D'accord
             </button>

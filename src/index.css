@@ -1498,6 +1498,103 @@ h1, h2, h3, h4 {
 }
 
 /* =====================================================================
+   DEMO MODAL (Services → Voir démos)
+   ===================================================================== */
+.demo-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(6px);
+  animation: demoModalFade 0.2s ease both;
+}
+
+.demo-modal {
+  position: relative;
+  width: min(92vw, 480px);
+  max-width: 480px;
+  padding: 32px;
+  border: 1px solid var(--card-border);
+  border-radius: 24px;
+  background: var(--card);
+  color: var(--text);
+  text-align: center;
+  box-shadow: var(--shadow-neon);
+  animation: demoModalZoom 0.25s ease both;
+}
+
+.demo-modal-icon {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 22px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--primary);
+  color: var(--accent);
+}
+
+.demo-modal-title {
+  margin-bottom: 12px;
+  font-family: "Playfair Display", serif;
+  font-size: 1.6rem;
+  line-height: 1.2;
+  color: var(--text);
+}
+
+.demo-modal-text {
+  margin-bottom: 26px;
+  color: var(--text-muted);
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+.demo-modal .btn {
+  width: 100%;
+  justify-content: center;
+}
+
+@keyframes demoModalFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes demoModalZoom {
+  from { opacity: 0; transform: scale(0.94); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@media (max-width: 479px) {
+  .demo-modal {
+    padding: 24px 20px;
+    border-radius: 20px;
+  }
+  .demo-modal-icon {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 18px;
+  }
+  .demo-modal-title {
+    font-size: 1.35rem;
+  }
+  .demo-modal-text {
+    margin-bottom: 22px;
+    font-size: 0.95rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .demo-modal-overlay,
+  .demo-modal {
+    animation: none;
+  }
+}
+
+/* =====================================================================
    MOBILE OPTIMIZATIONS
    ===================================================================== */
 

@@ -1,7 +1,7 @@
 import { useReveal } from "./hooks/useReveal";
 import { useTheme } from "./hooks/useTheme";
 import { useTouchOptimization } from "./hooks/useTouchOptimization";
-import { BrowserRouter as Router, Routes, Route, useParams } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import CustomCursor from "./components/CustomCursor";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
@@ -13,12 +13,7 @@ import Contact from "./components/Contact";
 import Newsletter from "./components/Newsletter";
 import Footer from "./components/Footer";
 import BackToTop from "./components/BackToTop";
-import TemplateGallery from "./pages/templates/TemplateGallery";
-import DemoPlaceholder from "./pages/templates/DemoPlaceholder";
 import Demos from "./pages/Demos";
-import JungleBirthday from "./pages/templates/birthdays/demos/children/JungleBirthday/JungleBirthday.tsx";
-import SpaceBirthday from "./pages/templates/birthdays/demos/children/SpaceBirthday/SpaceBirthday.tsx";
-import MagicGrimoireBirthday from "./pages/templates/birthdays/demos/children/MagicGrimoireBirthday/MagicGrimoireBirthday.tsx";
 
 /**
  * App
@@ -58,12 +53,6 @@ export default function App() {
           } />
 
           <Route path="/demos" element={<Demos />} />
-          <Route path="/demos/birthdays/jungle" element={<JungleBirthday />} />
-          <Route path="/demos/birthdays/space" element={<SpaceBirthday />} />
-          <Route path="/demos/birthdays/grimoire" element={<MagicGrimoireBirthday />} />
-
-          <Route path="/templates/:category" element={<TemplateGalleryWrapper />} />
-          <Route path="/templates/:category/demo/:themeId" element={<DemoWrapper />} />
         </Routes>
 
         <Footer />
@@ -73,19 +62,4 @@ export default function App() {
   );
 }
 
-function TemplateGalleryWrapper() {
-  const { category } = useParams();
-  const categoryMap = {
-    birthdays: "Anniversaire",
-    weddings: "Mariage",
-    corporate: "Entreprise",
-    baptisms: "Baptême",
-    parties: "Fête"
-  };
-  return <TemplateGallery category={category} title={categoryMap[category as keyof typeof categoryMap] || "Événement"} />;
-}
 
-function DemoWrapper() {
-  const { themeId } = useParams();
-  return <DemoPlaceholder themeId={themeId} />;
-}
