@@ -5,7 +5,7 @@ const SERVICES = [
   {
     id: 'weddings',
     icon: Heart,
-    title: "Sites de mariage",
+    title: "Mariage",
     desc: "Soyez le couple qui change la donne ! Offrez-vous un portail numérique unique : cartes d'invitation stylées, enregistrement fluide des invités, médiathèque partagée et bien plus encore.",
     image: "/assets/images/mariage.jpeg",
   },
