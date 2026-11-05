@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-import { Heart } from "lucide-react";
-import { Link } from "react-router-dom";
 
 /** Navigation items used by both the hidden overlay menu and the app. */
 export const NAV_LINKS = [
@@ -11,18 +9,13 @@ export const NAV_LINKS = [
   { id: "contact", label: "Nous contacter", index: "05" },
 ];
 
-interface NavbarProps {
-  theme: "dark" | "light";
-  onToggleTheme: () => void;
-}
-
 /**
  * Navbar
  * ------
  * Fixed top bar containing the logo, a primary CTA, and a hamburger menu.
  * Transition to a soft blur effect once the page is scrolled.
  */
-export default function Navbar({ theme, onToggleTheme }: NavbarProps) {
+export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 

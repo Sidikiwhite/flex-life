@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Mail, MapPin, Phone, Send, CheckCircle2 } from "lucide-react";
+import { Send, CheckCircle2 } from "lucide-react";
 
 interface FormState {
   name: string;
@@ -14,12 +14,6 @@ interface Errors {
   email?: string;
   message?: string;
 }
-
-const INFO = [
-  { icon: Mail, title: "Email", value: "ghostgolem25@gmail.com" },
-  { icon: Phone, title: "Téléphone", value: "+225 05 04 81 81 48" },
-  { icon: MapPin, title: "Lieu", value: "Grand Bassam, Côte d'Ivoire" },
-];
 
 /**
  * Contact

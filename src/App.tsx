@@ -1,5 +1,4 @@
 import { useReveal } from "./hooks/useReveal";
-import { useTheme } from "./hooks/useTheme";
 import { useTouchOptimization } from "./hooks/useTouchOptimization";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import CustomCursor from "./components/CustomCursor";
@@ -23,8 +22,7 @@ import Demos from "./pages/Demos";
  * scroll-reveal observer wrapping the whole page.
  */
 export default function App() {
-  // Theme state (dark default) + scroll-reveal observer for the page
-  const { theme, toggleTheme } = useTheme();
+  // Scroll-reveal observer for the page
   const pageRef = useReveal();
   
   // Mobile touch optimization
@@ -37,7 +35,7 @@ export default function App() {
         <CustomCursor />
 
         {/* Fixed navigation (hamburger only) */}
-        <Navbar theme={theme} onToggleTheme={toggleTheme} />
+        <Navbar />
 
         <Routes>
           <Route path="/" element={
