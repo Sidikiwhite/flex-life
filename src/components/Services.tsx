@@ -46,7 +46,7 @@ const SERVICES = [
  * Grid of la carte services.
  */
 export default function Services() {
-  const [activeService, setActiveService] = useState<number | null>(null);
+  const [activeServices, setActiveServices] = useState<boolean[]>(new Array(SERVICES.length).fill(false));
   const [showToast, setShowToast] = useState(false);
   const dotsContainerRef = useRef<HTMLDivElement>(null);
   const dotRefs = useRef<(HTMLSpanElement | null)[]>([]);
@@ -128,16 +128,12 @@ export default function Services() {
           <div className="services-grid">
             {SERVICES.map((s, i) => {
               const Icon = s.icon;
-              const isActive = activeService === i;
+              const isActive = activeServices[i];
               return (
                 <article
                   className={`card service-card reveal reveal-delay-2${isActive ? " is-active" : ""}`}
                   key={i}
-                  onClick={(event) => {
-                    const isTouch = window.matchMedia("(hover: none), (pointer: coarse)").matches;
-                    const clickedControl = event.target instanceof Element && event.target.closest("a, button");
-                    if (isTouch && isActive && !clickedControl) setActiveService(null);
-                  }}
+                  // Pas de onClick sur l'article pour mobile - seulement le bouton gère les clics
                 >
                   <div className="service-card-image">
                     <img
@@ -149,11 +145,34 @@ export default function Services() {
                       className="service-card-trigger"
                       aria-label={`${isActive ? "Masquer" : "Découvrir"} ${s.title}`}
                       aria-expanded={isActive}
-                      onClick={() => setActiveService(isActive ? null : i)}
+                      onClick={(e) => {
+                        // Empêcher la propagation pour éviter le double déclenchement
+                        e.stopPropagation();
+                        const isTouch = window.matchMedia("(hover: none), (pointer: coarse)").matches;
+                        if (isTouch) {
+                          // Sur mobile: toggle l'état de cette carte spécifique
+                          const newActiveServices = [...activeServices];
+                          newActiveServices[i] = !newActiveServices[i];
+                          setActiveServices(newActiveServices);
+                        }
+                      }}
                     />
                   </div>
 
-                  <div className="service-card-content">
+                  <div
+                    className="service-card-content"
+                    onClick={(e) => {
+                      // Ne pas refermer si le clic vient d'un bouton ou d'un lien
+                      if ((e.target as HTMLElement).closest("a, button")) return;
+                      const isTouch = window.matchMedia("(hover: none), (pointer: coarse)").matches;
+                      if (isTouch) {
+                        // Re-clic sur la zone de la carte : retour à l'état initial
+                        const newActiveServices = [...activeServices];
+                        newActiveServices[i] = false;
+                        setActiveServices(newActiveServices);
+                      }
+                    }}
+                  >
                     <div className="icon"><Icon size={28} /></div>
                     <h3>{s.title}</h3>
                     <p>
@@ -177,6 +196,7 @@ export default function Services() {
                       >
                         Voir démos
                       </button>
+
                     </div>
 
                   </div>

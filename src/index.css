@@ -667,7 +667,8 @@ h1, h2, h3, h4 {
   transform: translateY(40px);
   transition: opacity 0.8s ease, transform 0.8s ease;
 }
-.reveal.visible {
+.reveal.visible,
+.reveal[data-revealed="true"] {
   opacity: 1;
   transform: translateY(0);
 }
@@ -825,14 +826,31 @@ h1, h2, h3, h4 {
   transform: scale(0.96);
   transition: opacity 0.45s ease, transform 0.45s ease, visibility 0.45s ease;
 }
-.service-card.is-active .service-card-image {
-  opacity: 0;
-  transform: scale(1.06);
+/* Règles pour desktop - l'image disparaît quand la carte est active/survolée */
+@media (hover: hover) and (pointer: fine) {
+  .service-card.is-active .service-card-image,
+  .service-card:hover .service-card-image,
+  .service-card:focus-within .service-card-image {
+    opacity: 0;
+    transform: scale(1.06);
+  }
+  
+  .service-card.is-active .service-card-content,
+  .service-card:hover .service-card-content,
+  .service-card:focus-within .service-card-content {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: scale(1);
+  }
 }
+
+/* Règles générales pour l'état actif - s'appliquent partout */
 .service-card.is-active {
   opacity: 1;
   transform: none;
 }
+/* La carte secondaire recouvre entièrement la carte première (tous appareils) */
 .service-card.is-active .service-card-content {
   opacity: 1;
   visibility: visible;
@@ -906,16 +924,49 @@ h1, h2, h3, h4 {
 }
 
 @media (hover: none), (pointer: coarse) {
+  /* Règles spécifiques pour mobile */
   .service-card {
     display: block;
     min-height: 440px;
   }
+  
   .service-card-image {
     position: absolute;
     inset: 0;
     height: auto;
   }
-  .service-card-content { padding: 22px 18px; }
+  
+  .service-card-content { 
+    padding: 22px 18px; 
+  }
+  
+  /* SUR MOBILE: Logique ULTRA SIMPLIFIÉE */
+  /* Règle 1: L'image est TOUJOURS visible (100% d'opacité par défaut) */
+  .service-card .service-card-image {
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+  
+  /* Règle 2: Quand active, l'image est assombrie (60% d'opacité) */
+  .service-card.is-active .service-card-image {
+    opacity: 0.6 !important;
+  }
+  
+  /* Règle 3: Contenu visible SEULEMENT quand la carte est active */
+  .service-card.is-active .service-card-content {
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    /* Recouvre entièrement la carte (corrige le scale 0.96 résiduel) */
+    transform: scale(1) !important;
+  }
+  
+  /* Règle 4: Contenu caché quand la carte n'est PAS active */
+  .service-card:not(.is-active) .service-card-content {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
 }
 
 /* =====================================================================
@@ -1420,32 +1471,7 @@ h1, h2, h3, h4 {
   gap: 10px;
 }
 .social-link {
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  display: grid;
-  place-items: center;
-  color: var(--text-muted);
-  border: 1px solid var(--card-border);
-  background: transparent;
-  transition: all 0.3s ease;
-}
-.social-link:hover {
-  color: var(--text);
-  background: var(--primary);
-  box-shadow: var(--shadow-neon);
-  transform: translateY(-3px);
-}
-
-/* =====================================================================
-   BACK TO TOP
-   ===================================================================== */
-.back-top {
-  position: fixed;
-  bottom: 26px;
-  right: 26px;
-  width: 52px;
-  height: 52px;
+  width: 44px;
   border-radius: 12px;
   border: 1px solid var(--accent);
   background: var(--glass-bg);
@@ -1472,6 +1498,142 @@ h1, h2, h3, h4 {
 }
 
 /* =====================================================================
+   MOBILE OPTIMIZATIONS
+   ===================================================================== */
+
+/* Désactiver les effets hover sur les appareils tactiles */
+@media (hover: none) and (pointer: coarse) {
+  .btn:hover,
+  .card:hover,
+  .service-card:hover,
+  .timeline-item:hover,
+  .navbar-cta:hover,
+  .theme-toggle:hover,
+  .menu-btn:hover,
+  .overlay-close:hover,
+  .social-link:hover,
+  .back-top:hover {
+    transform: none !important;
+    box-shadow: none !important;
+    background: inherit !important;
+    border-color: inherit !important;
+  }
+  
+  /* Feedback tactile pour les boutons */
+  .btn.touch-active,
+  .navbar-cta.touch-active,
+  .theme-toggle.touch-active,
+  .menu-btn.touch-active,
+  .overlay-close.touch-active {
+    transform: scale(0.98);
+    opacity: 0.9;
+  }
+}
+
+/* Réduire les animations sur mobile et pour les préférences utilisateur */
+.reduce-motion *,
+.reduce-motion *::before,
+.reduce-motion *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
+}
+
+/* Optimiser les interactions tactiles */
+@media (hover: none) and (pointer: coarse) {
+  /* Augmenter la taille des cibles tactiles */
+  button,
+  .btn,
+  a[role="button"],
+  .menu-btn,
+  .overlay-close,
+  .theme-toggle,
+  .service-card-trigger {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Espacement supplémentaire pour les interactions tactiles */
+  .hero-cta,
+  .btn-primary,
+  .btn-ghost {
+    padding: 16px 24px;
+  }
+  
+  /* Désactiver les sélections de texte involontaires */
+  .hero-title,
+  .hero h1 .line,
+  h2, h3, h4 {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+  
+  /* Permettre la sélection de texte dans les zones de contenu */
+  p, li, span, .about-copy, .timeline-copy, .faq-a-inner {
+    -webkit-touch-callout: default;
+    -webkit-user-select: text;
+    user-select: text;
+  }
+}
+
+/* Optimisations pour les très petits écrans */
+@media (max-width: 359px) {
+  /* Simplifier les mises en page complexes */
+  .hero-stats {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  /* Agrandir les zones cliquables */
+  .faq-q,
+  .service-card-trigger,
+  .timeline-card {
+    padding: 16px;
+  }
+  
+  /* Réduire les marges internes pour gagner de l'espace */
+  .section {
+    padding: 40px 12px;
+  }
+}
+
+/* Optimisations pour les mobiles en mode paysage */
+@media (max-height: 500px) and (orientation: landscape) {
+  .hero-visual { 
+    height: 50svh; 
+    min-height: 300px;
+  }
+  .hero-content { 
+    padding-block: 10px 20px; 
+  }
+  .hero-title { 
+    font-size: clamp(1.6rem, 5vh, 2.8rem); 
+    margin-bottom: 8px;
+  }
+  .hero p.sub { 
+    margin: 8px auto 12px; 
+    font-size: 0.95rem;
+  }
+  .hero-stats { 
+    margin-top: 15px; 
+    padding-top: 10px; 
+  }
+  .overlay-nav { 
+    gap: 8px; 
+    padding-block: 60px 12px; 
+  }
+  .overlay-nav a { 
+    font-size: clamp(1rem, 4vh, 1.5rem); 
+    padding-block: 2px; 
+  }
+  .navbar {
+    padding-block: 8px;
+  }
+}
+
+/* =====================================================================
    KEYFRAMES
    ===================================================================== */
 @keyframes pulse {
@@ -1495,18 +1657,68 @@ h1, h2, h3, h4 {
    RESPONSIVE
    ===================================================================== */
 @media (max-width: 1023px) {
-  .section { padding: 88px 24px; }
-  .container { padding-inline: 8px; }
-  .about-grid { grid-template-columns: 1fr; gap: 36px; }
-  .about-copy .lead { font-size: 1.35rem; }
-  .services-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
-  #services.section { padding-inline: 20px; }
-  #services .container { padding-inline: 0; }
-  .service-card { min-height: 500px; }
-  .contact-grid { grid-template-columns: 1fr; }
-  .newsletter { padding: 40px 28px; }
-  .timeline { width: min(100%, 760px); }
-  .timeline::before { left: 28px; transform: none; }
+  .section { 
+    padding: 80px 24px; 
+  }
+  .container { 
+    padding-inline: 12px; 
+  }
+  
+  /* About section tablette */
+  .about-grid { 
+    grid-template-columns: 1fr; 
+    gap: 40px; 
+  }
+  .about-copy .lead { 
+    font-size: 1.35rem; 
+    line-height: 1.7;
+  }
+  .about-copy p {
+    font-size: 1.15rem;
+    line-height: 1.75;
+  }
+  .holo-card {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  /* Services tablette */
+  .services-grid { 
+    grid-template-columns: repeat(2, minmax(0, 1fr)); 
+    gap: 20px; 
+  }
+  #services.section { 
+    padding-inline: 20px; 
+  }
+  #services .container { 
+    padding-inline: 0; 
+  }
+  .service-card { 
+    min-height: 480px; 
+  }
+  
+  /* Contact tablette */
+  .contact-grid { 
+    grid-template-columns: 1fr; 
+    gap: 40px;
+  }
+  .info-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  /* Newsletter tablette */
+  .newsletter { 
+    padding: 40px 28px; 
+  }
+  
+  /* Timeline tablette */
+  .timeline { 
+    width: min(100%, 760px); 
+  }
+  .timeline::before { 
+    left: 28px; 
+    transform: none; 
+  }
   .timeline-item,
   .timeline-item.is-last {
     display: block;
@@ -1526,103 +1738,455 @@ h1, h2, h3, h4 {
     top: 24px;
     grid-column: auto;
   }
-  .timeline-item.is-last { padding-left: 0; margin-top: 56px; }
-  .timeline-item.is-last .timeline-card::before { top: -56px; height: 56px; }
-  .timeline-copy h3 { white-space: normal; }
+  .timeline-item.is-last { 
+    padding-left: 0; 
+    margin-top: 56px; 
+  }
+  .timeline-item.is-last .timeline-card::before { 
+    top: -56px; 
+    height: 56px; 
+  }
+  .timeline-copy h3 { 
+    white-space: normal; 
+    font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+  }
+  
+  /* FAQ tablette */
+  .faq-list {
+    max-width: 100%;
+  }
+  .faq-q {
+    padding: 18px 20px;
+  }
 }
 
 @media (max-width: 767px) {
-  .section { padding: 68px 22px; }
-  #apropos.section { padding-block: 52px; }
-  .navbar { padding: 12px 18px; }
-  .navbar.scrolled { padding: 8px 18px; }
-  .navbar .logo img { height: 48px !important; }
-  .navbar .logo div[aria-label="Flex-Life"] {
-    font-size: 1.15rem !important;
-    letter-spacing: 0.18em !important;
+  .section { 
+    padding: 68px 20px; 
   }
-  .navbar-cta { padding: 11px 14px; font-size: 0.72rem; }
-  .nav-actions { gap: 8px; }
-  .menu-btn { width: 46px; height: 46px; }
-  .overlay-nav { gap: 20px; padding: 84px 20px 28px; }
-  .overlay-nav a { font-size: clamp(1.35rem, 5vw, 2rem); text-align: center; }
-  .overlay-close { top: 18px; left: 18px; }
-  .hero { min-height: auto; min-height: 100svh; }
-  .hero-visual { height: min(58svh, 520px); }
-  .hero-content { padding: 20px 22px 44px; }
-  .hero-title { width: 100%; min-width: 0; font-size: clamp(2.1rem, 8.5vw, 4rem); }
-  .hero h1 .line { width: 100%; max-width: 100%; white-space: normal; overflow-wrap: anywhere; text-wrap: balance; }
-  .hero-title.final-row { font-size: clamp(1.8rem, 6vw, 2.7rem); }
-  .hero p.sub { font-size: 1.05rem; margin: 22px auto 28px; }
-  .hero-cta { padding: 16px 26px; font-size: 1rem; }
-  .hero-stats { gap: 22px 30px; margin-top: 36px; padding-top: 20px; }
-  .hero-stat .num { font-size: 1.8rem; }
-  .hero-stat .lbl { font-size: 0.75rem; }
-  .services-grid { gap: 18px; }
-  .service-card { min-height: 460px; }
-  .service-card-content { padding: 24px; }
-  .service-card-content p { font-size: 1rem; line-height: 1.65; }
-  .timeline-card { padding: 1.35rem 1.2rem; }
-  .timeline-copy p { font-size: 1.05rem; line-height: 1.7; }
-  .newsletter { padding: 34px 22px; }
-  .newsletter-form { flex-direction: column; }
-  .newsletter-form .btn { justify-content: center; }
-  .contact-grid { gap: 28px; }
-  .footer-inner { justify-content: center; text-align: center; }
-  .footer-top { flex-direction: column; align-items: center; }
+  #apropos.section { 
+    padding-block: 52px; 
+  }
+  
+  /* Navbar mobile optimisée */
+  .navbar { 
+    padding: 12px 16px; 
+  }
+  .navbar.scrolled { 
+    padding: 8px 16px; 
+  }
+  .navbar .logo img { 
+    height: 44px !important; 
+    width: 44px !important;
+  }
+  .navbar .logo div[aria-label="Flex-Life"] {
+    font-size: 1.05rem !important;
+    letter-spacing: 0.15em !important;
+  }
+  .navbar-cta { 
+    padding: 10px 12px; 
+    font-size: 0.7rem; 
+    white-space: nowrap;
+    border-radius: 12px;
+  }
+  .nav-actions { 
+    gap: 8px; 
+  }
+  .menu-btn { 
+    width: 44px; 
+    height: 44px; 
+  }
+  
+  /* Overlay menu mobile */
+  .overlay-nav { 
+    gap: 20px; 
+    padding: 80px 20px 28px; 
+  }
+  .overlay-nav a { 
+    font-size: clamp(1.4rem, 5vw, 2.1rem); 
+    text-align: center;
+    padding: 8px 16px;
+  }
+  .overlay-close { 
+    top: 16px; 
+    left: 16px;
+    width: 42px;
+    height: 42px;
+    font-size: 1.5rem;
+  }
+  
+  /* Hero mobile optimisé */
+  .hero { 
+    min-height: auto; 
+    min-height: 100svh; 
+  }
+  .hero-visual { 
+    height: min(55svh, 500px); 
+  }
+  .hero-content { 
+    padding: 20px 20px 40px; 
+  }
+  .hero-title { 
+    width: 100%; 
+    min-width: 0; 
+    font-size: clamp(2rem, 8vw, 3.8rem); 
+    line-height: 1.1;
+  }
+  .hero h1 .line { 
+    width: 100%; 
+    max-width: 100%; 
+    white-space: normal; 
+    overflow-wrap: anywhere; 
+    text-wrap: balance; 
+  }
+  .hero-title.final-row { 
+    font-size: clamp(1.7rem, 5.5vw, 2.5rem); 
+    line-height: 1.15;
+  }
+  .hero p.sub { 
+    font-size: 1.05rem; 
+    margin: 20px auto 24px; 
+    line-height: 1.6;
+  }
+  .hero-cta { 
+    padding: 16px 24px; 
+    font-size: 0.95rem;
+    border-radius: 14px;
+  }
+  .hero-stats { 
+    gap: 20px 28px; 
+    margin-top: 32px; 
+    padding-top: 18px; 
+  }
+  .hero-stat .num { 
+    font-size: 1.7rem; 
+    line-height: 1.2;
+  }
+  .hero-stat .lbl { 
+    font-size: 0.72rem; 
+    letter-spacing: 0.12em;
+  }
+  
+  /* Services mobile */
+  .services-grid { 
+    gap: 16px; 
+  }
+  .service-card { 
+    min-height: 420px; 
+  }
+  .service-card-content { 
+    padding: 20px; 
+  }
+  .service-card-content p { 
+    font-size: 0.95rem; 
+    line-height: 1.6; 
+  }
+  .service-card .icon {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 18px;
+  }
+  
+  /* Timeline mobile */
+  .timeline-card { 
+    padding: 1.2rem 1rem; 
+  }
+  .timeline-copy p { 
+    font-size: 1rem; 
+    line-height: 1.65; 
+  }
+  .timeline-icon {
+    width: 44px;
+    height: 44px;
+  }
+  
+  /* Newsletter mobile */
+  .newsletter { 
+    padding: 30px 20px; 
+  }
+  .newsletter-form { 
+    flex-direction: column; 
+    gap: 12px;
+  }
+  .newsletter-form .btn { 
+    justify-content: center;
+    width: 100%;
+  }
+  .newsletter-form input {
+    width: 100%;
+  }
+  
+  /* Contact mobile */
+  .contact-grid { 
+    gap: 24px; 
+  }
+  .field {
+    margin-bottom: 16px;
+  }
+  .field input,
+  .field textarea {
+    padding: 12px 14px;
+    font-size: 0.95rem;
+  }
+  
+  /* Footer mobile */
+  .footer-inner { 
+    justify-content: center; 
+    text-align: center;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .footer-top { 
+    flex-direction: column; 
+    align-items: center; 
+  }
+  .footer {
+    padding: 24px 20px;
+  }
 }
 
 @media (max-width: 479px) {
-  .section { padding: 58px 18px; }
-  #apropos.section { padding-block: 42px; }
-  .container { padding-inline: 0; }
-  .navbar { padding-inline: 12px; }
-  .navbar.scrolled { padding-inline: 12px; }
-  .navbar .logo { gap: 6px; }
-  .navbar .logo img { height: 40px !important; }
-  .navbar .logo div[aria-label="Flex-Life"] { font-size: 0.95rem !important; letter-spacing: 0.12em !important; }
-  .navbar-cta { padding: 10px 12px; font-size: 0.68rem; }
-  .menu-btn { width: 44px; height: 44px; }
-  .services-grid { grid-template-columns: minmax(0, 1fr); gap: 18px; }
-  #services.section { padding-inline: 14px; }
-  .service-card { min-height: 440px; }
-  .service-card-content { padding: 22px 18px; }
-  .about-copy p { font-size: 1.05rem; line-height: 1.75; }
-  .about-copy .lead { font-size: 1.18rem; }
-  .feature-list li { gap: 10px; }
-  .hero-visual { height: min(48svh, 380px); }
-  .hero-content { padding: 16px 18px 36px; }
-  .hero-title { font-size: clamp(1.9rem, 9vw, 2.6rem); }
-  .hero-title.final-row { font-size: clamp(1.5rem, 6.5vw, 2rem); }
-  .hero-stats { gap: 18px; }
-  .hero-stat .num { font-size: 1.5rem; }
-  .hero-stat .lbl { font-size: 0.68rem; letter-spacing: 0.08em; }
+  .section { 
+    padding: 52px 16px; 
+  }
+  #apropos.section { 
+    padding-block: 40px; 
+  }
+  .container { 
+    padding-inline: 0; 
+  }
+  
+  /* Navbar très petit écran */
+  .navbar { 
+    padding-inline: 12px; 
+    padding-block: 10px;
+  }
+  .navbar.scrolled { 
+    padding-inline: 12px; 
+    padding-block: 6px;
+  }
+  .navbar .logo { 
+    gap: 6px; 
+  }
+  .navbar .logo img { 
+    height: 36px !important; 
+    width: 36px !important;
+  }
+  .navbar .logo div[aria-label="Flex-Life"] { 
+    font-size: 0.9rem !important; 
+    letter-spacing: 0.1em !important; 
+  }
+  .navbar-cta { 
+    padding: 8px 10px; 
+    font-size: 0.65rem;
+    border-radius: 10px;
+  }
+  .menu-btn { 
+    width: 40px; 
+    height: 40px; 
+  }
+  .nav-actions {
+    gap: 6px;
+  }
+  
+  /* Services très petit écran */
+  .services-grid { 
+    grid-template-columns: minmax(0, 1fr); 
+    gap: 16px; 
+  }
+  #services.section { 
+    padding-inline: 12px; 
+  }
+  .service-card { 
+    min-height: 400px; 
+  }
+  .service-card-content { 
+    padding: 18px 16px; 
+  }
+  .service-card-content p {
+    font-size: 0.92rem;
+    line-height: 1.6;
+  }
+  .service-card .icon {
+    width: 52px;
+    height: 52px;
+    margin-bottom: 16px;
+  }
+  
+  /* About très petit écran */
+  .about-copy p { 
+    font-size: 1rem; 
+    line-height: 1.7; 
+  }
+  .about-copy .lead { 
+    font-size: 1.15rem; 
+    line-height: 1.65;
+  }
+  .feature-list li { 
+    gap: 8px; 
+    font-size: 0.95rem;
+  }
+  .holo-card {
+    border-radius: 20px;
+  }
+  
+  /* Hero très petit écran */
+  .hero-visual { 
+    height: min(45svh, 350px); 
+  }
+  .hero-content { 
+    padding: 14px 16px 32px; 
+  }
+  .hero-title { 
+    font-size: clamp(1.8rem, 8vw, 2.4rem); 
+    line-height: 1.1;
+  }
+  .hero-title.final-row { 
+    font-size: clamp(1.4rem, 6vw, 1.9rem); 
+    line-height: 1.15;
+  }
+  .hero p.sub {
+    font-size: 0.98rem;
+    margin: 18px auto 22px;
+  }
+  .hero-cta {
+    padding: 14px 20px;
+    font-size: 0.9rem;
+  }
+  .hero-stats { 
+    gap: 16px; 
+    margin-top: 28px;
+  }
+  .hero-stat .num { 
+    font-size: 1.4rem; 
+    line-height: 1.2;
+  }
+  .hero-stat .lbl { 
+    font-size: 0.65rem; 
+    letter-spacing: 0.1em; 
+  }
+  
+  /* Timeline très petit écran */
   .timeline-item,
-  .timeline-item.is-last { padding-left: 54px; }
-  .timeline::before { left: 20px; }
-  .timeline-card { padding: 1.15rem 1rem; }
-  .timeline-card .timeline-icon { width: 44px; height: 44px; }
-  .timeline-copy h3 { font-size: 1.45rem; }
-  .timeline-copy p { font-size: 0.98rem; }
-  .timeline-item.is-last { padding-left: 0; }
-  .faq-q { padding: 17px 16px; font-size: 0.94rem; }
-  .faq-a-inner { padding: 0 16px 18px; }
-  .newsletter { padding: 30px 18px; }
+  .timeline-item.is-last { 
+    padding-left: 48px; 
+    margin-bottom: 20px;
+  }
+  .timeline::before { 
+    left: 18px; 
+  }
+  .timeline-card { 
+    padding: 1rem; 
+    border-radius: 20px;
+  }
+  .timeline-card .timeline-icon { 
+    width: 40px; 
+    height: 40px; 
+    border-radius: 12px;
+  }
+  .timeline-copy h3 { 
+    font-size: 1.4rem; 
+    margin-bottom: 8px;
+  }
+  .timeline-copy p { 
+    font-size: 0.95rem; 
+    line-height: 1.65;
+  }
+  .timeline-item.is-last { 
+    padding-left: 0; 
+    margin-top: 32px;
+  }
+  
+  /* FAQ très petit écran */
+  .faq-list {
+    max-width: 100%;
+  }
+  .faq-q { 
+    padding: 15px 14px; 
+    font-size: 0.92rem; 
+  }
+  .faq-a-inner { 
+    padding: 0 14px 16px; 
+  }
+  .faq-item {
+    border-radius: 14px;
+  }
+  
+  /* Newsletter très petit écran */
+  .newsletter { 
+    padding: 26px 16px; 
+    border-radius: 20px;
+  }
+  .newsletter h2 {
+    font-size: 1.6rem;
+  }
+  
+  /* Contact très petit écran */
   .field input,
-  .field textarea { font-size: 1rem; }
-  .footer { padding: 24px 16px; }
-  .footer-top > div { max-width: 100%; overflow-wrap: anywhere; }
-  .back-top { width: 46px; height: 46px; bottom: 14px; right: 14px; }
+  .field textarea { 
+    font-size: 0.95rem; 
+    padding: 12px;
+  }
+  .info-list {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .info-row {
+    padding: 16px;
+  }
+  
+  /* Footer très petit écran */
+  .footer { 
+    padding: 20px 14px; 
+  }
+  .footer-top > div { 
+    max-width: 100%; 
+    overflow-wrap: anywhere; 
+    font-size: 0.85rem;
+  }
+  .back-top { 
+    width: 42px; 
+    height: 42px; 
+    bottom: 12px; 
+    right: 12px; 
+    font-size: 0.9rem;
+  }
 }
 
 @media (max-width: 359px) {
-  .navbar-cta { display: none; }
-  .navbar .logo div[aria-label="Flex-Life"] { font-size: 0.85rem !important; }
-  .hero-title { font-size: 1.9rem; }
-  .hero-title.final-row { font-size: 1.45rem; }
-  .hero-cta { width: 100%; justify-content: center; padding-inline: 16px; }
-  .hero-stats { gap: 14px; }
-  .hero-stat .num { font-size: 1.3rem; }
+  .navbar-cta { 
+    display: none; 
+  }
+  .navbar .logo div[aria-label="Flex-Life"] { 
+    font-size: 0.85rem !important;
+    letter-spacing: 0.15em !important;
+  }
+  .hero-title { 
+    font-size: 1.9rem; 
+    line-height: 1.15;
+  }
+  .hero-title.final-row { 
+    font-size: 1.45rem; 
+    line-height: 1.2;
+  }
+  .hero-cta { 
+    width: 100%; 
+    justify-content: center; 
+    padding-inline: 16px;
+    font-size: 0.95rem;
+  }
+  .hero-stats { 
+    gap: 14px;
+    margin-top: 30px;
+  }
+  .hero-stat .num { 
+    font-size: 1.3rem; 
+    line-height: 1.2;
+  }
+  .hero-stat .lbl {
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+  }
 }
 
 @media (max-height: 500px) and (orientation: landscape) {
