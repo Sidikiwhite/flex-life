@@ -19,6 +19,12 @@ export function useReveal() {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
+            // On utilise un attribut data-* en plus de la classe : React
+            // réécrit entièrement l'attribut `class` des éléments dont le
+            // className est dynamique (ex. cartes de services), ce qui
+            // effacerait la classe `visible` ajoutée ici. L'attribut data
+            // n'est pas géré par React et persiste donc.
+            entry.target.setAttribute("data-revealed", "true");
             entry.target.classList.add("visible");
             // On arrête d'observer une fois que c'est visible.
             // L'élément GARDERA la classe 'visible' définitivement.
