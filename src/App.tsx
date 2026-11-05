@@ -1,6 +1,6 @@
 import { useReveal } from "./hooks/useReveal";
 import { useTouchOptimization } from "./hooks/useTouchOptimization";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import CustomCursor from "./components/CustomCursor";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
@@ -12,7 +12,7 @@ import Contact from "./components/Contact";
 import Newsletter from "./components/Newsletter";
 import Footer from "./components/Footer";
 import BackToTop from "./components/BackToTop";
-import Demos from "./pages/Demos";
+import Templates from "./pages/Templates";
 
 /**
  * App
@@ -50,7 +50,9 @@ export default function App() {
             </main>
           } />
 
-          <Route path="/demos" element={<Demos />} />
+          <Route path="/templates" element={<Templates />} />
+          <Route path="/templates/:slug" element={<Templates />} />
+          <Route path="/demos" element={<Navigate to="/templates" replace />} />
         </Routes>
 
         <Footer />

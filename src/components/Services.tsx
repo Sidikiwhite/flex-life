@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Cake, Heart, Baby, Flame, Globe, Sparkles } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { getTemplatePath } from "../data/templates";
 
 const SERVICES = [
   {
@@ -47,6 +49,7 @@ const SERVICES = [
 export default function Services() {
   const [activeServices, setActiveServices] = useState<boolean[]>(new Array(SERVICES.length).fill(false));
   const [showToast, setShowToast] = useState(false);
+  const navigate = useNavigate();
   const dotsContainerRef = useRef<HTMLDivElement>(null);
   const dotRefs = useRef<(HTMLSpanElement | null)[]>([]);
 
@@ -167,10 +170,14 @@ export default function Services() {
                         e.stopPropagation();
                         const isTouch = window.matchMedia("(hover: none), (pointer: coarse)").matches;
                         if (isTouch) {
-                          // Sur mobile: toggle l'état de cette carte spécifique
-                          const newActiveServices = [...activeServices];
-                          newActiveServices[i] = !newActiveServices[i];
-                          setActiveServices(newActiveServices);
+                          // Sur mobile : une seule carte ouverte à la fois.
+                          // Ouvrir une carte ferme automatiquement les autres ;
+                          // recliquer sur la carte active la referme.
+                          setActiveServices((previous) =>
+                            previous.map((_, index) =>
+                              index === i ? !previous[i] : false
+                            )
+                          );
                         }
                       }}
                     />
@@ -183,10 +190,10 @@ export default function Services() {
                       if ((e.target as HTMLElement).closest("a, button")) return;
                       const isTouch = window.matchMedia("(hover: none), (pointer: coarse)").matches;
                       if (isTouch) {
-                        // Re-clic sur la zone de la carte : retour à l'état initial
-                        const newActiveServices = [...activeServices];
-                        newActiveServices[i] = false;
-                        setActiveServices(newActiveServices);
+                        // Re-clic sur la zone de la carte : fermer toutes les cartes
+                        setActiveServices((previous) =>
+                          previous.map(() => false)
+                        );
                       }
                     }}
                   >
@@ -203,7 +210,12 @@ export default function Services() {
                         type="button"
                         onClick={(e) => {
                           e.stopPropagation();
-                          setShowToast(true);
+                          const templatePath = getTemplatePath(s.id);
+                          if (templatePath) {
+                            navigate(templatePath);
+                          } else {
+                            setShowToast(true);
+                          }
                         }}
                         className="btn btn-primary service-card-demos"
                         style={{ backgroundColor: 'black', color: 'white', border: '1px solid rgba(255,255,255,0.2)' }}
