@@ -19,18 +19,16 @@ The project is a high-performance, one-page business website with a "cyberpunk" 
 ### 🧩 Core Components
 - **App.tsx**: Root component orchestrating the page layout.
 - **CustomCursor**: Neon decorative cursor effect.
-- **Navbar**: Fixed navigation with theme toggle.
+- **Navbar**: Fixed navigation with a hamburger overlay menu.
 - **Hero, About, Services, Timeline, FAQ, Newsletter, Contact**: Main content sections.
-- **ParticleCanvas**: Visual background effects.
-- **Templates (`src/pages/templates`)**: Reusable page structures for expanding beyond the one-page layout.
+- **Demos (`src/pages/Demos.tsx`)**: Empty catalog on `/demos`, ready to receive the new template system.
 
 ## 🎯 Current Objectives
 - **Services Enhancement**: Improving the `Services.tsx` component and potentially creating detailed service pages.
-- **Template System**: Implementing a flexible system of templates in `src/pages/templates` to allow for scalable page creation while maintaining the cyberpunk aesthetic.
+- **Template System**: Building the new templates from scratch; the old demo templates have been removed.
 
 ## 🎨 Key Features
 - **Scroll Reveal:** Uses an Intersection Observer via `useReveal` to trigger animations as the user scrolls.
-- **Theme System:** Dark/Light mode support via `useTheme`.
 - **Cyberpunk Aesthetic:** Heavy use of neon colors, gradients, and futuristic UI patterns.
 - **Single File Build:** Configured to bundle everything into one HTML file for easy deployment.
 

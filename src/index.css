@@ -2,13 +2,11 @@
 
 /* =====================================================================
    FLEX-LIFE — PREMIUM EVENT EXPERIENCE THEME
-   Design tokens are defined as CSS custom properties so the entire
-   theme can be swapped by toggling [data-theme].
+   Design tokens are defined as CSS custom properties.
    ===================================================================== */
 
-/* ---------- PRIMARY THEME : Elegant, Modern & Human ----------------- */
-:root,
-:root[data-theme="dark"] {
+/* ---------- THEME : Elegant, Modern & Human ------------------------ */
+:root {
   /* Base surfaces - Ivory & Beige dominance */
   --bg: #FFF9F5;            /* Ivory: main background (60%) */
   --bg-elevated: #EBDCC6;   /* Beige: raised surfaces (20%) */
@@ -36,33 +34,6 @@
   --glass-border: rgba(74, 52, 52, 0.1);
 
   color-scheme: light;
-}
-
-/* ---------- ALT THEME : Deep Cocoa / Evening ------------------------ */
-:root[data-theme="light"] {
-  /* We swap the logic: 'light' becomes a deep sophisticated cocoa theme */
-  --bg: #4A3434;            /* Cocoa Brown background */
-  --bg-elevated: #382727;   /* Darker cocoa */
-  --card: #5A4444;          /* Slightly lighter cocoa card */
-  --card-border: rgba(255, 249, 245, 0.1);
-  --card-glow: rgba(247, 215, 217, 0.05);
-
-  --text: #FFF9F5;           /* Ivory text */
-  --text-muted: #D7C9C9;
-
-  --primary: #F7D7D9;       /* Blush Pink stays primary */
-  --accent: #D4A77C;        /* Gold */
-  --secondary: #A7B89F;     /* Sage */
-  --success: #A7B89F;
-
-  --grid-line: rgba(255, 249, 245, 0.03);
-  --shadow-neon: 0 10px 30px rgba(0, 0, 0, 0.3);
-  --shadow-neon-magenta: 0 10px 30px rgba(0, 0, 0, 0.4);
-
-  --glass-bg: rgba(74, 52, 52, 0.6);
-  --glass-border: rgba(255, 249, 245, 0.1);
-
-  color-scheme: dark;
 }
 
 /* =====================================================================

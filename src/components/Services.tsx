@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import { Cake, Heart, Baby, Flame, Globe, Sparkles } from "lucide-react";
-import { Link } from "react-router-dom";
 
 const SERVICES = [
   {

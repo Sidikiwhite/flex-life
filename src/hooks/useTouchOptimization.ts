@@ -64,7 +64,7 @@ export function useTouchOptimization() {
           lastTouchTime = currentTime;
         };
         
-        button.addEventListener("touchstart", handleTouch, { passive: false });
+        button.addEventListener("touchstart", handleTouch as EventListener, { passive: false });
         
         // Ajouter un feedback tactile visuel
         button.addEventListener("touchstart", () => {
