@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowLeft, Sparkles, Rocket, Palette } from 'lucide-react';
+import { ArrowLeft, Sparkles } from 'lucide-react';
 import { Link, useSearchParams } from 'react-router-dom';
 
 // Types for our demo data
@@ -29,33 +29,8 @@ const DEMO_DATA: ServiceDemoCategory[] = [
   {
     id: 'birthdays',
     title: 'Anniversaires',
-    hasDemos: true,
-    templates: [
-      {
-        id: 'jungle',
-        title: 'Expédition Jungle',
-        description: 'Un voyage sauvage avec dinosaures et jungle luxuriante.',
-        image: 'https://images.pexels.com/photos/13872219/pexels-photo-13872219.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=300&w=500',
-        path: '/demos/birthdays/jungle',
-        icon: Palette,
-      },
-      {
-        id: 'space',
-        title: 'Aventure Spatiale',
-        description: 'Un voyage interstellaire avec fusées et étoiles filantes.',
-        image: 'https://images.pexels.com/photos/13872225/pexels-photo-13872225.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=300&w=500',
-        path: '/demos/birthdays/space',
-        icon: Rocket,
-      },
-      {
-        id: 'grimoire',
-        title: 'Grimoire Magique',
-        description: 'Un livre enchanté rempli de vœux de fées et de sortilèges.',
-        image: 'https://images.pexels.com/photos/7100317/pexels-photo-7100317.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=300&w=500',
-        path: '/demos/birthdays/grimoire',
-        icon: Sparkles,
-      },
-    ],
+    hasDemos: false,
+    templates: [],
   },
   {
     id: 'baptisms',
