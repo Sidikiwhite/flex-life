@@ -7,6 +7,7 @@ export const NAV_LINKS = [
   { id: "parcours", label: "Le Parcours", index: "03" },
   { id: "faq", label: "Questions", index: "04" },
   { id: "contact", label: "Nous contacter", index: "05" },
+  { id: "templates", label: "Voir Templates", index: "06", isRoute: true },
 ];
 
 /**
@@ -33,6 +34,12 @@ export default function Navbar() {
   const goTo = (id: string) => (e: React.MouseEvent) => {
     e.preventDefault();
     setOpen(false);
+
+    // Si c'est le lien "templates", naviguer vers la route
+    if (id === "templates") {
+      window.location.href = "/templates";
+      return;
+    }
 
     if (window.location.pathname !== "/") {
       // Forcing a full page reload to the anchor is the most reliable way

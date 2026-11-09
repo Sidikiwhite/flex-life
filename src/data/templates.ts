@@ -50,7 +50,53 @@ export const TEMPLATE_CATEGORIES: TemplateCategory[] = [
       "Des faire-part, sites et expériences numériques pensés pour les couples qui veulent marquer leur union d'une empreinte unique.",
     icon: Heart,
     demoPageEnabled: true,
-    templates: [],
+    templates: [
+      {
+        id: "mariage-elegance",
+        name: "Élégance",
+        description:
+          "Un site de mariage romantique et raffiné : compte à rebours, histoire du couple, programme, informations pratiques, galerie et formulaire de réponse.",
+        thumbnail: "/demos/mariage-elegance/preview.jpg",
+        href: "/demos/mariage-elegance/index.html",
+        tags: ["Ivoire & or", "Classique", "RSVP"],
+      },
+      {
+        id: "mariage-boheme",
+        name: "Bohème Sauvage",
+        description:
+          "Template authentique et naturel pour un mariage en pleine nature. Timeline narrative, détails pratiques, formulaire RSVP et palette terre cuite & sauge.",
+        thumbnail: "/demos/mariage-boheme/preview.jpg",
+        href: "/demos/mariage-boheme/index.html",
+        tags: ["Nature", "Terre cuite", "Éditorial"],
+      },
+      {
+        id: "mariage-minuit",
+        name: "Minuit à Paris",
+        description:
+          "Élégance urbaine et sophistiquée pour un mariage nocturne. Design noir & or, timeline séquentielle, typographie Garamond, atmosphère mystérieuse.",
+        thumbnail: "/demos/mariage-minuit/preview.jpg",
+        href: "/demos/mariage-minuit/index.html",
+        tags: ["Urbain", "Noir & or", "Sophistiqué"],
+      },
+      {
+        id: "mariage-jardin",
+        name: "Jardin d'Éden",
+        description:
+          "Template botanique luxuriant pour un mariage en serre ou jardin. Palette émeraude & terracotta, galerie photo, animations végétales, programme détaillé.",
+        thumbnail: "/demos/mariage-jardin/preview.jpg",
+        href: "/demos/mariage-jardin/index.html",
+        tags: ["Botanique", "Émeraude", "Luxuriant"],
+      },
+      {
+        id: "mariage-rivage",
+        name: "Rivage Méditerranéen",
+        description:
+          "Légèreté lumineuse pour un mariage en bord de mer. Bleu azur & sable doré, vague SVG, timeline maritime, design aéré et lumineux.",
+        thumbnail: "/demos/mariage-rivage/preview.jpg",
+        href: "/demos/mariage-rivage/index.html",
+        tags: ["Mer", "Azur", "Lumineux"],
+      },
+    ],
   },
   {
     id: "birthdays",

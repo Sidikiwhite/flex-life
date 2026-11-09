@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sophie & Alexandre — 21 Septembre 2027</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    /* ========== RESET & BASE ========== */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --noir: #0D0D0D;
+      --blanc: #FAFAFA;
+      --or: #D4AF37;
+      --ardoise: #4A4A4A;
+      --line: rgba(212, 175, 55, 0.2);
+      
+      --display: "Cormorant Garamond", Georgia, serif;
+      --sans: "Lato", system-ui, sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 70px;
+    }
+
+    body {
+      font-family: var(--sans);
+      background: var(--noir);
+      color: var(--blanc);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3 {
+      font-family: var(--display);
+      font-weight: 600;
+      line-height: 1.2;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    ::selection {
+      background: var(--or);
+      color: var(--noir);
+    }
+
+    /* ========== UTILITY ========== */
+    .container {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .section {
+      padding: 120px 0;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        transition-duration: 0.001ms !important;
+      }
+    }
+
+    /* ========== HEADER ========== */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(13, 13, 13, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 24px;
+      max-width: 1140px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      font-family: var(--display);
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: var(--blanc);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+    }
+
+    .nav-menu {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-menu a {
+      font-size: 0.85rem;
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--blanc);
+      text-decoration: none;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+
+    .nav-menu a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--or);
+      transition: width 0.3s ease;
+    }
+
+    .nav-menu a:hover::after,
+    .nav-menu a:focus::after {
+      width: 100%;
+    }
+
+    .nav-menu a:focus {
+      outline: none;
+      color: var(--or);
+    }
+
+    /* ========== HERO ========== */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      min-height: 100svh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: var(--noir);
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+    }
+
+    .hero-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.4;
+      filter: grayscale(100%) contrast(1.1);
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, transparent 0%, var(--noir) 90%);
+      z-index: 2;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      padding: 40px 24px;
+    }
+
+    .hero-date-small {
+      font-family: var(--sans);
+      font-size: 0.75rem;
+      font-weight: 300;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--or);
+      margin-bottom: 30px;
+    }
+
+    .hero-names {
+      font-size: clamp(3.5rem, 10vw, 7rem);
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      color: var(--blanc);
+      margin-bottom: 20px;
+      line-height: 1;
+    }
+
+    .hero-ampersand {
+      display: block;
+      font-style: italic;
+      font-size: 0.6em;
+      color: var(--or);
+      margin: 20px 0;
+    }
+
+    .hero-tagline {
+      font-family: var(--display);
+      font-size: clamp(1.2rem, 3vw, 1.8rem);
+      font-style: italic;
+      color: rgba(250, 250, 250, 0.7);
+      margin-bottom: 50px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 36px;
+      border: 1px solid var(--or);
+      background: transparent;
+      color: var(--or);
+      font-family: var(--sans);
+      font-size: 0.8rem;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn:hover,
+    .btn:focus {
+      background: var(--or);
+      color: var(--noir);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(212, 175, 55, 0.3);
+      outline: none;
+    }
+
+    /* ========== INTRO ========== */
+    .intro {
+      background: var(--noir);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      padding: 80px 0;
+    }
+
+    .intro-content {
+      max-width: 720px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .intro-content p {
+      font-size: 1.15rem;
+      line-height: 1.9;
+      color: rgba(250, 250, 250, 0.8);
+      margin-bottom: 16px;
+    }
+
+    .intro-signature {
+      font-family: var(--display);
+      font-size: 1.5rem;
+      font-style: italic;
+      color: var(--or);
+      margin-top: 30px;
+    }
+
+    /* ========== TIMELINE ========== */
+    .timeline {
+      background: #121212;
+      padding: 120px 0;
+    }
+
+    .timeline-header {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    .timeline-header h2 {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      margin-bottom: 20px;
+      color: var(--blanc);
+    }
+
+    .timeline-list {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      gap: 0;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 40px;
+      padding: 40px 0;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+    }
+
+    .timeline-item:last-child {
+      border-bottom: none;
+    }
+
+    .timeline-time {
+      text-align: right;
+      padding-top: 4px;
+    }
+
+    .timeline-time strong {
+      font-family: var(--display);
+      font-size: 1.8rem;
+      color: var(--or);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .timeline-time span {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(250, 250, 250, 0.5);
+    }
+
+    .timeline-content h3 {
+      font-size: 1.6rem;
+      margin-bottom: 12px;
+      color: var(--blanc);
+    }
+
+    .timeline-content p {
+      color: rgba(250, 250, 250, 0.7);
+      line-height: 1.8;
+    }
+
+    /* ========== VENUE ========== */
+    .venue {
+      background: var(--noir);
+      padding: 120px 0;
+    }
+
+    .venue-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .venue-img {
+      position: relative;
+      aspect-ratio: 4 / 5;
+      overflow: hidden;
+    }
+
+    .venue-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(100%) contrast(1.05);
+    }
+
+    .venue-info h2 {
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      margin-bottom: 24px;
+      color: var(--blanc);
+    }
+
+    .venue-info p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: rgba(250, 250, 250, 0.75);
+      margin-bottom: 16px;
+    }
+
+    .venue-info .venue-name {
+      font-family: var(--display);
+      font-size: 1.3rem;
+      font-style: italic;
+      color: var(--or);
+      margin-top: 30px;
+      margin-bottom: 8px;
+    }
+
+    .venue-info .venue-address {
+      color: rgba(250, 250, 250, 0.6);
+      font-size: 0.95rem;
+      margin-bottom: 20px;
+    }
+
+    .venue-info a {
+      color: var(--or);
+      text-decoration: none;
+      border-bottom: 1px solid var(--or);
+      transition: opacity 0.3s ease;
+    }
+
+    .venue-info a:hover {
+      opacity: 0.7;
+    }
+
+    /* ========== RSVP ========== */
+    .rsvp {
+      background: #121212;
+      padding: 120px 0;
+    }
+
+    .rsvp-container {
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .rsvp-container h2 {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      margin-bottom: 20px;
+      color: var(--blanc);
+    }
+
+    .rsvp-container > p {
+      font-size: 1.05rem;
+      color: rgba(250, 250, 250, 0.7);
+      margin-bottom: 50px;
+    }
+
+    .rsvp-form {
+      text-align: left;
+    }
+
+    .form-row {
+      margin-bottom: 24px;
+    }
+
+    .form-row label {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--or);
+      margin-bottom: 10px;
+    }
+
+    .form-row input,
+    .form-row select,
+    .form-row textarea {
+      width: 100%;
+      padding: 14px 18px;
+      background: var(--noir);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      color: var(--blanc);
+      font-family: var(--sans);
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+    }
+
+    .form-row input:focus,
+    .form-row select:focus,
+    .form-row textarea:focus {
+      outline: none;
+      border-color: var(--or);
+    }
+
+    .form-row textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .form-submit {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    /* ========== FOOTER ========== */
+    .footer {
+      background: var(--noir);
+      border-top: 1px solid var(--line);
+      padding: 60px 24px;
+      text-align: center;
+    }
+
+    .footer-monogram {
+      font-family: var(--display);
+      font-size: 3rem;
+      color: var(--or);
+      margin-bottom: 16px;
+      letter-spacing: 0.1em;
+    }
+
+    .footer-date {
+      font-size: 0.9rem;
+      color: rgba(250, 250, 250, 0.5);
+      letter-spacing: 0.15em;
+    }
+
+    .footer-credits {
+      margin-top: 40px;
+      font-size: 0.75rem;
+      color: rgba(250, 250, 250, 0.3);
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 768px) {
+      .nav-menu {
+        display: none;
+      }
+
+      .section {
+        padding: 80px 0;
+      }
+
+      .timeline-item {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .timeline-time {
+        text-align: left;
+      }
+
+      .venue-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+    }
+
+    @media (max-width: 390px) {
+      .container {
+        padding: 0 18px;
+      }
+
+      .hero-content {
+        padding: 40px 18px;
+      }
+
+      .btn {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <header class="header">
+    <nav class="nav">
+      <a href="#hero" class="logo">S & A</a>
+      <ul class="nav-menu">
+        <li><a href="#programme">Programme</a></li>
+        <li><a href="#lieu">Le lieu</a></li>
+        <li><a href="#rsvp">Répondre</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section id="hero" class="hero">
+    <div class="hero-bg">
+      <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=1600&q=80" alt="">
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-date-small">21 Septembre 2027</p>
+      <h1 class="hero-names">
+        Sophie
+        <span class="hero-ampersand">&</span>
+        Alexandre
+      </h1>
+      <p class="hero-tagline">Une nuit parisienne inoubliable</p>
+      <a href="#rsvp" class="btn">Confirmer votre présence</a>
+    </div>
+  </section>
+
+  <!-- INTRO -->
+  <section class="intro">
+    <div class="container">
+      <div class="intro-content reveal">
+        <p>Après dix années de complicité urbaine, de cafés au petit matin et de promenades nocturnes le long de la Seine, nous avons décidé de sceller notre histoire au cœur de la ville qui nous a réunis.</p>
+        <p>Vous êtes les témoins de notre aventure. Nous serions honorés de vous compter parmi nous pour célébrer ce chapitre nouveau.</p>
+        <div class="intro-signature">Sophie & Alexandre</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section id="programme" class="timeline">
+    <div class="container">
+      <div class="timeline-header reveal">
+        <h2>Programme de la soirée</h2>
+      </div>
+
+      <div class="timeline-list">
+        <div class="timeline-item reveal">
+          <div class="timeline-time">
+            <strong>18h00</strong>
+            <span>Arrivée</span>
+          </div>
+          <div class="timeline-content">
+            <h3>Accueil des invités</h3>
+            <p>Cocktail de bienvenue dans les salons du premier étage. Vue panoramique sur les toits de Paris.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal">
+          <div class="timeline-time">
+            <strong>19h00</strong>
+            <span>Cérémonie</span>
+          </div>
+          <div class="timeline-content">
+            <h3>Échange des vœux</h3>
+            <p>Cérémonie laïque intimiste dans la bibliothèque. Lecture de textes choisis par nos proches.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal">
+          <div class="timeline-time">
+            <strong>20h00</strong>
+            <span>Dîner</span>
+          </div>
+          <div class="timeline-content">
+            <h3>Repas gastronomique</h3>
+            <p>Dîner assis de cinq services par le Chef Julien Mercier. Accord mets et vins sélectionnés.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal">
+          <div class="timeline-time">
+            <strong>23h00</strong>
+            <span>Ouverture</span>
+          </div>
+          <div class="timeline-content">
+            <h3>Première danse & soirée</h3>
+            <p>Bal jazz et électro-swing jusqu'à l'aube. DJ résident et piste de danse sous les lustres.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal">
+          <div class="timeline-time">
+            <strong>02h00</strong>
+            <span>Surprise</span>
+          </div>
+          <div class="timeline-content">
+            <h3>Minuit parisien</h3>
+            <p>Une attention particulière pour clore la soirée. Laissez-vous surprendre.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VENUE -->
+  <section id="lieu" class="venue">
+    <div class="container">
+      <div class="venue-grid">
+        <div class="venue-img reveal">
+          <img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800&q=80" alt="Hôtel particulier parisien">
+        </div>
+        <div class="venue-info reveal">
+          <h2>L'Hôtel de Sévigné</h2>
+          <p>Un hôtel particulier du XVIIIe siècle niché au cœur du Marais. Salons classés, bibliothèque d'époque et verrière contemporaine pour une soirée hors du temps.</p>
+          <p>Accessible en métro (ligne 1, arrêt Saint-Paul) ou en taxi. Un service voiturier sera à votre disposition.</p>
+          <div class="venue-name">Hôtel de Sévigné</div>
+          <div class="venue-address">12 rue de Turenne, 75004 Paris</div>
+          <a href="https://maps.google.com" target="_blank" rel="noopener">Voir l'itinéraire</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RSVP -->
+  <section id="rsvp" class="rsvp">
+    <div class="container">
+      <div class="rsvp-container reveal">
+        <h2>Faites-nous signe</h2>
+        <p>Merci de confirmer votre présence avant le 1er août 2027</p>
+
+        <form class="rsvp-form" id="rsvp-form">
+          <div class="form-row">
+            <label for="name">Nom et prénom *</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+
+          <div class="form-row">
+            <label for="email">Email *</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+
+          <div class="form-row">
+            <label for="attending">Présence *</label>
+            <select id="attending" name="attending" required>
+              <option value="">Sélectionner</option>
+              <option value="yes">Je serai présent·e</option>
+              <option value="no">Je ne pourrai malheureusement pas venir</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label for="guests">Nombre de personnes</label>
+            <select id="guests" name="guests">
+              <option value="1">1 personne</option>
+              <option value="2">2 personnes</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label for="dietary">Préférences alimentaires</label>
+            <textarea id="dietary" name="dietary" placeholder="Végétarien, allergies, régimes particuliers..."></textarea>
+          </div>
+
+          <div class="form-submit">
+            <button type="submit" class="btn">Envoyer ma réponse</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-monogram">S ⚭ A</div>
+    <div class="footer-date">21 · 09 · 2027 · PARIS</div>
+    <div class="footer-credits">Template Minuit à Paris</div>
+  </footer>
+
+  <script>
+    // Reveal on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Form submission
+    document.getElementById('rsvp-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Merci pour votre réponse ! (En production, ce formulaire enverrait les données)');
+    });
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Emma & Lucas — 18 Juillet 2027</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Karla:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    /* ========== RESET & BASE ========== */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --azur: #4A7C9E;
+      --blanc-lin: #FAF8F5;
+      --sable: #D4C5B0;
+      --terracotta: #C17A5B;
+      --bleu-clair: #8AB4D5;
+      --ink: #2C3E50;
+      --muted: #6B7A8C;
+      --line: rgba(74, 124, 158, 0.15);
+      
+      --serif: "Lora", Georgia, serif;
+      --sans: "Karla", system-ui, sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 75px;
+    }
+
+    body {
+      font-family: var(--sans);
+      background: var(--blanc-lin);
+      color: var(--ink);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3 {
+      font-family: var(--serif);
+      font-weight: 600;
+      line-height: 1.25;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    ::selection {
+      background: var(--azur);
+      color: white;
+    }
+
+    /* ========== UTILITY ========== */
+    .container {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    .section {
+      padding: 100px 0;
+    }
+
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.75s ease, transform 0.75s ease;
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        transition-duration: 0.001ms !important;
+      }
+    }
+
+    /* ========== HEADER ========== */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(250, 248, 245, 0.96);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 1px 0 var(--line);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 32px;
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      font-family: var(--serif);
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--azur);
+      text-decoration: none;
+      letter-spacing: 0.03em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus {
+      color: var(--azur);
+      outline: none;
+    }
+
+    /* ========== HERO ========== */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      min-height: 100svh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: linear-gradient(to bottom, #E8F2F8 0%, var(--blanc-lin) 100%);
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+    }
+
+    .hero-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.35;
+      filter: brightness(1.1) saturate(0.85);
+    }
+
+    .hero-wave {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 120px;
+      z-index: 2;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M0 0v46.29c47.79 22.2 103.59 32.17 158 28 70.36-5.37 136.33-33.31 206.8-37.5 73.84-4.36 147.54 16.88 218.2 35.26 69.27 18 138.3 24.88 209.4 13.08 36.15-6 69.85-17.84 104.45-29.34C989.49 25 1113-14.29 1200 52.47V0z' opacity='.25' fill='%23FAF8F5'/%3E%3Cpath d='M0 0v15.81c13 21.11 27.64 41.05 47.69 56.24C99.41 111.27 165 111 224.58 91.58c31.15-10.15 60.09-26.07 89.67-39.8 40.92-19 84.73-46 130.83-49.67 36.26-2.85 70.9 9.42 98.6 31.56 31.77 25.39 62.32 62 103.63 73 40.44 10.79 81.35-6.69 119.13-24.28s75.16-39 116.92-43.05c59.73-5.85 113.28 22.88 168.9 38.84 30.2 8.66 59 6.17 87.09-7.5 22.43-10.89 48-26.93 60.65-49.24V0z' opacity='.5' fill='%23FAF8F5'/%3E%3Cpath d='M0 0v5.63C149.93 59 314.09 71.32 475.83 42.57c43-7.64 84.23-20.12 127.61-26.46 59-8.63 112.48 12.24 165.56 35.4C827.93 77.22 886 95.24 951.2 90c86.53-7 172.46-45.71 248.8-84.81V0z' fill='%23FAF8F5'/%3E%3C/svg%3E") no-repeat bottom;
+      background-size: 100% 100%;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      padding: 60px 32px;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--azur);
+      margin-bottom: 24px;
+    }
+
+    .hero-names {
+      font-size: clamp(3rem, 9vw, 6rem);
+      color: var(--azur);
+      margin-bottom: 16px;
+      line-height: 1.05;
+    }
+
+    .hero-names .ampersand {
+      font-style: italic;
+      font-size: 0.65em;
+      color: var(--terracotta);
+      display: block;
+      margin: 8px 0;
+    }
+
+    .hero-date {
+      font-family: var(--serif);
+      font-size: clamp(1.3rem, 3vw, 1.9rem);
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    .hero-location {
+      font-size: 1rem;
+      color: var(--muted);
+      margin-bottom: 48px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 16px 36px;
+      border-radius: 50px;
+      font-family: var(--sans);
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: 2px solid transparent;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--azur);
+      color: white;
+      border-color: var(--azur);
+    }
+
+    .btn-primary:hover,
+    .btn-primary:focus {
+      background: var(--bleu-clair);
+      border-color: var(--bleu-clair);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(74, 124, 158, 0.25);
+      outline: none;
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--azur);
+      border-color: var(--azur);
+    }
+
+    .btn-outline:hover,
+    .btn-outline:focus {
+      background: var(--azur);
+      color: white;
+      outline: none;
+    }
+
+    /* ========== WELCOME ========== */
+    .welcome {
+      background: white;
+      padding: 90px 0;
+    }
+
+    .welcome-content {
+      max-width: 780px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .welcome-content h2 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      color: var(--azur);
+      margin-bottom: 28px;
+    }
+
+    .welcome-content p {
+      font-size: 1.15rem;
+      line-height: 1.85;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    .welcome-signature {
+      font-family: var(--serif);
+      font-size: 1.6rem;
+      font-style: italic;
+      color: var(--terracotta);
+      margin-top: 36px;
+    }
+
+    /* ========== STORY ========== */
+    .story {
+      background: var(--blanc-lin);
+      padding: 100px 0;
+    }
+
+    .story-header {
+      text-align: center;
+      margin-bottom: 70px;
+    }
+
+    .story-header h2 {
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      color: var(--azur);
+      margin-bottom: 16px;
+    }
+
+    .story-header p {
+      font-size: 1.05rem;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    .story-grid {
+      display: grid;
+      gap: 80px;
+    }
+
+    .story-block {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .story-block:nth-child(even) .story-image {
+      order: 2;
+    }
+
+    .story-image {
+      position: relative;
+      aspect-ratio: 5 / 6;
+      overflow: hidden;
+      border-radius: 20px;
+      box-shadow: 0 12px 40px rgba(74, 124, 158, 0.15);
+    }
+
+    .story-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .story-text h3 {
+      font-size: 1.9rem;
+      color: var(--azur);
+      margin-bottom: 16px;
+    }
+
+    .story-year {
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: 12px;
+    }
+
+    .story-text p {
+      font-size: 1.08rem;
+      line-height: 1.8;
+      color: var(--muted);
+    }
+
+    /* ========== SCHEDULE ========== */
+    .schedule {
+      background: white;
+      padding: 100px 0;
+    }
+
+    .schedule-header {
+      text-align: center;
+      margin-bottom: 70px;
+    }
+
+    .schedule-header h2 {
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      color: var(--azur);
+      margin-bottom: 16px;
+    }
+
+    .schedule-list {
+      max-width: 840px;
+      margin: 0 auto;
+      display: grid;
+      gap: 28px;
+    }
+
+    .schedule-item {
+      display: flex;
+      gap: 32px;
+      padding: 32px;
+      background: var(--blanc-lin);
+      border-radius: 16px;
+      border: 2px solid transparent;
+      transition: border-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .schedule-item:hover {
+      border-color: var(--azur);
+      transform: translateX(4px);
+    }
+
+    .schedule-time {
+      flex-shrink: 0;
+      width: 100px;
+      text-align: right;
+      padding-top: 4px;
+    }
+
+    .schedule-time strong {
+      font-family: var(--serif);
+      font-size: 1.6rem;
+      color: var(--azur);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .schedule-time span {
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .schedule-content h3 {
+      font-size: 1.4rem;
+      color: var(--ink);
+      margin-bottom: 10px;
+    }
+
+    .schedule-content p {
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    /* ========== VENUE ========== */
+    .venue {
+      background: linear-gradient(to bottom, var(--blanc-lin) 0%, #E8F2F8 100%);
+      padding: 100px 0;
+    }
+
+    .venue-wrap {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 70px;
+      align-items: center;
+    }
+
+    .venue-img {
+      position: relative;
+      aspect-ratio: 4 / 5;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 16px 48px rgba(74, 124, 158, 0.2);
+    }
+
+    .venue-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .venue-info h2 {
+      font-size: clamp(2.2rem, 5vw, 3.2rem);
+      color: var(--azur);
+      margin-bottom: 24px;
+    }
+
+    .venue-info p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    .venue-box {
+      background: white;
+      border-radius: 16px;
+      padding: 28px;
+      margin-top: 32px;
+      border: 1px solid var(--line);
+    }
+
+    .venue-box h4 {
+      font-size: 1.05rem;
+      color: var(--azur);
+      margin-bottom: 12px;
+    }
+
+    .venue-box p {
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 8px;
+    }
+
+    .venue-box a {
+      color: var(--azur);
+      text-decoration: none;
+      font-weight: 600;
+      border-bottom: 1px solid var(--azur);
+      transition: opacity 0.3s ease;
+    }
+
+    .venue-box a:hover {
+      opacity: 0.7;
+    }
+
+    /* ========== RSVP ========== */
+    .rsvp {
+      background: white;
+      padding: 100px 0;
+    }
+
+    .rsvp-wrapper {
+      max-width: 680px;
+      margin: 0 auto;
+      background: var(--blanc-lin);
+      border-radius: 24px;
+      padding: 60px 50px;
+      box-shadow: 0 12px 40px rgba(74, 124, 158, 0.08);
+    }
+
+    .rsvp-wrapper h2 {
+      font-size: clamp(2.2rem, 5vw, 3.2rem);
+      color: var(--azur);
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    .rsvp-intro {
+      text-align: center;
+      font-size: 1.05rem;
+      color: var(--muted);
+      margin-bottom: 48px;
+    }
+
+    .rsvp-form .field {
+      margin-bottom: 24px;
+    }
+
+    .rsvp-form label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--azur);
+      margin-bottom: 10px;
+    }
+
+    .rsvp-form input,
+    .rsvp-form select,
+    .rsvp-form textarea {
+      width: 100%;
+      padding: 14px 18px;
+      background: white;
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      font-family: var(--sans);
+      font-size: 1rem;
+      color: var(--ink);
+      transition: border-color 0.3s ease;
+    }
+
+    .rsvp-form input:focus,
+    .rsvp-form select:focus,
+    .rsvp-form textarea:focus {
+      outline: none;
+      border-color: var(--azur);
+    }
+
+    .rsvp-form textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    .rsvp-actions {
+      text-align: center;
+      margin-top: 36px;
+    }
+
+    /* ========== FOOTER ========== */
+    .footer {
+      background: var(--azur);
+      color: white;
+      padding: 80px 32px;
+      text-align: center;
+    }
+
+    .footer-icon {
+      font-size: 3.5rem;
+      margin-bottom: 24px;
+      opacity: 0.9;
+    }
+
+    .footer-names {
+      font-family: var(--serif);
+      font-size: 2.5rem;
+      margin-bottom: 12px;
+    }
+
+    .footer-date {
+      font-size: 1.05rem;
+      margin-bottom: 8px;
+      opacity: 0.9;
+    }
+
+    .footer-tag {
+      font-size: 0.8rem;
+      margin-top: 48px;
+      opacity: 0.7;
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .section {
+        padding: 70px 0;
+      }
+
+      .story-block {
+        grid-template-columns: 1fr;
+        gap: 36px;
+      }
+
+      .story-block:nth-child(even) .story-image {
+        order: 0;
+      }
+
+      .schedule-item {
+        flex-direction: column;
+        gap: 16px;
+        padding: 24px;
+      }
+
+      .schedule-time {
+        text-align: left;
+      }
+
+      .venue-wrap {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .rsvp-wrapper {
+        padding: 40px 28px;
+      }
+    }
+
+    @media (max-width: 390px) {
+      .container {
+        padding: 0 20px;
+      }
+
+      .hero-content {
+        padding: 50px 20px;
+      }
+
+      .btn {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <header class="header">
+    <nav class="nav">
+      <a href="#hero" class="logo">Emma & Lucas</a>
+      <ul class="nav-links">
+        <li><a href="#histoire">Notre histoire</a></li>
+        <li><a href="#programme">Programme</a></li>
+        <li><a href="#lieu">Le lieu</a></li>
+        <li><a href="#rsvp">RSVP</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section id="hero" class="hero">
+    <div class="hero-bg">
+      <img src="https://images.unsplash.com/photo-1519046904884-53103b34b206?w=1600&q=80" alt="">
+    </div>
+    <div class="hero-wave"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Rejoignez-nous</p>
+      <h1 class="hero-names">
+        Emma
+        <span class="ampersand">&</span>
+        Lucas
+      </h1>
+      <p class="hero-date">Vendredi 18 juillet 2027</p>
+      <p class="hero-location">Villa Méditerranée · Cassis, Côte d'Azur</p>
+      <a href="#rsvp" class="btn btn-primary">Confirmer ma présence</a>
+    </div>
+  </section>
+
+  <!-- WELCOME -->
+  <section class="welcome">
+    <div class="container">
+      <div class="welcome-content fade-up">
+        <h2>Sous le soleil de Méditerranée</h2>
+        <p>Nous avons grandi entre le sable et les vagues, les matins lumineux et les soirées douces. C'est naturellement les pieds dans l'eau que nous avons décidé de célébrer notre amour.</p>
+        <p>Rejoignez-nous pour une journée baignée de lumière azur, de rires et de promesses éternelles.</p>
+        <div class="welcome-signature">Emma & Lucas</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STORY -->
+  <section id="histoire" class="story">
+    <div class="container">
+      <div class="story-header fade-up">
+        <h2>Notre histoire</h2>
+        <p>Huit années de complicité maritime</p>
+      </div>
+
+      <div class="story-grid">
+        <div class="story-block fade-up">
+          <div class="story-image">
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=80" alt="Couple au bord de l'eau">
+          </div>
+          <div class="story-text">
+            <p class="story-year">Été 2019</p>
+            <h3>La rencontre</h3>
+            <p>Un cours de voile sur le Vieux-Port de Marseille. Lucas était moniteur, Emma apprenait les nœuds marins. Un fou rire après une chute dans l'eau, et une histoire qui ne s'est plus jamais arrêtée.</p>
+          </div>
+        </div>
+
+        <div class="story-block fade-up">
+          <div class="story-image">
+            <img src="https://images.unsplash.com/photo-1530789253388-582c481c54b0?w=800&q=80" alt="Voyage en bateau">
+          </div>
+          <div class="story-text">
+            <p class="story-year">Août 2022</p>
+            <h3>L'aventure grecque</h3>
+            <p>Trois semaines en voilier à travers les Cyclades. Santorin au lever du jour, Mykonos sous les étoiles. Lucas a compris qu'Emma chantait faux, Emma que Lucas avait le mal de mer. On s'est aimés encore plus.</p>
+          </div>
+        </div>
+
+        <div class="story-block fade-up">
+          <div class="story-image">
+            <img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=800&q=80" alt="Demande en mariage au bord de l'eau">
+          </div>
+          <div class="story-text">
+            <p class="story-year">Décembre 2026</p>
+            <h3>La promesse</h3>
+            <p>Sur la plage de Pampelonne à Saint-Tropez, un matin de décembre désert et lumineux. Lucas a écrit « Veux-tu m'épouser ? » dans le sable. Emma a écrit « OUI » en lettres géantes. La mer a tout effacé, mais pas la promesse.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCHEDULE -->
+  <section id="programme" class="schedule">
+    <div class="container">
+      <div class="schedule-header fade-up">
+        <h2>Programme de la journée</h2>
+      </div>
+
+      <div class="schedule-list">
+        <div class="schedule-item fade-up">
+          <div class="schedule-time">
+            <strong>16h00</strong>
+            <span>Arrivée</span>
+          </div>
+          <div class="schedule-content">
+            <h3>Accueil en bord de mer</h3>
+            <p>Cocktail de bienvenue sur la terrasse face à la Méditerranée. Mojitos, rosé frais et canapés provençaux.</p>
+          </div>
+        </div>
+
+        <div class="schedule-item fade-up">
+          <div class="schedule-time">
+            <strong>17h30</strong>
+            <span>Cérémonie</span>
+          </div>
+          <div class="schedule-content">
+            <h3>Échange des vœux</h3>
+            <p>Cérémonie laïque sur la plage privée, pieds nus dans le sable, face au coucher de soleil. Lecture de poèmes par nos témoins.</p>
+          </div>
+        </div>
+
+        <div class="schedule-item fade-up">
+          <div class="schedule-time">
+            <strong>18h30</strong>
+            <span>Apéritif</span>
+          </div>
+          <div class="schedule-content">
+            <h3>Cocktail dînatoire</h3>
+            <p>Apéritif étendu sur la terrasse panoramique avec buffet méditerranéen : mezze, fruits de mer, grillades au feu de bois.</p>
+          </div>
+        </div>
+
+        <div class="schedule-item fade-up">
+          <div class="schedule-time">
+            <strong>21h00</strong>
+            <span>Dîner</span>
+          </div>
+          <div class="schedule-content">
+            <h3>Dîner sous les étoiles</h3>
+            <p>Repas assis sous une pergola illuminée de guirlandes. Menu gastronomique inspiré des saveurs du Sud par le Chef Antoine Sanchez.</p>
+          </div>
+        </div>
+
+        <div class="schedule-item fade-up">
+          <div class="schedule-time">
+            <strong>23h00</strong>
+            <span>Soirée</span>
+          </div>
+          <div class="schedule-content">
+            <h3>Bal sur la plage</h3>
+            <p>Ouverture de bal sur du jazz manouche, puis DJ set jusqu'au lever du soleil. Piste de danse installée sur le sable.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VENUE -->
+  <section id="lieu" class="venue">
+    <div class="container">
+      <div class="venue-wrap">
+        <div class="venue-img fade-up">
+          <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&q=80" alt="Villa méditerranéenne">
+        </div>
+        <div class="venue-info fade-up">
+          <h2>Villa Méditerranée</h2>
+          <p>Une villa d'architecte du début du XXe siècle, nichée entre pinède et calanques. Plage privée, terrasses en pierre blanche et vue à 180° sur la mer.</p>
+          <p>Le lieu est accessible en voiture (parking privé de 50 places) ou en bateau depuis le port de Cassis. Une navette maritime sera mise à disposition le soir.</p>
+
+          <div class="venue-box">
+            <h4>📍 Adresse</h4>
+            <p>Villa Méditerranée<br>Chemin du Petit Nice, 13260 Cassis</p>
+            <a href="https://maps.google.com" target="_blank" rel="noopener">Voir l'itinéraire</a>
+          </div>
+
+          <div class="venue-box">
+            <h4>🏨 Hébergements</h4>
+            <p>Liste d'hôtels et locations disponibles sur demande. Pensez à réserver tôt, c'est la haute saison !</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RSVP -->
+  <section id="rsvp" class="rsvp">
+    <div class="container">
+      <div class="rsvp-wrapper fade-up">
+        <h2>Serez-vous des nôtres ?</h2>
+        <p class="rsvp-intro">Merci de confirmer votre présence avant le 15 mai 2027</p>
+
+        <form class="rsvp-form" id="rsvp-form">
+          <div class="field">
+            <label for="name">Nom et prénom *</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+
+          <div class="field">
+            <label for="email">Adresse email *</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+
+          <div class="field">
+            <label for="attending">Présence *</label>
+            <select id="attending" name="attending" required>
+              <option value="">Sélectionner</option>
+              <option value="yes">Je serai présent·e avec joie</option>
+              <option value="no">Je ne pourrai malheureusement pas venir</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="guests">Nombre de personnes</label>
+            <select id="guests" name="guests">
+              <option value="1">1 personne</option>
+              <option value="2">2 personnes</option>
+              <option value="3">3 personnes</option>
+              <option value="4">4 personnes</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="message">Allergies, régimes, message</label>
+            <textarea id="message" name="message" placeholder="Partagez avec nous vos préférences alimentaires ou un petit mot doux..."></textarea>
+          </div>
+
+          <div class="rsvp-actions">
+            <button type="submit" class="btn btn-primary">Envoyer ma réponse</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-icon">⚓</div>
+    <div class="footer-names">Emma & Lucas</div>
+    <div class="footer-date">18 juillet 2027 · Cassis</div>
+    <p class="footer-tag">Template Rivage Méditerranéen · Créé avec amour et soleil</p>
+  </footer>
+
+  <script>
+    // Fade-up on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // Form submission
+    document.getElementById('rsvp-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Merci pour votre réponse ! (En production, ce formulaire enverrait les données)');
+    });
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
