@@ -44,27 +44,6 @@ export default function DemoViewer() {
 
   return (
     <div className="demo-viewer">
-      {/* Barre d'actions flottante */}
-      <div className="demo-viewer-controls">
-        <button
-          onClick={handleBackToTemplates}
-          className="demo-btn demo-btn-back"
-          aria-label="Retour aux templates"
-        >
-          <ArrowLeft size={18} />
-          <span>Retour à Templates</span>
-        </button>
-
-        <button
-          onClick={handleChooseModel}
-          className="demo-btn demo-btn-choose"
-          aria-label="Choisir ce modèle"
-        >
-          <CheckCircle2 size={18} />
-          <span>Choisir ce modèle</span>
-        </button>
-      </div>
-
       {/* Iframe de la démo */}
       <iframe
         key={iframeKey}
