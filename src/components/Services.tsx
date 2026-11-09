@@ -218,7 +218,7 @@ export default function Services() {
                           }
                         }}
                         className="btn btn-primary service-card-demos"
-                        style={{ backgroundColor: 'black', color: 'white', border: '1px solid rgba(255,255,255,0.2)' }}
+                        style={{ backgroundColor: 'black', color: '#FFF9F5', border: '1px solid rgba(255,255,255,0.2)' }}
                       >
                         Voir démos
                       </button>

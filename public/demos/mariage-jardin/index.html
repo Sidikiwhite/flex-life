@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Léa & Maxime — 3 Mai 2027</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Nunito:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    /* ========== RESET & BASE ========== */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --emeraude: #2D5C4E;
+      --blanc-casse: #F8F6F1;
+      --terracotta: #C97F5D;
+      --or-vegetal: #B8995B;
+      --vert-doux: #7A9B8C;
+      --ink: #2C3630;
+      --muted: #5A6B5F;
+      --line: rgba(45, 92, 78, 0.15);
+      
+      --serif: "Playfair Display", Georgia, serif;
+      --sans: "Nunito", system-ui, sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 80px;
+    }
+
+    body {
+      font-family: var(--sans);
+      background: var(--blanc-casse);
+      color: var(--ink);
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3 {
+      font-family: var(--serif);
+      font-weight: 600;
+      line-height: 1.2;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    ::selection {
+      background: var(--emeraude);
+      color: white;
+    }
+
+    /* ========== UTILITY ========== */
+    .container {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    .section {
+      padding: 110px 0;
+    }
+
+    .grow-in {
+      opacity: 0;
+      transform: scale(0.95);
+      transition: opacity 0.9s ease, transform 0.9s ease;
+    }
+
+    .grow-in.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        transition-duration: 0.001ms !important;
+      }
+    }
+
+    /* ========== HEADER ========== */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(248, 246, 241, 0.94);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 28px;
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--emeraude);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .logo::before {
+      content: '🌿';
+      font-size: 1.2rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus {
+      color: var(--emeraude);
+      outline: none;
+    }
+
+    /* ========== HERO ========== */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      min-height: 100svh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: linear-gradient(135deg, #E8F2ED 0%, var(--blanc-casse) 100%);
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      opacity: 0.25;
+    }
+
+    .hero-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(0.8);
+    }
+
+    .hero-leaves {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .hero-leaf {
+      position: absolute;
+      font-size: 2rem;
+      opacity: 0.15;
+      animation: float 8s ease-in-out infinite;
+    }
+
+    .hero-leaf:nth-child(1) { top: 15%; left: 10%; animation-delay: 0s; }
+    .hero-leaf:nth-child(2) { top: 25%; right: 15%; animation-delay: 1.5s; }
+    .hero-leaf:nth-child(3) { bottom: 20%; left: 20%; animation-delay: 3s; }
+    .hero-leaf:nth-child(4) { bottom: 30%; right: 12%; animation-delay: 4.5s; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(5deg); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      padding: 50px 28px;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      padding: 8px 20px;
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--emeraude);
+      margin-bottom: 28px;
+    }
+
+    .hero-title {
+      font-size: clamp(2.8rem, 9vw, 5.5rem);
+      color: var(--emeraude);
+      margin-bottom: 20px;
+      line-height: 1.1;
+    }
+
+    .hero-title span {
+      display: block;
+      font-style: italic;
+      font-size: 0.5em;
+      color: var(--terracotta);
+      margin: 12px 0;
+    }
+
+    .hero-date {
+      font-family: var(--serif);
+      font-size: clamp(1.3rem, 3vw, 2rem);
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    .hero-location {
+      font-size: 1rem;
+      color: var(--muted);
+      margin-bottom: 40px;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 15px 32px;
+      border-radius: 8px;
+      font-family: var(--sans);
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: 2px solid transparent;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--emeraude);
+      color: white;
+      border-color: var(--emeraude);
+    }
+
+    .btn-primary:hover,
+    .btn-primary:focus {
+      background: var(--vert-doux);
+      border-color: var(--vert-doux);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(45, 92, 78, 0.2);
+      outline: none;
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--emeraude);
+      border-color: var(--emeraude);
+    }
+
+    .btn-secondary:hover,
+    .btn-secondary:focus {
+      background: var(--emeraude);
+      color: white;
+      outline: none;
+    }
+
+    /* ========== INTRO ========== */
+    .intro {
+      background: white;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      padding: 80px 0;
+    }
+
+    .intro-text {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .intro-text p {
+      font-size: 1.2rem;
+      line-height: 1.85;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    .intro-text .highlight {
+      color: var(--emeraude);
+      font-weight: 600;
+    }
+
+    /* ========== GALLERY ========== */
+    .gallery {
+      background: var(--blanc-casse);
+      padding: 110px 0;
+    }
+
+    .gallery-header {
+      text-align: center;
+      margin-bottom: 70px;
+    }
+
+    .gallery-header h2 {
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      color: var(--emeraude);
+      margin-bottom: 16px;
+    }
+
+    .gallery-header p {
+      font-size: 1.1rem;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    .story-timeline {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      gap: 80px;
+    }
+
+    .story-moment {
+      display: grid;
+      gap: 20px;
+    }
+
+    .story-year {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      color: var(--terracotta);
+      letter-spacing: 0.05em;
+      font-weight: 600;
+    }
+
+    .story-moment h3 {
+      font-size: 1.9rem;
+      color: var(--emeraude);
+      margin-bottom: 12px;
+    }
+
+    .story-moment p {
+      font-size: 1.08rem;
+      line-height: 1.8;
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+
+    .story-img {
+      position: relative;
+      aspect-ratio: 16 / 10;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      box-shadow: 0 8px 30px rgba(45, 92, 78, 0.12);
+    }
+
+    .story-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .story-moment:hover .story-img img {
+      transform: scale(1.05);
+    }
+
+    .story-signature {
+      text-align: center;
+      margin-top: 60px;
+      padding-top: 40px;
+      border-top: 1px solid var(--line);
+    }
+
+    .story-signature p {
+      font-size: 1.05rem;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .story-signature em {
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      color: var(--emeraude);
+      font-style: italic;
+      display: block;
+      margin-top: 12px;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .gallery-item {
+      position: relative;
+      aspect-ratio: 1;
+      overflow: hidden;
+      border-radius: 12px;
+      background: white;
+      border: 1px solid var(--line);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.08);
+    }
+
+    .gallery-item:nth-child(1) {
+      grid-column: span 2;
+      grid-row: span 2;
+    }
+
+    /* ========== PROGRAM ========== */
+    .program {
+      background: #F0EDE5;
+      padding: 110px 0;
+    }
+
+    .program-header {
+      text-align: center;
+      margin-bottom: 70px;
+    }
+
+    .program-header h2 {
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      color: var(--emeraude);
+      margin-bottom: 16px;
+    }
+
+    .program-list {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      gap: 32px;
+    }
+
+    .program-card {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 36px;
+      display: flex;
+      gap: 28px;
+      align-items: flex-start;
+      box-shadow: 0 4px 20px rgba(45, 92, 78, 0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .program-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 30px rgba(45, 92, 78, 0.12);
+    }
+
+    .program-icon {
+      flex-shrink: 0;
+      width: 64px;
+      height: 64px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--emeraude), var(--vert-doux));
+      display: grid;
+      place-items: center;
+      font-size: 1.8rem;
+    }
+
+    .program-content h3 {
+      font-size: 1.6rem;
+      color: var(--emeraude);
+      margin-bottom: 8px;
+    }
+
+    .program-time {
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: 12px;
+    }
+
+    .program-content p {
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    /* ========== VENUE ========== */
+    .venue {
+      background: white;
+      padding: 110px 0;
+    }
+
+    .venue-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 70px;
+      align-items: center;
+    }
+
+    .venue-img {
+      position: relative;
+      aspect-ratio: 4 / 5;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+    }
+
+    .venue-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .venue-info h2 {
+      font-size: clamp(2.2rem, 5vw, 3.2rem);
+      color: var(--emeraude);
+      margin-bottom: 24px;
+    }
+
+    .venue-info p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    .venue-details {
+      background: var(--blanc-casse);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 24px;
+      margin-top: 32px;
+    }
+
+    .venue-details h4 {
+      font-size: 1.1rem;
+      color: var(--emeraude);
+      margin-bottom: 12px;
+    }
+
+    .venue-details p {
+      font-size: 0.95rem;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .venue-details a {
+      color: var(--terracotta);
+      text-decoration: none;
+      font-weight: 600;
+      border-bottom: 1px solid var(--terracotta);
+      transition: opacity 0.3s ease;
+    }
+
+    .venue-details a:hover {
+      opacity: 0.7;
+    }
+
+    /* ========== RSVP ========== */
+    .rsvp {
+      background: linear-gradient(135deg, var(--emeraude) 0%, var(--vert-doux) 100%);
+      padding: 110px 0;
+      color: white;
+    }
+
+    .rsvp-container {
+      max-width: 650px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .rsvp-container h2 {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      color: white;
+      margin-bottom: 20px;
+    }
+
+    .rsvp-container > p {
+      font-size: 1.1rem;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 50px;
+    }
+
+    .rsvp-form {
+      background: white;
+      border-radius: 20px;
+      padding: 48px;
+      text-align: left;
+    }
+
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--emeraude);
+      margin-bottom: 10px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 14px 16px;
+      background: var(--blanc-casse);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      font-family: var(--sans);
+      font-size: 1rem;
+      color: var(--ink);
+      transition: border-color 0.3s ease;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--emeraude);
+    }
+
+    .form-group textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    .form-actions {
+      text-align: center;
+      margin-top: 36px;
+    }
+
+    /* ========== FOOTER ========== */
+    .footer {
+      background: var(--emeraude);
+      color: white;
+      padding: 70px 28px;
+      text-align: center;
+    }
+
+    .footer-icon {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+
+    .footer-names {
+      font-family: var(--serif);
+      font-size: 2.2rem;
+      margin-bottom: 12px;
+    }
+
+    .footer-date {
+      font-size: 1rem;
+      margin-bottom: 8px;
+      opacity: 0.9;
+    }
+
+    .footer-tag {
+      font-size: 0.8rem;
+      margin-top: 40px;
+      opacity: 0.6;
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .section {
+        padding: 70px 0;
+      }
+
+      .hero-cta {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .btn {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .story-timeline {
+        max-width: 600px;
+        gap: 60px;
+      }
+
+      .story-moment {
+        gap: 16px;
+      }
+
+      .story-img {
+        aspect-ratio: 16 / 9;
+      }
+
+      .story-signature {
+        margin-top: 50px;
+        padding-top: 30px;
+      }
+
+      .program-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 28px 24px;
+      }
+
+      .program-icon {
+        margin: 0 auto;
+      }
+
+      .venue-wrap {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .rsvp-form {
+        padding: 32px 24px;
+      }
+    }
+
+    @media (max-width: 390px) {
+      .container {
+        padding: 0 18px;
+      }
+
+      .hero-content {
+        padding: 40px 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <header class="header">
+    <nav class="nav">
+      <a href="#hero" class="logo">Léa & Maxime</a>
+      <ul class="nav-links">
+        <li><a href="#galerie">Galerie</a></li>
+        <li><a href="#programme">Programme</a></li>
+        <li><a href="#lieu">Le lieu</a></li>
+        <li><a href="#rsvp">RSVP</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section id="hero" class="hero">
+    <div class="hero-bg">
+      <img src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=1600&q=80" alt="">
+    </div>
+    <div class="hero-leaves">
+      <div class="hero-leaf">🌿</div>
+      <div class="hero-leaf">🍃</div>
+      <div class="hero-leaf">🌱</div>
+      <div class="hero-leaf">🌿</div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-badge">Nous nous marions</div>
+      <h1 class="hero-title">
+        Léa
+        <span>& Maxime</span>
+      </h1>
+      <p class="hero-date">Samedi 3 mai 2027</p>
+      <p class="hero-location">Les Grandes Serres · Angers, France</p>
+      <div class="hero-cta">
+        <a href="#rsvp" class="btn btn-primary">Confirmer ma présence</a>
+        <a href="#programme" class="btn btn-secondary">Voir le programme</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTRO -->
+  <section class="intro">
+    <div class="container">
+      <div class="intro-text grow-in">
+        <p>Nous avons grandi entourés de plantes, de jardins et de verdure. C'est naturellement sous <span class="highlight">une verrière botanique</span> que nous avons choisi de célébrer notre union.</p>
+        <p>Rejoignez-nous pour une journée luxuriante où la nature sera notre témoin.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- STORY -->
+  <section id="histoire" class="gallery">
+    <div class="container">
+      <div class="gallery-header grow-in">
+        <h2>Notre jardin secret</h2>
+        <p>Six années à cultiver notre amour</p>
+      </div>
+
+      <div class="story-timeline">
+        <div class="story-moment grow-in">
+          <div class="story-year">Printemps 2021</div>
+          <h3>La première graine</h3>
+          <p>Un atelier de jardinage urbain dans le 11ème arrondissement. Léa rempotait des succulentes, Maxime ne savait pas tenir un sécateur. On a ri, échangé nos pots, et pris rendez-vous pour arroser ensemble le dimanche suivant.</p>
+          <div class="story-img">
+            <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=800&q=80" alt="Couple jardinage ensemble">
+          </div>
+        </div>
+
+        <div class="story-moment grow-in">
+          <div class="story-year">Été 2022</div>
+          <h3>Le premier voyage</h3>
+          <p>Trois semaines au Costa Rica, entre forêts tropicales et jardins suspendus. Maxime a découvert que Léa connaissait le nom latin de chaque plante. Léa a compris que Maxime avait peur des papillons. On s'est aimés encore plus fort.</p>
+          <div class="story-img">
+            <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=800&q=80" alt="Couple en voyage nature">
+          </div>
+        </div>
+
+        <div class="story-moment grow-in">
+          <div class="story-year">Automne 2024</div>
+          <h3>Le jardin partagé</h3>
+          <p>On a pris une parcelle au jardin communautaire de Belleville. Tomates cerises, basilic pourpre, cosmos et dahlias. Nos samedis se sont remplis de terre sous les ongles et de pique-niques improvisés. C'est là qu'on a compris qu'on voulait planter des racines ensemble, pour de vrai.</p>
+          <div class="story-img">
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=80" alt="Couple complice">
+          </div>
+        </div>
+
+        <div class="story-moment grow-in">
+          <div class="story-year">Hiver 2025</div>
+          <h3>La question dans la serre</h3>
+          <p>Un matin glacé de décembre, au Jardin des Plantes. Maxime avait caché la bague dans un terrarium de mousses. Léa a dit oui entre deux fougères arborescentes, les joues rouges de froid et les yeux brillants de bonheur. Le jardinier nous a offert une bouture de monstera en cadeau. Elle pousse toujours chez nous.</p>
+          <div class="story-img">
+            <img src="https://images.unsplash.com/photo-1606800052052-a08af7148866?w=800&q=80" alt="Demande en mariage">
+          </div>
+        </div>
+
+        <div class="story-moment grow-in">
+          <div class="story-year">Printemps 2027</div>
+          <h3>Aujourd'hui</h3>
+          <p>On se dit oui sous une verrière remplie de vie. Entourés de ceux qu'on aime, de fleurs et de promesses. Parce que l'amour, comme un jardin, ça se cultive chaque jour. Et nous, on a décidé de jardiner ensemble pour toujours.</p>
+          <div class="story-img">
+            <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80" alt="Mariage couple heureux">
+          </div>
+        </div>
+      </div>
+
+      <div class="story-signature grow-in">
+        <p>Avec tout notre amour,<br><em>Léa & Maxime</em></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROGRAM -->
+  <section id="programme" class="program">
+    <div class="container">
+      <div class="program-header grow-in">
+        <h2>Le déroulé de la journée</h2>
+      </div>
+
+      <div class="program-list">
+        <div class="program-card grow-in">
+          <div class="program-icon">☀️</div>
+          <div class="program-content">
+            <h3>Accueil champêtre</h3>
+            <p class="program-time">14h30</p>
+            <p>Arrivée des invités dans les jardins extérieurs. Balade libre parmi les massifs de pivoines et les allées d'hortensias.</p>
+          </div>
+        </div>
+
+        <div class="program-card grow-in">
+          <div class="program-icon">🌿</div>
+          <div class="program-content">
+            <h3>Cérémonie sous verrière</h3>
+            <p class="program-time">15h30</p>
+            <p>Échange des vœux dans la Grande Serre tropicale, entourés de fougères arborescentes et d'orchidées sauvages.</p>
+          </div>
+        </div>
+
+        <div class="program-card grow-in">
+          <div class="program-icon">🥂</div>
+          <div class="program-content">
+            <h3>Cocktail botanique</h3>
+            <p class="program-time">16h30 - 19h00</p>
+            <p>Apéritif dans l'orangerie avec bar à cocktails aux saveurs florales, planches de saison et dégustation de vins bio locaux.</p>
+          </div>
+        </div>
+
+        <div class="program-card grow-in">
+          <div class="program-icon">🍽️</div>
+          <div class="program-content">
+            <h3>Dîner champêtre</h3>
+            <p class="program-time">19h30</p>
+            <p>Repas végétal gastronomique conçu par la Chef Amélie Verdier. Tables dressées sous les lumières suspendues de la serre principale.</p>
+          </div>
+        </div>
+
+        <div class="program-card grow-in">
+          <div class="program-icon">🎵</div>
+          <div class="program-content">
+            <h3>Bal des feuillages</h3>
+            <p class="program-time">22h00 - 2h00</p>
+            <p>Ouverture de bal sur un morceau de Debussy, puis soirée dansante folk et électro organique jusqu'au bout de la nuit.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VENUE -->
+  <section id="lieu" class="venue">
+    <div class="container">
+      <div class="venue-wrap">
+        <div class="venue-img grow-in">
+          <img src="https://images.unsplash.com/photo-1470058869958-2a77ade41c02?w=800&q=80" alt="Serre botanique">
+        </div>
+        <div class="venue-info grow-in">
+          <h2>Les Grandes Serres</h2>
+          <p>Un conservatoire botanique du XIXe siècle restauré avec soin. Plus de 2000 m² de verrières victoriennes abritant une collection végétale exceptionnelle.</p>
+          <p>Le site est accessible en transport en commun (tramway ligne B, arrêt Jardin des Plantes) et dispose d'un parking gratuit de 80 places.</p>
+
+          <div class="venue-details">
+            <h4>🗺️ Adresse</h4>
+            <p>Les Grandes Serres du Jardin des Plantes<br>Place Pierre Mendès France, 49100 Angers</p>
+            <a href="https://maps.google.com" target="_blank" rel="noopener">Ouvrir dans Google Maps</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RSVP -->
+  <section id="rsvp" class="rsvp">
+    <div class="container">
+      <div class="rsvp-container grow-in">
+        <h2>Dites-nous oui</h2>
+        <p>Merci de confirmer votre présence avant le 20 mars 2027</p>
+
+        <form class="rsvp-form" id="rsvp-form">
+          <div class="form-group">
+            <label for="name">Prénom et nom *</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Adresse email *</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+
+          <div class="form-group">
+            <label for="attending">Présence *</label>
+            <select id="attending" name="attending" required>
+              <option value="">Sélectionner</option>
+              <option value="yes">Je serai là !</option>
+              <option value="no">Je ne pourrai malheureusement pas venir</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="guests">Nombre de personnes</label>
+            <select id="guests" name="guests">
+              <option value="1">1 personne</option>
+              <option value="2">2 personnes</option>
+              <option value="3">3 personnes</option>
+              <option value="4">4 personnes</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="message">Régimes alimentaires, allergies ou message</label>
+            <textarea id="message" name="message" placeholder="Vegan, sans gluten, allergie aux noix..."></textarea>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Envoyer ma réponse</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-icon">🌱</div>
+    <div class="footer-names">Léa & Maxime</div>
+    <div class="footer-date">3 mai 2027 · Angers</div>
+    <p class="footer-tag">Template Jardin d'Éden · Conçu avec amour</p>
+  </footer>
+
+  <script>
+    // Grow-in on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.grow-in').forEach(el => observer.observe(el));
+
+    // Form submission
+    document.getElementById('rsvp-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Merci pour votre réponse ! (En production, ce formulaire enverrait les données)');
+    });
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>

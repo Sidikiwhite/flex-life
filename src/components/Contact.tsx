@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { Send, CheckCircle2 } from "lucide-react";
 
 interface FormState {
@@ -23,10 +24,38 @@ interface Errors {
  * confirmation (a real API endpoint could be plugged in).
  */
 export default function Contact() {
+  const [searchParams] = useSearchParams();
+  const selectedTemplate = (searchParams.get("modele") ?? "").trim().slice(0, 80);
+
   const [form, setForm] = useState<FormState>({ name: "", email: "", phone: "", event: "", message: "" });
   const [errors, setErrors] = useState<Errors>({});
   const [sent, setSent] = useState(false);
   const [sending, setSending] = useState(false);
+
+  // Pré-remplit le champ « Votre projet » quand un visiteur choisit un modèle.
+  useEffect(() => {
+    if (!selectedTemplate) return;
+
+    const prefill = `Je prends ce modèle (${selectedTemplate}) comme base.`;
+
+    setForm((current) =>
+      current.message.trim() ? current : { ...current, message: prefill }
+    );
+
+    const timer = window.setTimeout(() => {
+      const contact = document.getElementById("contact");
+      if (!contact) return;
+
+      // Scroll instantané : on arrive directement sur le formulaire.
+      const root = document.documentElement;
+      const previous = root.style.scrollBehavior;
+      root.style.scrollBehavior = "auto";
+      contact.scrollIntoView({ block: "start" });
+      root.style.scrollBehavior = previous;
+    }, 150);
+
+    return () => window.clearTimeout(timer);
+  }, [selectedTemplate]);
 
   // Simple validation rules
   const validate = (values: FormState): Errors => {

@@ -1,6 +1,11 @@
 import { useEffect } from "react";
-import { ArrowLeft, ArrowUpRight, Layers, Sparkles } from "lucide-react";
-import { Link, useParams } from "react-router-dom";
+import {
+  ArrowLeft,
+  ArrowUpRight,
+  Layers,
+  Sparkles,
+} from "lucide-react";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import {
   TEMPLATE_CATEGORIES,
   getCategoryBySlug,
@@ -59,6 +64,9 @@ export default function Templates() {
               : notFound
                 ? "Cette catégorie de templates n'existe pas ou n'est plus disponible."
                 : "Choisissez une catégorie pour découvrir les templates disponibles."}
+          </p>
+          <p className="templates-disclaimer">
+            💡 Les templates sont présentés à titre indicatif et peuvent être entièrement personnalisés selon vos besoins.
           </p>
         </header>
 
@@ -144,6 +152,8 @@ export default function Templates() {
 }
 
 function CategoryView({ category }: { category: TemplateCategory }) {
+  const navigate = useNavigate();
+
   if (category.templates.length === 0) {
     return (
       <div className="template-empty">
@@ -194,15 +204,13 @@ function CategoryView({ category }: { category: TemplateCategory }) {
             )}
 
             {template.href ? (
-              <a
-                href={template.href}
+              <button
+                onClick={() => navigate(`/demo/${template.id}`)}
                 className="btn btn-primary"
-                target="_blank"
-                rel="noopener noreferrer"
               >
                 Voir le template
                 <ArrowUpRight size={16} aria-hidden="true" />
-              </a>
+              </button>
             ) : (
               <span className="template-soon">Aperçu bientôt disponible</span>
             )}
