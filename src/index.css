@@ -2719,24 +2719,26 @@ h1, h2, h3, h4 {
 /* Responsive pour petits écrans */
 @media (max-width: 640px) {
   .demo-viewer-controls {
-    top: 10px;
-    left: 10px;
-    right: 10px;
+    top: auto;
+    bottom: 20px;
+    left: auto;
+    right: 20px;
     transform: none;
-    flex-direction: column;
+    flex-direction: row;
     gap: 8px;
-    padding: 10px;
+    padding: 8px;
+    width: auto;
   }
 
   .demo-btn {
-    width: 100%;
+    width: auto;
     justify-content: center;
-    padding: 10px 16px;
-    font-size: 0.9rem;
+    padding: 8px 12px;
+    font-size: 0.8rem;
   }
 
   .demo-btn span {
-    display: none;
+    display: inline;
   }
 
   .demo-btn svg {
