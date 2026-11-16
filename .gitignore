@@ -38,3 +38,7 @@ Thumbs.db
 .cache/
 coverage/
 *.tsbuildinfo
+
+# Documentation interne pour les agents (non versionnée)
+PROJECT_MAP.md
+PROJECT_MAP.md`
