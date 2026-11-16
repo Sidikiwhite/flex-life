@@ -165,7 +165,7 @@ export default function Services() {
                     <p>
                       {s.desc}
                     </p>
-                    <div className="flex flex-col gap-2">
+                    <div className="flex flex-col gap-2 w-full">
                       <Link
                         to={`/?service=${s.id}#contact`}
                         className="btn btn-primary service-card-order"

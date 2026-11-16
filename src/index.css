@@ -865,10 +865,22 @@ h1, h2, h3, h4 {
   line-height: 1.75;
   font-size: 1.1rem;
 }
+.service-card-order,
+.service-card-demos {
+  width: 100%;
+  justify-content: center;
+  text-align: center;
+}
 .service-card-order {
   margin-top: 4px;
+  padding-block: 16px;
   background: #ffffff;
   color: #111111;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+.service-card-demos {
+  font-size: 0.95rem;
 }
 .service-card h3 {
   font-size: 1.5rem;
