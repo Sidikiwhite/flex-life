@@ -7,7 +7,10 @@ import { useEffect } from "react";
  * - Désactive les effets hover sur les appareils tactiles
  * - Améliore la réactivité des boutons sur mobile
  * - Évite le zoom sur les champs de formulaire
- * - Optimise les animations pour mobile
+ *
+ * Les animations ne sont plus coupées ici : la réduction des mouvements
+ * est gérée uniquement en CSS via `prefers-reduced-motion` (voir index.css),
+ * afin de ne pas désactiver les transitions sur tous les mobiles.
  */
 export function useTouchOptimization() {
   useEffect(() => {
@@ -83,28 +86,7 @@ export function useTouchOptimization() {
       });
     };
 
-    // 4. Désactiver les animations lourdes sur mobile
-    const optimizeAnimations = () => {
-      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      
-      if (prefersReducedMotion || window.innerWidth < 768) {
-        // Ajouter une classe pour réduire les animations
-        document.documentElement.classList.add("reduce-motion");
-        
-        // Désactiver certaines animations complexes
-        const heavyAnimations = document.querySelectorAll<HTMLElement>(
-          '[class*="animate-"], [style*="animation"]'
-        );
-        
-        heavyAnimations.forEach(el => {
-          const originalAnimation = el.style.animation;
-          el.dataset.originalAnimation = originalAnimation;
-          el.style.animation = "none";
-        });
-      }
-    };
-
-    // 5. Prévenir le scroll de la page lorsque l'utilisateur interagit avec certains éléments
+    // 4. Prévenir le scroll de la page lorsque l'utilisateur interagit avec certains éléments
     const preventPullToRefresh = () => {
       let startY = 0;
       
@@ -137,21 +119,12 @@ export function useTouchOptimization() {
     setTimeout(() => {
       preventZoomOnFocus();
       improveButtonResponsiveness();
-      optimizeAnimations();
       preventPullToRefresh();
     }, 100);
 
     // Cleanup
     return () => {
-      document.documentElement.classList.remove("touch-device", "reduce-motion");
-      
-      // Restaurer les animations désactivées
-      const elements = document.querySelectorAll<HTMLElement>('[data-original-animation]');
-      elements.forEach(el => {
-        if (el.dataset.originalAnimation) {
-          el.style.animation = el.dataset.originalAnimation;
-        }
-      });
+      document.documentElement.classList.remove("touch-device");
     };
   }, []);
 }

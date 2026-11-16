@@ -1,45 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import { Cake, Heart, Baby, Flame, Globe, Sparkles } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { Sparkles } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
 import { getTemplatePath } from "../data/templates";
-
-const SERVICES = [
-  {
-    id: 'weddings',
-    icon: Heart,
-    title: "Mariage",
-    desc: "Soyez le couple qui change la donne ! Offrez-vous un portail numérique unique : cartes d'invitation stylées, enregistrement fluide des invités, médiathèque partagée et bien plus encore.",
-    image: "/assets/images/mariage.jpeg",
-  },
-  {
-    id: 'baptisms',
-    icon: Baby,
-    title: "Baptêmes & naissances",
-    desc: "Célébrez l'arrivée d'une nouvelle vie avec un site tendre et moderne, conçu pour partager ce bonheur en famille.",
-    image: "/assets/images/naissance.jpeg",
-  },
-  {
-    id: 'birthdays',
-    icon: Cake,
-    title: "Anniversaires",
-    desc: "Marquez le coup avec une expérience immersive : compte à rebours, livret d'or et souvenirs interactifs.",
-    image: "/assets/images/anniverssaire.jpeg",
-  },
-  {
-    id: 'commemorations',
-    icon: Flame,
-    title: "Commémorations",
-    desc: "Un espace solennel et respectueux pour honorer une mémoire, rassembler les témoignages et partager des hommages.",
-    image: "/assets/images/enterement.jpeg",
-  },
-  {
-    id: 'special',
-    icon: Globe,
-    title: "Événements spéciaux",
-    desc: "Galas, festivals ou retrouvailles : nous concevons l'architecture digitale parfaite pour vos moments d'exception.",
-    image: "/assets/images/calin.jpeg",
-  },
-];
+import { SERVICES } from "../data/services";
 
 /**
  * Services
@@ -203,9 +166,13 @@ export default function Services() {
                       {s.desc}
                     </p>
                     <div className="flex flex-col gap-2">
-                      <a className="btn btn-primary service-card-order" href="#contact">
-                        Commander
-                      </a>
+                      <Link
+                        to={`/?service=${s.id}#contact`}
+                        className="btn btn-primary service-card-order"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        Choisir
+                      </Link>
                       <button
                         type="button"
                         onClick={(e) => {

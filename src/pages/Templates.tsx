@@ -66,7 +66,8 @@ export default function Templates() {
                 : "Choisissez une catégorie pour découvrir les templates disponibles."}
           </p>
           <p className="templates-disclaimer">
-            💡 Les templates sont présentés à titre indicatif et peuvent être entièrement personnalisés selon vos besoins.
+            <span className="templates-disclaimer-label">Sur mesure</span>
+            Les templates sont présentés à titre indicatif et peuvent être entièrement personnalisés selon vos besoins.
           </p>
         </header>
 

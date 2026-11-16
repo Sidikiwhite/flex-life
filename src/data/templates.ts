@@ -106,7 +106,7 @@ export const TEMPLATE_CATEGORIES: TemplateCategory[] = [
     description:
       "Des univers ludiques et immersifs pour célébrer chaque année comme il se doit.",
     icon: Cake,
-    demoPageEnabled: true,
+    demoPageEnabled: false,
     templates: [],
   },
   {

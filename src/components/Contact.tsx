@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Send, CheckCircle2 } from "lucide-react";
+import { getServiceById } from "../data/services";
 
 interface FormState {
   name: string;
@@ -26,11 +27,16 @@ interface Errors {
 export default function Contact() {
   const [searchParams] = useSearchParams();
   const selectedTemplate = (searchParams.get("modele") ?? "").trim().slice(0, 80);
+  const selectedService = (searchParams.get("service") ?? "").trim();
+  const selectedServiceTitle = getServiceById(selectedService)?.title ?? "";
 
   const [form, setForm] = useState<FormState>({ name: "", email: "", phone: "", event: "", message: "" });
   const [errors, setErrors] = useState<Errors>({});
   const [sent, setSent] = useState(false);
   const [sending, setSending] = useState(false);
+  // Dernière valeur injectée automatiquement dans « Type d'événement ».
+  // Permet de rafraîchir le champ sans écraser une saisie du visiteur.
+  const autoFilledEvent = useRef("");
 
   // Pré-remplit le champ « Votre projet » quand un visiteur choisit un modèle.
   useEffect(() => {
@@ -41,6 +47,27 @@ export default function Contact() {
     setForm((current) =>
       current.message.trim() ? current : { ...current, message: prefill }
     );
+  }, [selectedTemplate]);
+
+  // Pré-remplit le champ « Type d'événement » quand un visiteur choisit
+  // une carte de la section « Nos expériences créatives ».
+  useEffect(() => {
+    if (!selectedServiceTitle) return;
+
+    setForm((current) => {
+      const untouched =
+        !current.event.trim() || current.event === autoFilledEvent.current;
+      if (!untouched) return current;
+
+      autoFilledEvent.current = selectedServiceTitle;
+      return { ...current, event: selectedServiceTitle };
+    });
+  }, [selectedServiceTitle]);
+
+  // Amène le visiteur directement au formulaire quand il arrive depuis une
+  // carte service ou depuis un modèle.
+  useEffect(() => {
+    if (!selectedTemplate && !selectedService) return;
 
     const timer = window.setTimeout(() => {
       const contact = document.getElementById("contact");
@@ -55,7 +82,7 @@ export default function Contact() {
     }, 150);
 
     return () => window.clearTimeout(timer);
-  }, [selectedTemplate]);
+  }, [selectedTemplate, selectedService]);
 
   // Simple validation rules
   const validate = (values: FormState): Errors => {

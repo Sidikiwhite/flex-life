@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { ArrowLeft, CheckCircle2 } from "lucide-react";
 
 /**
  * DemoViewer
@@ -18,12 +17,6 @@ export default function DemoViewer() {
   useEffect(() => {
     setIframeKey((prev) => prev + 1);
   }, [demoId]);
-
-  const handleChooseModel = () => {
-    // Rediriger vers la page d'accueil avec anchor vers contact
-    // et passer l'ID du modèle via le paramètre 'modele'
-    window.location.href = `/#contact?modele=${demoId}`;
-  };
 
   const handleBackToTemplates = () => {
     navigate("/templates");

@@ -108,7 +108,7 @@ export default function Navbar() {
             setOpen(false);
             window.location.href = "/#contact";
           }}>
-            Créer mon événement
+            Ajouter mon événement
           </a>
 
 

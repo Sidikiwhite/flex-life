@@ -647,6 +647,15 @@ h1, h2, h3, h4 {
 .reveal-delay-2 { transition-delay: 0.2s; }
 .reveal-delay-3 { transition-delay: 0.3s; }
 
+/* Mobile : reveal plus court et plus proche, pour rester fluide sans
+   supprimer l'animation (les mobiles gardent leurs transitions). */
+@media (max-width: 767px) {
+  .reveal {
+    transform: translateY(24px);
+    transition-duration: 0.45s;
+  }
+}
+
 /* =====================================================================
    ABOUT
    ===================================================================== */
@@ -1555,14 +1564,21 @@ h1, h2, h3, h4 {
 
 .templates-disclaimer {
   max-width: 660px;
-  margin-top: 20px;
-  padding: 14px 20px;
-  background: rgba(212, 167, 124, 0.08);
-  border-left: 3px solid var(--accent);
-  border-radius: 8px;
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid var(--card-border);
   color: var(--text-muted);
   font-size: 0.9rem;
   line-height: 1.6;
+}
+
+.templates-disclaimer-label {
+  margin-right: 10px;
+  color: var(--text);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
 }
 
 .templates-tabs {
@@ -1951,14 +1967,18 @@ h1, h2, h3, h4 {
   }
 }
 
-/* Réduire les animations sur mobile et pour les préférences utilisateur */
-.reduce-motion *,
-.reduce-motion *::before,
-.reduce-motion *::after {
-  animation-duration: 0.001ms !important;
-  animation-iteration-count: 1 !important;
-  transition-duration: 0.001ms !important;
-  scroll-behavior: auto !important;
+/* Réduction des animations : uniquement quand l'utilisateur le demande via
+   les préférences système. Aucun mobile n'est ciblé ici (les transitions
+   restent actives sur téléphone). */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 /* Optimiser les interactions tactiles */

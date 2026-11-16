@@ -78,7 +78,7 @@ export default function Hero() {
 
         <div style={{ display: "flex", flexWrap: "wrap", gap: 20, justifyContent: 'center' }}>
           <a href="#contact" className="btn btn-primary hero-cta" onClick={scrollTo("contact")}>
-            Créer mon événement
+            Ajouter mon événement
           </a>
         </div>
 

@@ -120,11 +120,6 @@
       gap: 8px;
     }
 
-    .logo::before {
-      content: '🌿';
-      font-size: 1.2rem;
-    }
-
     .nav-links {
       display: flex;
       gap: 32px;
@@ -169,30 +164,6 @@
       height: 100%;
       object-fit: cover;
       filter: saturate(0.8);
-    }
-
-    .hero-leaves {
-      position: absolute;
-      inset: 0;
-      z-index: 2;
-      pointer-events: none;
-    }
-
-    .hero-leaf {
-      position: absolute;
-      font-size: 2rem;
-      opacity: 0.15;
-      animation: float 8s ease-in-out infinite;
-    }
-
-    .hero-leaf:nth-child(1) { top: 15%; left: 10%; animation-delay: 0s; }
-    .hero-leaf:nth-child(2) { top: 25%; right: 15%; animation-delay: 1.5s; }
-    .hero-leaf:nth-child(3) { bottom: 20%; left: 20%; animation-delay: 3s; }
-    .hero-leaf:nth-child(4) { bottom: 30%; right: 12%; animation-delay: 4.5s; }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0) rotate(0deg); }
-      50% { transform: translateY(-20px) rotate(5deg); }
     }
 
     .hero-content {
@@ -489,15 +460,15 @@
       box-shadow: 0 8px 30px rgba(45, 92, 78, 0.12);
     }
 
-    .program-icon {
+    .program-index {
       flex-shrink: 0;
-      width: 64px;
-      height: 64px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, var(--emeraude), var(--vert-doux));
-      display: grid;
-      place-items: center;
-      font-size: 1.8rem;
+      width: 56px;
+      padding-top: 4px;
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      font-variant-numeric: tabular-nums;
+      line-height: 1;
+      color: var(--emeraude);
     }
 
     .program-content h3 {
@@ -677,11 +648,6 @@
       text-align: center;
     }
 
-    .footer-icon {
-      font-size: 3rem;
-      margin-bottom: 20px;
-    }
-
     .footer-names {
       font-family: var(--serif);
       font-size: 2.2rem;
@@ -744,7 +710,7 @@
         padding: 28px 24px;
       }
 
-      .program-icon {
+      .program-index {
         margin: 0 auto;
       }
 
@@ -787,12 +753,6 @@
   <section id="hero" class="hero">
     <div class="hero-bg">
       <img src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=1600&q=80" alt="">
-    </div>
-    <div class="hero-leaves">
-      <div class="hero-leaf">🌿</div>
-      <div class="hero-leaf">🍃</div>
-      <div class="hero-leaf">🌱</div>
-      <div class="hero-leaf">🌿</div>
     </div>
     <div class="hero-content">
       <div class="hero-badge">Nous nous marions</div>
@@ -889,7 +849,7 @@
 
       <div class="program-list">
         <div class="program-card grow-in">
-          <div class="program-icon">☀️</div>
+          <span class="program-index">01</span>
           <div class="program-content">
             <h3>Accueil champêtre</h3>
             <p class="program-time">14h30</p>
@@ -898,7 +858,7 @@
         </div>
 
         <div class="program-card grow-in">
-          <div class="program-icon">🌿</div>
+          <span class="program-index">02</span>
           <div class="program-content">
             <h3>Cérémonie sous verrière</h3>
             <p class="program-time">15h30</p>
@@ -907,7 +867,7 @@
         </div>
 
         <div class="program-card grow-in">
-          <div class="program-icon">🥂</div>
+          <span class="program-index">03</span>
           <div class="program-content">
             <h3>Cocktail botanique</h3>
             <p class="program-time">16h30 - 19h00</p>
@@ -916,7 +876,7 @@
         </div>
 
         <div class="program-card grow-in">
-          <div class="program-icon">🍽️</div>
+          <span class="program-index">04</span>
           <div class="program-content">
             <h3>Dîner champêtre</h3>
             <p class="program-time">19h30</p>
@@ -925,7 +885,7 @@
         </div>
 
         <div class="program-card grow-in">
-          <div class="program-icon">🎵</div>
+          <span class="program-index">05</span>
           <div class="program-content">
             <h3>Bal des feuillages</h3>
             <p class="program-time">22h00 - 2h00</p>
@@ -949,7 +909,7 @@
           <p>Le site est accessible en transport en commun (tramway ligne B, arrêt Jardin des Plantes) et dispose d'un parking gratuit de 80 places.</p>
 
           <div class="venue-details">
-            <h4>🗺️ Adresse</h4>
+            <h4>Adresse</h4>
             <p>Les Grandes Serres du Jardin des Plantes<br>Place Pierre Mendès France, 49100 Angers</p>
             <a href="https://maps.google.com" target="_blank" rel="noopener">Ouvrir dans Google Maps</a>
           </div>
@@ -1010,7 +970,6 @@
 
   <!-- FOOTER -->
   <footer class="footer">
-    <div class="footer-icon">🌱</div>
     <div class="footer-names">Léa & Maxime</div>
     <div class="footer-date">3 mai 2027 · Angers</div>
     <p class="footer-tag">Template Jardin d'Éden · Conçu avec amour</p>
