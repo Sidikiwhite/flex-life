@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Léa & Maxime — 3 Mai 2027</title>
+  <title>Adjoa & Koffi — 3 Mai 2027</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Nunito:wght@300;400;600&display=swap" rel="stylesheet">
@@ -388,37 +388,6 @@
       margin-top: 12px;
     }
 
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-
-    .gallery-item {
-      position: relative;
-      aspect-ratio: 1;
-      overflow: hidden;
-      border-radius: 12px;
-      background: white;
-      border: 1px solid var(--line);
-    }
-
-    .gallery-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.5s ease;
-    }
-
-    .gallery-item:hover img {
-      transform: scale(1.08);
-    }
-
-    .gallery-item:nth-child(1) {
-      grid-column: span 2;
-      grid-row: span 2;
-    }
-
     /* ========== PROGRAM ========== */
     .program {
       background: #F0EDE5;
@@ -733,14 +702,130 @@
         padding: 40px 18px;
       }
     }
+    /* Accessibilité : cibles tactiles et focus clavier */
+    .logo,
+    .nav-links a,
+    .venue-details a {
+      padding: 12px 6px;
+    }
+
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible,
+    select:focus-visible,
+    textarea:focus-visible {
+      outline: 2px solid var(--terracotta);
+      outline-offset: 3px;
+    }
+
+    /* ========== STORY NOTE ========== */
+    .story-moment--note {
+      max-width: 620px;
+      margin-inline: auto;
+      padding-left: 24px;
+      border-left: 2px solid var(--or-vegetal);
+    }
+
+    /* ========== PHOTO GALLERY ========== */
+    .photo-gallery {
+      padding: clamp(64px, 8vw, 110px) 0;
+      background: var(--blanc-casse);
+      border-top: 1px solid var(--line);
+    }
+    .gallery-heading {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 12px 40px;
+      margin-bottom: clamp(24px, 4vw, 44px);
+    }
+    .gallery-eyebrow {
+      margin: 0 0 8px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--emeraude);
+    }
+    .gallery-heading h2 {
+      margin: 0;
+      font-family: var(--serif);
+      font-size: clamp(1.9rem, 4vw, 2.8rem);
+      line-height: 1.12;
+    }
+    .gallery-heading > p {
+      margin: 0;
+      max-width: 34ch;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    .gallery-mosaic {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-auto-rows: clamp(220px, 22vw, 320px);
+      gap: clamp(8px, 1.5vw, 18px);
+    }
+    .gallery-item { display: flex; margin: 0; }
+    .gallery-item:nth-child(1),
+    .gallery-item:nth-child(4) { grid-column: span 2; }
+    .gallery-item a {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      color: inherit;
+      text-decoration: none;
+    }
+    .gallery-item a:focus-visible {
+      outline: 3px solid var(--terracotta);
+      outline-offset: 4px;
+    }
+    .gallery-frame {
+      flex: 1;
+      min-height: 0;
+      overflow: hidden;
+      background: #EAE6DC;
+    }
+    .gallery-frame img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    .gallery-item a:hover .gallery-frame img { transform: scale(1.04); }
+    .gallery-item figcaption {
+      padding-top: 10px;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+    @media (max-width: 768px) {
+      .gallery-mosaic {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-auto-rows: clamp(150px, 38vw, 240px);
+      }
+      .gallery-item:nth-child(1),
+      .gallery-item:nth-child(4) { grid-column: span 1; }
+    }
+    @media (max-width: 390px) {
+      .gallery-mosaic {
+        grid-template-columns: minmax(0, 1fr);
+        grid-auto-rows: clamp(200px, 55vw, 280px);
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .gallery-frame img { transition: none; }
+      .gallery-item a:hover .gallery-frame img { transform: none; }
+    }
   </style>
 </head>
 <body>
   <!-- HEADER -->
   <header class="header">
     <nav class="nav">
-      <a href="#hero" class="logo">Léa & Maxime</a>
+      <a href="#hero" class="logo">Adjoa & Koffi</a>
       <ul class="nav-links">
+        <li><a href="#histoire">Notre histoire</a></li>
         <li><a href="#galerie">Galerie</a></li>
         <li><a href="#programme">Programme</a></li>
         <li><a href="#lieu">Le lieu</a></li>
@@ -757,11 +842,11 @@
     <div class="hero-content">
       <div class="hero-badge">Nous nous marions</div>
       <h1 class="hero-title">
-        Léa
-        <span>& Maxime</span>
+        Adjoa
+        <span>& Koffi</span>
       </h1>
       <p class="hero-date">Samedi 3 mai 2027</p>
-      <p class="hero-location">Les Grandes Serres · Angers, France</p>
+      <p class="hero-location">Jardin botanique de Bingerville · Abidjan, Côte d'Ivoire</p>
       <div class="hero-cta">
         <a href="#rsvp" class="btn btn-primary">Confirmer ma présence</a>
         <a href="#programme" class="btn btn-secondary">Voir le programme</a>
@@ -773,8 +858,8 @@
   <section class="intro">
     <div class="container">
       <div class="intro-text grow-in">
-        <p>Nous avons grandi entourés de plantes, de jardins et de verdure. C'est naturellement sous <span class="highlight">une verrière botanique</span> que nous avons choisi de célébrer notre union.</p>
-        <p>Rejoignez-nous pour une journée luxuriante où la nature sera notre témoin.</p>
+        <p>Nous avons grandi entourées de plantes, de jardins et de verdure. C'est naturellement sous <span class="highlight">la canopée du Jardin botanique de Bingerville</span> que nous avons choisi de célébrer notre union.</p>
+        <p>Rejoignez-nous pour une journée verte, au rythme de Bingerville, où la nature sera notre témoin.</p>
       </div>
     </div>
   </section>
@@ -784,58 +869,105 @@
     <div class="container">
       <div class="gallery-header grow-in">
         <h2>Notre jardin secret</h2>
-        <p>Six années à cultiver notre amour</p>
+        <p>Cinq saisons à faire pousser quelque chose, de Bingerville à l'océan.</p>
       </div>
 
       <div class="story-timeline">
         <div class="story-moment grow-in">
-          <div class="story-year">Printemps 2021</div>
-          <h3>La première graine</h3>
-          <p>Un atelier de jardinage urbain dans le 11ème arrondissement. Léa rempotait des succulentes, Maxime ne savait pas tenir un sécateur. On a ri, échangé nos pots, et pris rendez-vous pour arroser ensemble le dimanche suivant.</p>
+          <div class="story-year">Saison des pluies 2021</div>
+          <h3>La première bouture</h3>
+          <p>Un atelier de bouturage au Jardin botanique de Bingerville. Adjoa rempotait des succulentes, Koffi ne savait pas tenir un sécateur. On a ri, échangé nos pots, et pris rendez-vous pour arroser ensemble le dimanche suivant.</p>
           <div class="story-img">
-            <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=800&q=80" alt="Couple jardinage ensemble">
+            <img src="story/01.jpg" alt="Nos premières plantes à Bingerville" loading="lazy">
           </div>
         </div>
 
-        <div class="story-moment grow-in">
-          <div class="story-year">Été 2022</div>
-          <h3>Le premier voyage</h3>
-          <p>Trois semaines au Costa Rica, entre forêts tropicales et jardins suspendus. Maxime a découvert que Léa connaissait le nom latin de chaque plante. Léa a compris que Maxime avait peur des papillons. On s'est aimés encore plus fort.</p>
-          <div class="story-img">
-            <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=800&q=80" alt="Couple en voyage nature">
-          </div>
+        <div class="story-moment story-moment--note grow-in">
+          <div class="story-year">Harmattan 2022</div>
+          <h3>La parcelle derrière la maison</h3>
+          <p>Piments, feuilles de manioc, basilic et hibiscus. Nos samedis se sont remplis de terre sous les ongles, d'attieké partagé et de conseils donnés par les voisins.</p>
+          <p>C'est là, sans le dire, que nous avons commencé à planter des racines ensemble.</p>
         </div>
 
         <div class="story-moment grow-in">
-          <div class="story-year">Automne 2024</div>
-          <h3>Le jardin partagé</h3>
-          <p>On a pris une parcelle au jardin communautaire de Belleville. Tomates cerises, basilic pourpre, cosmos et dahlias. Nos samedis se sont remplis de terre sous les ongles et de pique-niques improvisés. C'est là qu'on a compris qu'on voulait planter des racines ensemble, pour de vrai.</p>
+          <div class="story-year">Été 2023</div>
+          <h3>Le détour par Assinie</h3>
+          <p>Trois jours entre Grand-Bassam et Assinie, entre lagune et palmiers. Adjoa connaissait le nom de chaque plante, Koffi avait peur des crabes. Nous sommes revenus avec des graines et une idée : agrandir le jardin.</p>
           <div class="story-img">
-            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=80" alt="Couple complice">
+            <img src="story/02.jpg" alt="Souvenir de notre route vers Assinie" loading="lazy">
           </div>
         </div>
 
-        <div class="story-moment grow-in">
-          <div class="story-year">Hiver 2025</div>
-          <h3>La question dans la serre</h3>
-          <p>Un matin glacé de décembre, au Jardin des Plantes. Maxime avait caché la bague dans un terrarium de mousses. Léa a dit oui entre deux fougères arborescentes, les joues rouges de froid et les yeux brillants de bonheur. Le jardinier nous a offert une bouture de monstera en cadeau. Elle pousse toujours chez nous.</p>
-          <div class="story-img">
-            <img src="https://images.unsplash.com/photo-1606800052052-a08af7148866?w=800&q=80" alt="Demande en mariage">
-          </div>
+        <div class="story-moment story-moment--note grow-in">
+          <div class="story-year">Récolte 2025</div>
+          <h3>Le panier du samedi</h3>
+          <p>Le premier piment rouge de la saison est resté sur la table trois jours, comme un trophée. Nous portions nos récoltes aux voisins, qui nous rappelaient en retour qu'une plante, ça s'écoute autant que ça s'arrose.</p>
         </div>
 
         <div class="story-moment grow-in">
-          <div class="story-year">Printemps 2027</div>
-          <h3>Aujourd'hui</h3>
-          <p>On se dit oui sous une verrière remplie de vie. Entourés de ceux qu'on aime, de fleurs et de promesses. Parce que l'amour, comme un jardin, ça se cultive chaque jour. Et nous, on a décidé de jardiner ensemble pour toujours.</p>
+          <div class="story-year">Décembre 2026</div>
+          <h3>La bague dans la feuille de bananier</h3>
+          <p>Un matin lumineux au Jardin botanique de Bingerville. Koffi avait glissé la bague dans une feuille de bananier. Adjoa a dit oui entre deux fougères, les joues humides et les yeux brillants.</p>
           <div class="story-img">
-            <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80" alt="Mariage couple heureux">
+            <img src="story/03.jpg" alt="Notre souvenir du Jardin botanique" loading="lazy">
           </div>
         </div>
       </div>
 
       <div class="story-signature grow-in">
-        <p>Avec tout notre amour,<br><em>Léa & Maxime</em></p>
+        <p>Avec tout notre amour,<br><em>Adjoa & Koffi</em></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHOTO GALLERY -->
+  <section id="galerie" class="photo-gallery">
+    <div class="container">
+      <div class="gallery-heading grow-in">
+        <div>
+          <p class="gallery-eyebrow">Sous les arbres</p>
+          <h2>Le jardin en images</h2>
+        </div>
+        <p>Six instants de notre journée, entre tenues traditionnelles, rires et cérémonie à Bingerville.</p>
+      </div>
+
+      <div class="gallery-mosaic">
+        <figure class="gallery-item grow-in">
+          <a href="gallery/01.jpg" target="_blank" rel="noopener" aria-label="Agrandir la photo : les invitées en tenue traditionnelle">
+            <div class="gallery-frame"><img src="gallery/01.jpg" alt="Des invitées en tenue traditionnelle sourient lors de la cérémonie" loading="lazy"></div>
+            <figcaption>Les invitées en tenue traditionnelle</figcaption>
+          </a>
+        </figure>
+        <figure class="gallery-item grow-in">
+          <a href="gallery/02.jpg" target="_blank" rel="noopener" aria-label="Agrandir la photo : l'arrivée des convives">
+            <div class="gallery-frame"><img src="gallery/02.jpg" alt="Une convive en tenue traditionnelle arrive à la cérémonie en plein air" loading="lazy"></div>
+            <figcaption>L'arrivée des convives</figcaption>
+          </a>
+        </figure>
+        <figure class="gallery-item grow-in">
+          <a href="gallery/03.jpg" target="_blank" rel="noopener" aria-label="Agrandir la photo : le cortège dans le jardin">
+            <div class="gallery-frame"><img src="gallery/03.jpg" alt="Le cortège de mariage traverse le jardin en tenue traditionnelle" loading="lazy"></div>
+            <figcaption>Le cortège dans le jardin</figcaption>
+          </a>
+        </figure>
+        <figure class="gallery-item grow-in">
+          <a href="gallery/04.jpg" target="_blank" rel="noopener" aria-label="Agrandir la photo : l'étreinte familiale">
+            <div class="gallery-frame"><img src="gallery/04.jpg" alt="La mariée embrasse un proche pendant la célébration" loading="lazy"></div>
+            <figcaption>L'étreinte familiale</figcaption>
+          </a>
+        </figure>
+        <figure class="gallery-item grow-in">
+          <a href="gallery/05.jpg" target="_blank" rel="noopener" aria-label="Agrandir la photo : l'échange des présents">
+            <div class="gallery-frame"><img src="gallery/05.jpg" alt="Les mariés échangent leurs cadeaux lors de la cérémonie" loading="lazy"></div>
+            <figcaption>L'échange des présents</figcaption>
+          </a>
+        </figure>
+        <figure class="gallery-item grow-in">
+          <a href="gallery/06.jpg" target="_blank" rel="noopener" aria-label="Agrandir la photo : le gâteau des mariés">
+            <div class="gallery-frame"><img src="gallery/06.jpg" alt="Les mariés coupent leur gâteau en extérieur" loading="lazy"></div>
+            <figcaption>Le gâteau des mariés</figcaption>
+          </a>
+        </figure>
       </div>
     </div>
   </section>
@@ -851,36 +983,36 @@
         <div class="program-card grow-in">
           <span class="program-index">01</span>
           <div class="program-content">
-            <h3>Accueil champêtre</h3>
+            <h3>Accueil sous les palmiers</h3>
             <p class="program-time">14h30</p>
-            <p>Arrivée des invités dans les jardins extérieurs. Balade libre parmi les massifs de pivoines et les allées d'hortensias.</p>
+            <p>Arrivée des invités dans les jardins extérieurs. Balade libre parmi les massifs d'hibiscus et les allées d'areca.</p>
           </div>
         </div>
 
         <div class="program-card grow-in">
           <span class="program-index">02</span>
           <div class="program-content">
-            <h3>Cérémonie sous verrière</h3>
+            <h3>Cérémonie sous la canopée</h3>
             <p class="program-time">15h30</p>
-            <p>Échange des vœux dans la Grande Serre tropicale, entourés de fougères arborescentes et d'orchidées sauvages.</p>
+            <p>Échange des vœux sous les grands arbres du Jardin botanique, entourés de fougères et d'orchidées.</p>
           </div>
         </div>
 
         <div class="program-card grow-in">
           <span class="program-index">03</span>
           <div class="program-content">
-            <h3>Cocktail botanique</h3>
+            <h3>Cocktail d'agrumes</h3>
             <p class="program-time">16h30 - 19h00</p>
-            <p>Apéritif dans l'orangerie avec bar à cocktails aux saveurs florales, planches de saison et dégustation de vins bio locaux.</p>
+            <p>Apéritif à l'ombre des areca : bar à jus de bissap, gingembre et ananas, attieké et brochettes de saison.</p>
           </div>
         </div>
 
         <div class="program-card grow-in">
           <span class="program-index">04</span>
           <div class="program-content">
-            <h3>Dîner champêtre</h3>
+            <h3>Dîner ivoirien</h3>
             <p class="program-time">19h30</p>
-            <p>Repas végétal gastronomique conçu par la Chef Amélie Verdier. Tables dressées sous les lumières suspendues de la serre principale.</p>
+            <p>Menu revisité autour du poisson braisé, de l'aloco et de la sauce claire. Tables dressées sous les lumières suspendues des arbres.</p>
           </div>
         </div>
 
@@ -889,7 +1021,7 @@
           <div class="program-content">
             <h3>Bal des feuillages</h3>
             <p class="program-time">22h00 - 2h00</p>
-            <p>Ouverture de bal sur un morceau de Debussy, puis soirée dansante folk et électro organique jusqu'au bout de la nuit.</p>
+            <p>Ouverture de bal sur un air de highlife, puis soirée dansante coupé-décalé jusqu'au bout de la nuit.</p>
           </div>
         </div>
       </div>
@@ -901,16 +1033,16 @@
     <div class="container">
       <div class="venue-wrap">
         <div class="venue-img grow-in">
-          <img src="https://images.unsplash.com/photo-1470058869958-2a77ade41c02?w=800&q=80" alt="Serre botanique">
+          <img src="https://images.unsplash.com/photo-1470058869958-2a77ade41c02?w=800&q=80" alt="Allée ombragée du jardin botanique">
         </div>
         <div class="venue-info grow-in">
-          <h2>Les Grandes Serres</h2>
-          <p>Un conservatoire botanique du XIXe siècle restauré avec soin. Plus de 2000 m² de verrières victoriennes abritant une collection végétale exceptionnelle.</p>
-          <p>Le site est accessible en transport en commun (tramway ligne B, arrêt Jardin des Plantes) et dispose d'un parking gratuit de 80 places.</p>
+          <h2>Jardin botanique de Bingerville</h2>
+          <p>Un jardin botanique centenaire à une vingtaine de minutes d'Abidjan. Ses allées ombragées, ses fougères et ses grands arbres offrent un cadre vivant et paisible, loin du bruit de la ville.</p>
+          <p>Le site est accessible par la route de Bingerville depuis Abidjan. Un parking est prévu sur place pour les invités.</p>
 
           <div class="venue-details">
             <h4>Adresse</h4>
-            <p>Les Grandes Serres du Jardin des Plantes<br>Place Pierre Mendès France, 49100 Angers</p>
+            <p>Jardin botanique de Bingerville<br>Bingerville, Côte d'Ivoire</p>
             <a href="https://maps.google.com" target="_blank" rel="noopener">Ouvrir dans Google Maps</a>
           </div>
         </div>
@@ -970,9 +1102,9 @@
 
   <!-- FOOTER -->
   <footer class="footer">
-    <div class="footer-names">Léa & Maxime</div>
-    <div class="footer-date">3 mai 2027 · Angers</div>
-    <p class="footer-tag">Template Jardin d'Éden · Conçu avec amour</p>
+    <div class="footer-names">Adjoa & Koffi</div>
+    <div class="footer-date">3 mai 2027 · Bingerville</div>
+    <p class="footer-tag">Template Jardin de Bingerville · Conçu avec amour</p>
   </footer>
 
   <script>

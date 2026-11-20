@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Emma & Lucas — 18 Juillet 2027</title>
+  <title>Awa & Moussa — 18 Juillet 2027</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Karla:wght@300;400;600&display=swap" rel="stylesheet">
@@ -667,15 +667,132 @@
         justify-content: center;
       }
     }
+    /* Accessibilité : cibles tactiles et focus clavier */
+    .logo,
+    .nav-links a,
+    .venue-box a {
+      display: inline-block;
+      padding: 12px 6px;
+    }
+
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible,
+    select:focus-visible,
+    textarea:focus-visible {
+      outline: 2px solid var(--azur);
+      outline-offset: 3px;
+    }
+
+    /* ========== STORY NOTE ========== */
+    .story-block--note {
+      grid-template-columns: minmax(0, 1fr);
+      max-width: 620px;
+      margin-inline: auto;
+      text-align: center;
+    }
+
+    /* ========== PHOTO GALLERY ========== */
+    .photo-gallery {
+      padding: clamp(64px, 8vw, 110px) 0;
+      background: var(--blanc-lin);
+      border-top: 1px solid var(--line);
+    }
+    .gallery-heading {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 12px 40px;
+      margin-bottom: clamp(24px, 4vw, 44px);
+    }
+    .gallery-eyebrow {
+      margin: 0 0 8px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #3A6684;
+    }
+    .gallery-heading h2 {
+      margin: 0;
+      font-family: var(--serif);
+      font-size: clamp(1.9rem, 4vw, 2.8rem);
+      line-height: 1.12;
+    }
+    .gallery-heading > p {
+      margin: 0;
+      max-width: 34ch;
+      color: #5A6B7E;
+      font-size: 0.95rem;
+    }
+    .gallery-mosaic {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-auto-rows: clamp(220px, 22vw, 320px);
+      gap: clamp(8px, 1.5vw, 18px);
+    }
+    .gallery-item { display: flex; margin: 0; }
+    .gallery-item:nth-child(1),
+    .gallery-item:nth-child(4) { grid-column: span 2; }
+    .gallery-item a {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      color: inherit;
+      text-decoration: none;
+    }
+    .gallery-item a:focus-visible {
+      outline: 3px solid var(--azur);
+      outline-offset: 4px;
+    }
+    .gallery-frame {
+      flex: 1;
+      min-height: 0;
+      overflow: hidden;
+      background: #E6E0D6;
+    }
+    .gallery-frame img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    .gallery-item a:hover .gallery-frame img { transform: scale(1.04); }
+    .gallery-item figcaption {
+      padding-top: 10px;
+      font-size: 0.82rem;
+      color: #5A6B7E;
+    }
+    @media (max-width: 768px) {
+      .gallery-mosaic {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-auto-rows: clamp(150px, 38vw, 240px);
+      }
+      .gallery-item:nth-child(1),
+      .gallery-item:nth-child(4) { grid-column: span 1; }
+    }
+    @media (max-width: 390px) {
+      .gallery-mosaic {
+        grid-template-columns: minmax(0, 1fr);
+        grid-auto-rows: clamp(200px, 55vw, 280px);
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .gallery-frame img { transition: none; }
+      .gallery-item a:hover .gallery-frame img { transform: none; }
+    }
   </style>
 </head>
 <body>
   <!-- HEADER -->
   <header class="header">
     <nav class="nav">
-      <a href="#hero" class="logo">Emma & Lucas</a>
+      <a href="#hero" class="logo">Awa & Moussa</a>
       <ul class="nav-links">
         <li><a href="#histoire">Notre histoire</a></li>
+        <li><a href="#galerie">Galerie</a></li>
         <li><a href="#programme">Programme</a></li>
         <li><a href="#lieu">Le lieu</a></li>
         <li><a href="#rsvp">RSVP</a></li>
@@ -692,12 +809,12 @@
     <div class="hero-content">
       <p class="hero-eyebrow">Rejoignez-nous</p>
       <h1 class="hero-names">
-        Emma
+        Awa
         <span class="ampersand">&</span>
-        Lucas
+        Moussa
       </h1>
       <p class="hero-date">Vendredi 18 juillet 2027</p>
-      <p class="hero-location">Villa Méditerranée · Cassis, Côte d'Azur</p>
+      <p class="hero-location">Assinie-Mafia · Côte d'Ivoire</p>
       <a href="#rsvp" class="btn btn-primary">Confirmer ma présence</a>
     </div>
   </section>
@@ -706,10 +823,10 @@
   <section class="welcome">
     <div class="container">
       <div class="welcome-content fade-up">
-        <h2>Sous le soleil de Méditerranée</h2>
-        <p>Nous avons grandi entre le sable et les vagues, les matins lumineux et les soirées douces. C'est naturellement les pieds dans l'eau que nous avons décidé de célébrer notre amour.</p>
-        <p>Rejoignez-nous pour une journée baignée de lumière azur, de rires et de promesses éternelles.</p>
-        <div class="welcome-signature">Emma & Lucas</div>
+        <h2>Sous le soleil d'Assinie</h2>
+        <p>Nous avons grandi entre le sable et la lagune, les matins lumineux et les soirées douces. C'est naturellement les pieds dans l'eau que nous avons décidé de célébrer notre amour.</p>
+        <p>Rejoignez-nous pour une journée baignée de lumière, de rires et de promesses éternelles, au bord de l'océan ivoirien.</p>
+        <div class="welcome-signature">Awa & Moussa</div>
       </div>
     </div>
   </section>
@@ -719,42 +836,115 @@
     <div class="container">
       <div class="story-header fade-up">
         <h2>Notre histoire</h2>
-        <p>Huit années de complicité maritime</p>
+        <p>Un carnet de marée, de la ligne d'Awa à la pirogue de Moussa.</p>
       </div>
 
       <div class="story-grid">
         <div class="story-block fade-up">
           <div class="story-image">
-            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=80" alt="Couple au bord de l'eau">
+            <img src="story/01.jpg" alt="Notre première journée au bord de l'eau" loading="lazy">
           </div>
           <div class="story-text">
-            <p class="story-year">Été 2019</p>
-            <h3>La rencontre</h3>
-            <p>Un cours de voile sur le Vieux-Port de Marseille. Lucas était moniteur, Emma apprenait les nœuds marins. Un fou rire après une chute dans l'eau, et une histoire qui ne s'est plus jamais arrêtée.</p>
+            <p class="story-year">Juillet 2019</p>
+            <h3>Le nœud qui ne tenait pas</h3>
+            <p>Sur la plage d'Assinie, un après-midi de juillet. Moussa pêchait avec des amis, Awa apprenait à nouer une ligne. Un fou rire après un poisson échappé, et une histoire qui ne s'est plus jamais arrêtée.</p>
+            <p>Moussa a refait le nœud trois fois. Awa a gardé le morceau de fil dans son carnet, entre deux pages de notes sur la marée.</p>
+          </div>
+        </div>
+
+        <div class="story-block story-block--note fade-up">
+          <div class="story-text">
+            <p class="story-year">Août 2021</p>
+            <h3>La traversée du matin</h3>
+            <p>Une pirogue du port de Grand-Bassam jusqu'aux bancs de sable d'Assinie. Awa a compris que Moussa chantait faux, Moussa qu'Awa avait le mal de mer.</p>
+            <p>À mi-parcours, le moteur a toussé. Personne n'a paniqué : nous avons simplement attendu la marée, en partageant une bouteille d'eau.</p>
           </div>
         </div>
 
         <div class="story-block fade-up">
           <div class="story-image">
-            <img src="https://images.unsplash.com/photo-1530789253388-582c481c54b0?w=800&q=80" alt="Voyage en bateau">
+            <img src="story/02.jpg" alt="Souvenir d'une traversée sur la lagune" loading="lazy">
           </div>
           <div class="story-text">
-            <p class="story-year">Août 2022</p>
-            <h3>L'aventure grecque</h3>
-            <p>Trois semaines en voilier à travers les Cyclades. Santorin au lever du jour, Mykonos sous les étoiles. Lucas a compris qu'Emma chantait faux, Emma que Lucas avait le mal de mer. On s'est aimés encore plus.</p>
+            <p class="story-year">Janvier 2023</p>
+            <h3>La nappe sous les cocotiers</h3>
+            <p>Chaque dimanche, le même rituel : sortir tôt, acheter du poisson frais, puis installer une nappe à l'ombre des cocotiers. Nous avons appris les noms des pêcheurs et l'heure exacte où la lumière devient dorée.</p>
+            <p>La nappe a connu trois plages et deux saisons. Elle est encore dans le coffre, pliée avec le même soin qu'au premier jour.</p>
+          </div>
+        </div>
+
+        <div class="story-block story-block--note fade-up">
+          <div class="story-text">
+            <p class="story-year">Mars 2025</p>
+            <h3>Une saison à Assinie</h3>
+            <p>Nous avons quitté Abidjan pour passer quelques mois au bord de l'eau. Deux valises, une pirogue et l'envie d'écouter la mer plutôt que la ville.</p>
+            <p>C'est là, entre deux marées, que l'idée du mariage a pris racine. Sans décision solennelle — juste une évidence qui est revenue chaque matin.</p>
           </div>
         </div>
 
         <div class="story-block fade-up">
           <div class="story-image">
-            <img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=800&q=80" alt="Demande en mariage au bord de l'eau">
+            <img src="story/03.jpg" alt="Notre promesse au bord de l'eau" loading="lazy">
           </div>
           <div class="story-text">
             <p class="story-year">Décembre 2026</p>
-            <h3>La promesse</h3>
-            <p>Sur la plage de Pampelonne à Saint-Tropez, un matin de décembre désert et lumineux. Lucas a écrit « Veux-tu m'épouser ? » dans le sable. Emma a écrit « OUI » en lettres géantes. La mer a tout effacé, mais pas la promesse.</p>
+            <h3>Le mot écrit dans le sable</h3>
+            <p>Sur la plage d'Assinie-Mafia, un matin désert et lumineux. Moussa a écrit « Veux-tu m'épouser ? » dans le sable. Awa a écrit « OUI » en lettres géantes.</p>
+            <p>La mer a tout effacé avant midi. Il reste la photo, le carnet de marée et la promesse.</p>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHOTO GALLERY -->
+  <section id="galerie" class="photo-gallery">
+    <div class="container">
+      <div class="gallery-heading fade-up">
+        <div>
+          <p class="gallery-eyebrow">Carnet photo</p>
+          <h2>La journée au fil de l'eau</h2>
+        </div>
+        <p>Six images de notre célébration à Assinie, du premier regard à la dernière lumière.</p>
+      </div>
+
+      <div class="gallery-mosaic">
+        <figure class="gallery-item fade-up">
+          <a href="gallery/01.jpg" target="_blank" rel="noopener" aria-label="Agrandir la photo : la dentelle de la robe">
+            <div class="gallery-frame"><img src="gallery/01.jpg" alt="Détail de la dentelle de la robe de mariée lors de l'essayage" loading="lazy"></div>
+            <figcaption>La dentelle de la robe</figcaption>
+          </a>
+        </figure>
+        <figure class="gallery-item fade-up">
+          <a href="gallery/02.jpg" target="_blank" rel="noopener" aria-label="Agrandir la photo : sous le soleil d'Assinie">
+            <div class="gallery-frame"><img src="gallery/02.jpg" alt="Le couple en tenue traditionnelle profite du soleil" loading="lazy"></div>
+            <figcaption>Sous le soleil d'Assinie</figcaption>
+          </a>
+        </figure>
+        <figure class="gallery-item fade-up">
+          <a href="gallery/03.jpg" target="_blank" rel="noopener" aria-label="Agrandir la photo : un instant à deux">
+            <div class="gallery-frame"><img src="gallery/03.jpg" alt="Les mariés partagent un tendre moment sous le soleil" loading="lazy"></div>
+            <figcaption>Un instant à deux</figcaption>
+          </a>
+        </figure>
+        <figure class="gallery-item fade-up">
+          <a href="gallery/04.jpg" target="_blank" rel="noopener" aria-label="Agrandir la photo : la danse traditionnelle">
+            <div class="gallery-frame"><img src="gallery/04.jpg" alt="Les invités dansent en tenue culturelle lors de la fête" loading="lazy"></div>
+            <figcaption>La danse traditionnelle</figcaption>
+          </a>
+        </figure>
+        <figure class="gallery-item fade-up">
+          <a href="gallery/05.jpg" target="_blank" rel="noopener" aria-label="Agrandir la photo : les femmes de la fête">
+            <div class="gallery-frame"><img src="gallery/05.jpg" alt="Des femmes en tenue traditionnelle célèbrent le mariage" loading="lazy"></div>
+            <figcaption>Les femmes de la fête</figcaption>
+          </a>
+        </figure>
+        <figure class="gallery-item fade-up">
+          <a href="gallery/06.jpg" target="_blank" rel="noopener" aria-label="Agrandir la photo : la dernière lumière">
+            <div class="gallery-frame"><img src="gallery/06.jpg" alt="La mariée lève le bras en souriant sous le soleil couchant" loading="lazy"></div>
+            <figcaption>La dernière lumière</figcaption>
+          </a>
+        </figure>
       </div>
     </div>
   </section>
@@ -773,8 +963,8 @@
             <span>Arrivée</span>
           </div>
           <div class="schedule-content">
-            <h3>Accueil en bord de mer</h3>
-            <p>Cocktail de bienvenue sur la terrasse face à la Méditerranée. Mojitos, rosé frais et canapés provençaux.</p>
+            <h3>Accueil au bord de la lagune</h3>
+            <p>Cocktail de bienvenue sur la terrasse face à l'océan. Jus de bissap, ginger et canapés de poisson frais.</p>
           </div>
         </div>
 
@@ -785,7 +975,7 @@
           </div>
           <div class="schedule-content">
             <h3>Échange des vœux</h3>
-            <p>Cérémonie laïque sur la plage privée, pieds nus dans le sable, face au coucher de soleil. Lecture de poèmes par nos témoins.</p>
+            <p>Cérémonie laïque sur la plage, pieds nus dans le sable, face au coucher de soleil. Lecture de poèmes par nos témoins.</p>
           </div>
         </div>
 
@@ -796,7 +986,7 @@
           </div>
           <div class="schedule-content">
             <h3>Cocktail dînatoire</h3>
-            <p>Apéritif étendu sur la terrasse panoramique avec buffet méditerranéen : mezze, fruits de mer, grillades au feu de bois.</p>
+            <p>Apéritif étendu sur la terrasse avec buffet ivoirien : attieké, brochettes, akara et fruits de mer grillés.</p>
           </div>
         </div>
 
@@ -807,7 +997,7 @@
           </div>
           <div class="schedule-content">
             <h3>Dîner sous les étoiles</h3>
-            <p>Repas assis sous une pergola illuminée de guirlandes. Menu gastronomique inspiré des saveurs du Sud par le Chef Antoine Sanchez.</p>
+            <p>Repas assis sous une pergola illuminée de guirlandes. Menu inspiré des saveurs de la côte ivoirienne, poisson braisé et sauce claire.</p>
           </div>
         </div>
 
@@ -818,7 +1008,7 @@
           </div>
           <div class="schedule-content">
             <h3>Bal sur la plage</h3>
-            <p>Ouverture de bal sur du jazz manouche, puis DJ set jusqu'au lever du soleil. Piste de danse installée sur le sable.</p>
+            <p>Ouverture de bal sur du highlife, puis DJ set coupé-décalé jusqu'au lever du soleil. Piste de danse installée sur le sable.</p>
           </div>
         </div>
       </div>
@@ -830,22 +1020,22 @@
     <div class="container">
       <div class="venue-wrap">
         <div class="venue-img fade-up">
-          <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&q=80" alt="Villa méditerranéenne">
+          <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&q=80" alt="Plage d'Assinie-Mafia">
         </div>
         <div class="venue-info fade-up">
-          <h2>Villa Méditerranée</h2>
-          <p>Une villa d'architecte du début du XXe siècle, nichée entre pinède et calanques. Plage privée, terrasses en pierre blanche et vue à 180° sur la mer.</p>
-          <p>Le lieu est accessible en voiture (parking privé de 50 places) ou en bateau depuis le port de Cassis. Une navette maritime sera mise à disposition le soir.</p>
+          <h2>Assinie-Mafia</h2>
+          <p>Une langue de sable entre lagune et océan, à environ une heure et demie d'Abidjan. Plage privée, terrasses ombragées et vue à 180° sur la mer.</p>
+          <p>Le lieu est accessible en voiture par la route d'Assinie (parking privé) ou en pirogue depuis le port d'Assinie. Une navette sera mise à disposition le soir.</p>
 
           <div class="venue-box">
             <h4>Adresse</h4>
-            <p>Villa Méditerranée<br>Chemin du Petit Nice, 13260 Cassis</p>
+            <p>Assinie-Mafia<br>Côte d'Ivoire</p>
             <a href="https://maps.google.com" target="_blank" rel="noopener">Voir l'itinéraire</a>
           </div>
 
           <div class="venue-box">
             <h4>Hébergements</h4>
-            <p>Liste d'hôtels et locations disponibles sur demande. Pensez à réserver tôt, c'est la haute saison !</p>
+            <p>Liste d'hôtels et de locations sur demande à Assinie-Mafia. Pensez à réserver tôt, c'est la haute saison !</p>
           </div>
         </div>
       </div>
@@ -904,9 +1094,9 @@
 
   <!-- FOOTER -->
   <footer class="footer">
-    <div class="footer-names">Emma & Lucas</div>
-    <div class="footer-date">18 juillet 2027 · Cassis</div>
-    <p class="footer-tag">Template Rivage Méditerranéen · Créé avec amour et soleil</p>
+    <div class="footer-names">Awa & Moussa</div>
+    <div class="footer-date">18 juillet 2027 · Assinie-Mafia</div>
+    <p class="footer-tag">Template Rivage d'Assinie · Créé avec amour et soleil</p>
   </footer>
 
   <script>

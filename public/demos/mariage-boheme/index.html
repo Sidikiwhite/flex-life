@@ -16,10 +16,10 @@
     }
 
     :root {
-      --terre: #C17A5B;
+      --terre: #A5573C;
       --creme: #F5F1E8;
-      --sauge: #8A9A7F;
-      --ocre: #B8855E;
+      --sauge: #5F7354;
+      --ocre: #9F6A48;
       --ink: #3E3228;
       --muted: #6B5D52;
       --line: rgba(62, 50, 40, 0.15);
@@ -38,7 +38,11 @@
       background: var(--creme);
       color: var(--ink);
       line-height: 1.6;
-      overflow-x: hidden;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--terre);
+      outline-offset: 3px;
     }
 
     h1, h2, h3 {
@@ -125,6 +129,9 @@
     }
 
     .nav-links a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
       font-size: 0.9rem;
       color: var(--muted);
       text-decoration: none;
@@ -134,7 +141,11 @@
     .nav-links a:hover,
     .nav-links a:focus {
       color: var(--terre);
-      outline: none;
+    }
+
+    .nav-links a:focus-visible {
+      outline: 2px solid var(--terre);
+      outline-offset: 4px;
     }
 
     /* ========== HERO ========== */
@@ -146,7 +157,7 @@
       align-items: center;
       justify-content: center;
       overflow: hidden;
-      background: linear-gradient(to bottom, var(--creme) 0%, #E8E0D0 100%);
+      background: var(--creme);
     }
 
     .hero-bg {
@@ -214,7 +225,7 @@
       font-weight: 500;
       text-decoration: none;
       border: 2px solid transparent;
-      transition: all 0.25s ease;
+      transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease, transform 0.25s ease;
       cursor: pointer;
     }
 
@@ -229,7 +240,6 @@
       background: var(--ocre);
       border-color: var(--ocre);
       transform: translateY(-2px);
-      outline: none;
     }
 
     .btn-ghost {
@@ -242,7 +252,6 @@
     .btn-ghost:focus {
       background: var(--ink);
       color: var(--creme);
-      outline: none;
     }
 
     /* ========== COUNTDOWN ========== */
@@ -298,6 +307,8 @@
       font-size: 1.1rem;
       color: var(--muted);
       font-style: italic;
+      max-width: 42rem;
+      margin-inline: auto;
     }
 
     .story-timeline {
@@ -352,6 +363,22 @@
       font-size: 1.05rem;
       line-height: 1.75;
       color: var(--muted);
+    }
+
+    .story-text p + p {
+      margin-top: 16px;
+    }
+
+    .story-moment--journal {
+      grid-template-columns: 1fr;
+      max-width: 760px;
+      margin-inline: auto;
+      border-left: 1px solid var(--line);
+      padding-left: 32px;
+    }
+
+    .story-moment--journal .story-text {
+      padding: 0;
     }
 
     /* ========== DETAILS ========== */
@@ -473,7 +500,6 @@
     .form-field input:focus,
     .form-field select:focus,
     .form-field textarea:focus {
-      outline: none;
       border-color: var(--terre);
     }
 
@@ -538,6 +564,10 @@
         order: 0;
       }
 
+      .story-moment--journal {
+        padding-left: 20px;
+      }
+
       .details-grid {
         grid-template-columns: 1fr;
         gap: 24px;
@@ -562,6 +592,98 @@
         justify-content: center;
       }
     }
+
+    /* ========== PHOTO GALLERY ========== */
+    .photo-gallery {
+      padding: clamp(64px, 8vw, 110px) 0;
+      background: var(--creme);
+      border-top: 1px solid var(--line);
+    }
+    .gallery-heading {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 12px 40px;
+      margin-bottom: clamp(24px, 4vw, 44px);
+    }
+    .gallery-eyebrow {
+      margin: 0 0 8px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--terre);
+    }
+    .gallery-heading h2 {
+      margin: 0;
+      font-family: var(--serif);
+      font-size: clamp(1.9rem, 4vw, 2.8rem);
+      line-height: 1.12;
+    }
+    .gallery-heading > p {
+      margin: 0;
+      max-width: 34ch;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    .gallery-mosaic {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-auto-rows: clamp(220px, 22vw, 320px);
+      gap: clamp(8px, 1.5vw, 18px);
+    }
+    .gallery-item { display: flex; margin: 0; }
+    .gallery-item:nth-child(1),
+    .gallery-item:nth-child(4) { grid-column: span 2; }
+    .gallery-item a {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      color: inherit;
+      text-decoration: none;
+    }
+    .gallery-item a:focus-visible {
+      outline: 3px solid var(--terre);
+      outline-offset: 4px;
+    }
+    .gallery-frame {
+      flex: 1;
+      min-height: 0;
+      overflow: hidden;
+      background: #E8E1D3;
+    }
+    .gallery-frame img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    .gallery-item a:hover .gallery-frame img { transform: scale(1.04); }
+    .gallery-item figcaption {
+      padding-top: 10px;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+    @media (max-width: 768px) {
+      .gallery-mosaic {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-auto-rows: clamp(150px, 38vw, 240px);
+      }
+      .gallery-item:nth-child(1),
+      .gallery-item:nth-child(4) { grid-column: span 1; }
+    }
+    @media (max-width: 390px) {
+      .gallery-mosaic {
+        grid-template-columns: minmax(0, 1fr);
+        grid-auto-rows: clamp(200px, 55vw, 280px);
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .gallery-frame img { transition: none; }
+      .gallery-item a:hover .gallery-frame img { transform: none; }
+    }
   </style>
 </head>
 <body>
@@ -571,6 +693,7 @@
       <a href="#hero" class="logo">Clara & Thomas</a>
       <ul class="nav-links">
         <li><a href="#histoire">Notre histoire</a></li>
+        <li><a href="#galerie">Galerie</a></li>
         <li><a href="#details">Informations</a></li>
         <li><a href="#rsvp">Répondre</a></li>
       </ul>
@@ -586,7 +709,7 @@
       <p class="hero-eyebrow">Nous nous marions</p>
       <h1 class="hero-title">Clara <em>&</em> Thomas</h1>
       <p class="hero-date">Samedi 14 juin 2027</p>
-      <p class="hero-location">Domaine des Bergeries, Lourmarin · Provence</p>
+      <p class="hero-location">Sofitel Abidjan Hôtel Ivoire, Cocody · Abidjan</p>
       <a href="#rsvp" class="btn btn-primary">Confirmer votre présence</a>
     </div>
   </section>
@@ -620,42 +743,115 @@
     <div class="container">
       <div class="story-header fade-in">
         <h2>Notre histoire</h2>
-        <p>Huit ans de complicité, d'aventures et de rires partagés</p>
+        <p>Un carnet de huit ans, du rayon poésie du Marais à la terrasse de Cocody.</p>
       </div>
 
       <div class="story-timeline">
         <div class="story-moment fade-in">
           <div class="story-img">
-            <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=800&q=80" alt="Première rencontre">
+            <img src="story/01.jpg" alt="Clara et Thomas, les premières années" loading="lazy">
           </div>
           <div class="story-text">
             <p class="story-year">Septembre 2019</p>
-            <h3>La rencontre</h3>
-            <p>Un soir d'automne dans une librairie du Marais. Thomas cherchait un recueil de poésie, Clara lisait près de la fenêtre. Une conversation sur Prévert qui dure encore aujourd'hui.</p>
+            <h3>Le rayon poésie</h3>
+            <p>Thomas voulait un recueil de Prévert, Clara l'avait déjà ouvert près de la fenêtre. Ils ont commencé par discuter d'un poème et fini par traverser Paris sans but, en oubliant l'heure du dernier train.</p>
+            <p>Le lendemain, le livre était sur la table de Thomas, glissé entre deux pages par Clara. Il a traversé trois déménagements et se trouve aujourd'hui sur notre étagère, à Cocody.</p>
           </div>
         </div>
 
         <div class="story-moment fade-in">
           <div class="story-img">
-            <img src="https://images.unsplash.com/photo-1464207687429-7505649dae38?w=800&q=80" alt="Premier voyage">
+            <img src="story/02.jpg" alt="La carte pliée en quatre, premier voyage ensemble" loading="lazy">
           </div>
           <div class="story-text">
             <p class="story-year">Juillet 2021</p>
-            <h3>L'évasion nordique</h3>
-            <p>Notre premier grand voyage : deux semaines en Norvège, entre fjords et forêts. Thomas a appris que Clara ronfle en altitude, Clara que Thomas ne sait pas lire une carte.</p>
+            <h3>La carte pliée en quatre</h3>
+            <p>Deux semaines en Norvège, et aucun itinéraire réellement suivi. Thomas refusait de demander son chemin, Clara lisait la carte à l'envers. Nous avons atterri au bord d'un fjord sans savoir comment — c'était mieux ainsi.</p>
+            <p>Une playlist usée jusqu'à la corde, deux sacs trop lourds et la même phrase à chaque détour : « on repart demain ». C'est encore notre règle de voyage.</p>
+          </div>
+        </div>
+
+        <div class="story-moment story-moment--journal fade-in">
+          <div class="story-text">
+            <p class="story-year">Mars 2023</p>
+            <h3>Deux valises pour Abidjan</h3>
+            <p>Un billet, deux valises et une seule adresse en tête. Nous avons atterri à Cocody sans connaître personne, avec l'idée bizarre que cette ville pourrait devenir un chez-nous.</p>
+            <p>La première semaine s'est faite de trajets entre le Plateau et la lagune, de repas debout et d'un marché découvert par hasard. Le soir, la terrasse de notre location nous rappelait qu'on avait raison d'être un peu fous.</p>
+          </div>
+        </div>
+
+        <div class="story-moment story-moment--journal fade-in">
+          <div class="story-text">
+            <p class="story-year">Août 2024</p>
+            <h3>Le rythme de Cocody</h3>
+            <p>Nos dimanches ont pris une forme : le marché à l'aube, le poisson braisé à midi, puis un détour chez les voisins. Nous connaissons maintenant le nom des vendeurs et l'heure exacte où la lumière descend sur la lagune.</p>
+            <p>Abidjan n'était plus une destination mais une cadence. C'est en la ralentissant que nous avons compris que notre mariage devait se célébrer ici, à quelques minutes de chez nous.</p>
           </div>
         </div>
 
         <div class="story-moment fade-in">
           <div class="story-img">
-            <img src="https://images.unsplash.com/photo-1513861302809-b9a07d1e0f47?w=800&q=80" alt="La demande">
+            <img src="story/03.jpg" alt="La demande en mariage de Clara et Thomas" loading="lazy">
           </div>
           <div class="story-text">
             <p class="story-year">Décembre 2026</p>
-            <h3>La question</h3>
-            <p>Au sommet du Puy de Dôme, sous un ciel d'hiver parfaitement dégagé. Thomas avait préparé un discours qu'il a oublié. Clara a dit oui avant même qu'il finisse sa phrase.</p>
+            <h3>Oui avant la fin de la phrase</h3>
+            <p>De retour en France pour les fêtes, au sommet du Puy de Dôme. Thomas avait préparé un discours ; Clara a deviné avant la première phrase. Elle a dit oui, il a oublié la suite.</p>
+            <p>La photo de ce matin-là est posée sur l'étagère du salon, entre le recueil de Prévert et une carte de Norvège pliée en quatre.</p>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHOTO GALLERY -->
+  <section id="galerie" class="photo-gallery">
+    <div class="container">
+      <div class="gallery-heading fade-in">
+        <div>
+          <p class="gallery-eyebrow">En images</p>
+          <h2>Les instants que l'on garde</h2>
+        </div>
+        <p>Des tenues traditionnelles, des gestes et des sourires : notre journée racontée en photos.</p>
+      </div>
+
+      <div class="gallery-mosaic">
+        <figure class="gallery-item fade-in">
+          <a href="gallery/01.jpg" target="_blank" rel="noopener" aria-label="Agrandir la photo : les préparatifs">
+            <div class="gallery-frame"><img src="gallery/01.jpg" alt="La mariée se prépare avec l'aide d'une styliste" loading="lazy"></div>
+            <figcaption>Les préparatifs</figcaption>
+          </a>
+        </figure>
+        <figure class="gallery-item fade-in">
+          <a href="gallery/02.jpg" target="_blank" rel="noopener" aria-label="Agrandir la photo : l'arrivée de la mariée">
+            <div class="gallery-frame"><img src="gallery/02.jpg" alt="La mariée arrive entourée de deux proches en tenue traditionnelle" loading="lazy"></div>
+            <figcaption>L'arrivée de la mariée</figcaption>
+          </a>
+        </figure>
+        <figure class="gallery-item fade-in">
+          <a href="gallery/03.jpg" target="_blank" rel="noopener" aria-label="Agrandir la photo : la cérémonie traditionnelle">
+            <div class="gallery-frame"><img src="gallery/03.jpg" alt="Trois proches en tenue traditionnelle lors de la cérémonie" loading="lazy"></div>
+            <figcaption>La cérémonie traditionnelle</figcaption>
+          </a>
+        </figure>
+        <figure class="gallery-item fade-in">
+          <a href="gallery/04.jpg" target="_blank" rel="noopener" aria-label="Agrandir la photo : le portrait des mariés">
+            <div class="gallery-frame"><img src="gallery/04.jpg" alt="Le couple en tenue traditionnelle africaine en extérieur" loading="lazy"></div>
+            <figcaption>Le portrait des mariés</figcaption>
+          </a>
+        </figure>
+        <figure class="gallery-item fade-in">
+          <a href="gallery/05.jpg" target="_blank" rel="noopener" aria-label="Agrandir la photo : la lumière du soir">
+            <div class="gallery-frame"><img src="gallery/05.jpg" alt="La mariée en tenue d'apparat au coucher du soleil" loading="lazy"></div>
+            <figcaption>La lumière du soir</figcaption>
+          </a>
+        </figure>
+        <figure class="gallery-item fade-in">
+          <a href="gallery/06.jpg" target="_blank" rel="noopener" aria-label="Agrandir la photo : le partage du vin">
+            <div class="gallery-frame"><img src="gallery/06.jpg" alt="Un proche verse une boisson traditionnelle dans un verre" loading="lazy"></div>
+            <figcaption>Le partage du vin</figcaption>
+          </a>
+        </figure>
       </div>
     </div>
   </section>
@@ -671,43 +867,43 @@
         <div class="detail-card fade-in">
           <span class="detail-index">01</span>
           <h3>Cérémonie</h3>
-          <p>15h30 précises<br>Jardins du domaine</p>
-          <p>Cérémonie laïque en extérieur</p>
+          <p>15h30 précises<br>Jardins de l'Hôtel Ivoire</p>
+          <p>Cérémonie laïque en extérieur, sous les palmiers</p>
         </div>
 
         <div class="detail-card fade-in">
           <span class="detail-index">02</span>
           <h3>Vin d'honneur</h3>
-          <p>17h00 - 19h30<br>Terrasse panoramique</p>
-          <p>Apéritif dinatoire provençal</p>
+          <p>17h00 - 19h30<br>Terrasse face à la lagune</p>
+          <p>Cocktail de bienvenue aux saveurs ivoiriennes</p>
         </div>
 
         <div class="detail-card fade-in">
           <span class="detail-index">03</span>
           <h3>Dîner & soirée</h3>
-          <p>20h00 - tard<br>Grande bergerie</p>
+          <p>20h00 - tard<br>Salle de réception de l'Hôtel Ivoire</p>
           <p>Dîner assis, puis danse jusqu'au bout de la nuit</p>
         </div>
 
         <div class="detail-card fade-in">
           <span class="detail-index">04</span>
           <h3>Accès</h3>
-          <p>Domaine des Bergeries<br>Route de Vaugines, 84160 Lourmarin</p>
-          <p><a href="https://maps.google.com" target="_blank" rel="noopener">Voir sur Google Maps</a></p>
+          <p>Sofitel Abidjan Hôtel Ivoire<br>Boulevard Hassan II, Cocody, Abidjan</p>
+          <p><a href="https://www.google.com/maps/search/?api=1&amp;query=Sofitel%20Abidjan%20H%C3%B4tel%20Ivoire" target="_blank" rel="noopener">Voir sur Google Maps</a></p>
         </div>
 
         <div class="detail-card fade-in">
           <span class="detail-index">05</span>
           <h3>Hébergement</h3>
-          <p>Sélection de gîtes à proximité</p>
+          <p>Hôtels partenaires à Cocody et au Plateau</p>
           <p><a href="#rsvp">Contactez-nous pour nos recommandations</a></p>
         </div>
 
         <div class="detail-card fade-in">
           <span class="detail-index">06</span>
           <h3>Tenue</h3>
-          <p>Élégance champêtre</p>
-          <p>Pensez au terrain : préférez les talons compensés ou espadrilles</p>
+          <p>Élégance bohème</p>
+          <p>Préférez les tissus légers : la soirée se poursuit en extérieur</p>
         </div>
       </div>
     </div>
@@ -768,13 +964,13 @@
   <footer class="footer">
     <div class="footer-love">❦</div>
     <div class="footer-names">Clara & Thomas</div>
-    <p>14 juin 2027 · Lourmarin</p>
+    <p>14 juin 2027 · Abidjan</p>
     <p class="footer-tag">Avec amour · Template Bohème Sauvage</p>
   </footer>
 
   <script>
     // Countdown
-    const weddingDate = new Date('2027-06-14T15:30:00').getTime();
+    const weddingDate = new Date('2027-06-14T15:30:00+00:00').getTime();
     
     function updateCountdown() {
       const now = new Date().getTime();

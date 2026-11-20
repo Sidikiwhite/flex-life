@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sophie & Alexandre — 21 Septembre 2027</title>
+  <title>Aminata & Yaya — 21 Septembre 2027</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
@@ -351,6 +351,95 @@
       line-height: 1.8;
     }
 
+    /* ========== STORY ========== */
+    .story {
+      background: var(--noir);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      padding: 120px 0;
+    }
+
+    .story-header {
+      text-align: center;
+      margin-bottom: 72px;
+    }
+
+    .story-header h2 {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      color: var(--blanc);
+      margin-bottom: 16px;
+    }
+
+    .story-header p {
+      color: rgba(250, 250, 250, 0.65);
+      font-size: 1.05rem;
+    }
+
+    .story-moment {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      padding: 48px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .story-moment:last-child {
+      border-bottom: none;
+    }
+
+    .story-moment:nth-child(even) .story-img {
+      order: 2;
+    }
+
+    .story-img {
+      aspect-ratio: 4 / 5;
+      overflow: hidden;
+    }
+
+    .story-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(100%) contrast(1.05);
+    }
+
+    .story-year {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--or);
+      margin-bottom: 12px;
+    }
+
+    .story-text h3 {
+      font-size: clamp(1.6rem, 3vw, 2rem);
+      color: var(--blanc);
+      margin-bottom: 16px;
+    }
+
+    .story-text p {
+      color: rgba(250, 250, 250, 0.75);
+      line-height: 1.8;
+    }
+
+    .story-text p + p {
+      margin-top: 16px;
+    }
+
+    .story-moment--journal {
+      grid-template-columns: 1fr;
+      max-width: 720px;
+      margin-inline: auto;
+      border-left: 1px solid var(--line);
+      padding-left: 32px;
+    }
+
+    .story-moment--journal .story-text {
+      padding: 0;
+    }
+
     /* ========== VENUE ========== */
     .venue {
       background: var(--noir);
@@ -526,6 +615,23 @@
         padding: 80px 0;
       }
 
+      .story {
+        padding: 80px 0;
+      }
+
+      .story-moment {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .story-moment:nth-child(even) .story-img {
+        order: 0;
+      }
+
+      .story-moment--journal {
+        padding-left: 20px;
+      }
+
       .timeline-item {
         grid-template-columns: 1fr;
         gap: 16px;
@@ -555,14 +661,124 @@
         justify-content: center;
       }
     }
+    /* Accessibilité : cibles tactiles et focus clavier */
+    .logo,
+    .nav-menu a,
+    .venue-info a {
+      display: inline-block;
+      padding: 12px 6px;
+    }
+
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible,
+    select:focus-visible,
+    textarea:focus-visible {
+      outline: 2px solid var(--or);
+      outline-offset: 3px;
+    }
+
+    /* ========== PHOTO GALLERY ========== */
+    .photo-gallery {
+      padding: clamp(64px, 8vw, 110px) 0;
+      background: var(--noir);
+      border-top: 1px solid var(--line);
+    }
+    .gallery-heading {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 12px 40px;
+      margin-bottom: clamp(24px, 4vw, 44px);
+    }
+    .gallery-eyebrow {
+      margin: 0 0 8px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--or);
+    }
+    .gallery-heading h2 {
+      margin: 0;
+      font-family: var(--display);
+      font-size: clamp(1.9rem, 4vw, 2.8rem);
+      line-height: 1.12;
+    }
+    .gallery-heading > p {
+      margin: 0;
+      max-width: 34ch;
+      color: rgba(250, 250, 250, 0.72);
+      font-size: 0.95rem;
+    }
+    .gallery-mosaic {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-auto-rows: clamp(220px, 22vw, 320px);
+      gap: clamp(8px, 1.5vw, 18px);
+    }
+    .gallery-item { display: flex; margin: 0; }
+    .gallery-item:nth-child(1),
+    .gallery-item:nth-child(4) { grid-column: span 2; }
+    .gallery-item a {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      color: inherit;
+      text-decoration: none;
+    }
+    .gallery-item a:focus-visible {
+      outline: 3px solid var(--or);
+      outline-offset: 4px;
+    }
+    .gallery-frame {
+      flex: 1;
+      min-height: 0;
+      overflow: hidden;
+      background: #1C1C1C;
+    }
+    .gallery-frame img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    .gallery-item a:hover .gallery-frame img { transform: scale(1.04); }
+    .gallery-item figcaption {
+      padding-top: 10px;
+      font-size: 0.82rem;
+      color: rgba(250, 250, 250, 0.72);
+    }
+    @media (max-width: 768px) {
+      .gallery-mosaic {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-auto-rows: clamp(150px, 38vw, 240px);
+      }
+      .gallery-item:nth-child(1),
+      .gallery-item:nth-child(4) { grid-column: span 1; }
+    }
+    @media (max-width: 390px) {
+      .gallery-mosaic {
+        grid-template-columns: minmax(0, 1fr);
+        grid-auto-rows: clamp(200px, 55vw, 280px);
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .gallery-frame img { transition: none; }
+      .gallery-item a:hover .gallery-frame img { transform: none; }
+    }
   </style>
 </head>
 <body>
   <!-- HEADER -->
   <header class="header">
     <nav class="nav">
-      <a href="#hero" class="logo">S & A</a>
+      <a href="#hero" class="logo">A & Y</a>
       <ul class="nav-menu">
+        <li><a href="#histoire">Notre histoire</a></li>
+        <li><a href="#galerie">Galerie</a></li>
         <li><a href="#programme">Programme</a></li>
         <li><a href="#lieu">Le lieu</a></li>
         <li><a href="#rsvp">Répondre</a></li>
@@ -579,11 +795,11 @@
     <div class="hero-content">
       <p class="hero-date-small">21 Septembre 2027</p>
       <h1 class="hero-names">
-        Sophie
+        Aminata
         <span class="hero-ampersand">&</span>
-        Alexandre
+        Yaya
       </h1>
-      <p class="hero-tagline">Une nuit parisienne inoubliable</p>
+      <p class="hero-tagline">Une nuit abidjanaise inoubliable</p>
       <a href="#rsvp" class="btn">Confirmer votre présence</a>
     </div>
   </section>
@@ -592,9 +808,127 @@
   <section class="intro">
     <div class="container">
       <div class="intro-content reveal">
-        <p>Après dix années de complicité urbaine, de cafés au petit matin et de promenades nocturnes le long de la Seine, nous avons décidé de sceller notre histoire au cœur de la ville qui nous a réunis.</p>
+        <p>Après neuf années de complicité abidjanaise, de maquis au Plateau et de marches le long de la lagune, nous avons décidé de sceller notre histoire dans la ville qui nous a réunis.</p>
         <p>Vous êtes les témoins de notre aventure. Nous serions honorés de vous compter parmi nous pour célébrer ce chapitre nouveau.</p>
-        <div class="intro-signature">Sophie & Alexandre</div>
+        <div class="intro-signature">Aminata & Yaya</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STORY -->
+  <section id="histoire" class="story">
+    <div class="container">
+      <div class="story-header reveal">
+        <h2>Notre histoire</h2>
+        <p>L'Abidjan d'après minuit, en cinq scènes — du Plateau à la lagune de Cocody.</p>
+      </div>
+
+      <div class="story-timeline">
+        <div class="story-moment reveal">
+          <div class="story-img">
+            <img src="story/01.jpg" alt="Photo souvenir de nos débuts à Abidjan" loading="lazy">
+          </div>
+          <div class="story-text">
+            <p class="story-year">Mars 2018</p>
+            <h3>Le dernier aloco du Plateau</h3>
+            <p>Un jeudi de mars, dans un maquis du Plateau où l'on partageait la table avec des inconnus. Aminata commandait un aloco, Yaya une bière bien fraîche. La conversation a commencé sur le prix du poisson et n'a plus jamais cessé.</p>
+            <p>À la fermeture, Yaya a retrouvé son parapluie accroché à la chaise d'Aminata. Il est encore dans l'entrée, chez nous, à Cocody.</p>
+          </div>
+        </div>
+
+        <div class="story-moment story-moment--journal reveal">
+          <div class="story-text">
+            <p class="story-year">Octobre 2019</p>
+            <h3>Sous l'auvent</h3>
+            <p>Une pluie d'octobre nous a bloqués sous un auvent de la rue des Jardins. Nous avons attendu quarante minutes en écoutant le bruit sur le zinc, sans une seule plainte.</p>
+            <p>Yaya a dit : « si on arrive à attendre sous la pluie, on arrivera à tout attendre ensemble. » Il avait raison, mais il était trempé quand même.</p>
+          </div>
+        </div>
+
+        <div class="story-moment reveal">
+          <div class="story-img">
+            <img src="story/02.jpg" alt="Souvenir de notre escapade à Grand-Bassam" loading="lazy">
+          </div>
+          <div class="story-text">
+            <p class="story-year">Août 2021</p>
+            <h3>Grand-Bassam, sans carte</h3>
+            <p>Deux jours hors d'Abidjan, entre les maisons du Vieux-Bassam et la lagune. Yaya avait oublié la carte, Aminata avait gardé les tickets de taxi dans sa poche.</p>
+            <p>Nous avons marché au hasard jusqu'à une plage presque vide, et compris ce soir-là que nous aimions voyager sans programme — mais toujours du même côté du quai.</p>
+          </div>
+        </div>
+
+        <div class="story-moment story-moment--journal reveal">
+          <div class="story-text">
+            <p class="story-year">Novembre 2024</p>
+            <h3>Le balcon de Cocody</h3>
+            <p>Nous avons emménagé à quelques minutes de l'Hôtel Ivoire. Le dimanche commence au marché, se poursuit autour d'un poisson braisé et finit chez des amis du quartier.</p>
+            <p>Le soir, du balcon, nous regardons les lumières s'allumer un à un. C'est devenu notre façon de dire bonjour à la ville.</p>
+          </div>
+        </div>
+
+        <div class="story-moment reveal">
+          <div class="story-img">
+            <img src="story/03.jpg" alt="Souvenir de notre soirée face à la lagune" loading="lazy">
+          </div>
+          <div class="story-text">
+            <p class="story-year">Juin 2026</p>
+            <h3>Minuit moins cinq</h3>
+            <p>Sur la terrasse de l'Hôtel Ivoire, face à la lagune, au moment où Cocody s'illumine. Yaya avait préparé un discours qu'il a oublié. Aminata a dit oui avant même qu'il finisse sa phrase.</p>
+            <p>Nous revenons ce soir au même endroit, avec ceux qui nous ont vus arriver et ceux qui nous ont vus devenir nous-mêmes.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHOTO GALLERY -->
+  <section id="galerie" class="photo-gallery">
+    <div class="container">
+      <div class="gallery-heading reveal">
+        <div>
+          <p class="gallery-eyebrow">La soirée en images</p>
+          <h2>Ces heures qui restent</h2>
+        </div>
+        <p>De l'arrivée des premiers invités à la dernière danse : six instants de notre nuit à Abidjan.</p>
+      </div>
+
+      <div class="gallery-mosaic">
+        <figure class="gallery-item reveal">
+          <a href="gallery/01.jpg" target="_blank" rel="noopener" aria-label="Agrandir la photo : le chanteur de la soirée">
+            <div class="gallery-frame"><img src="gallery/01.jpg" alt="Un chanteur anime la fête de mariage" loading="lazy"></div>
+            <figcaption>Le chanteur de la soirée</figcaption>
+          </a>
+        </figure>
+        <figure class="gallery-item reveal">
+          <a href="gallery/02.jpg" target="_blank" rel="noopener" aria-label="Agrandir la photo : l'ouverture de la réception">
+            <div class="gallery-frame"><img src="gallery/02.jpg" alt="Le couple sourit au milieu de la réception décorée" loading="lazy"></div>
+            <figcaption>L'ouverture de la réception</figcaption>
+          </a>
+        </figure>
+        <figure class="gallery-item reveal">
+          <a href="gallery/03.jpg" target="_blank" rel="noopener" aria-label="Agrandir la photo : le toast des mariés">
+            <div class="gallery-frame"><img src="gallery/03.jpg" alt="Les mariés lèvent leur verre pour porter un toast" loading="lazy"></div>
+            <figcaption>Le toast des mariés</figcaption>
+          </a>
+        </figure>
+        <figure class="gallery-item reveal">
+          <a href="gallery/04.jpg" target="_blank" rel="noopener" aria-label="Agrandir la photo : la première danse">
+            <div class="gallery-frame"><img src="gallery/04.jpg" alt="Les mariés dansent entourés d'invités et de flammèches" loading="lazy"></div>
+            <figcaption>La première danse</figcaption>
+          </a>
+        </figure>
+        <figure class="gallery-item reveal">
+          <a href="gallery/05.jpg" target="_blank" rel="noopener" aria-label="Agrandir la photo : le sourire de la mariée">
+            <div class="gallery-frame"><img src="gallery/05.jpg" alt="La mariée sourit au milieu de la réception" loading="lazy"></div>
+            <figcaption>Le sourire de la mariée</figcaption>
+          </a>
+        </figure>
+        <figure class="gallery-item reveal">
+          <a href="gallery/06.jpg" target="_blank" rel="noopener" aria-label="Agrandir la photo : la fête bat son plein">
+            <div class="gallery-frame"><img src="gallery/06.jpg" alt="Les invités chantent et dansent ensemble" loading="lazy"></div>
+            <figcaption>La fête bat son plein</figcaption>
+          </a>
+        </figure>
       </div>
     </div>
   </section>
@@ -614,7 +948,7 @@
           </div>
           <div class="timeline-content">
             <h3>Accueil des invités</h3>
-            <p>Cocktail de bienvenue dans les salons du premier étage. Vue panoramique sur les toits de Paris.</p>
+            <p>Cocktail de bienvenue dans les salons de l'Hôtel Ivoire. Vue sur la lagune et les lumières de Cocody.</p>
           </div>
         </div>
 
@@ -625,7 +959,7 @@
           </div>
           <div class="timeline-content">
             <h3>Échange des vœux</h3>
-            <p>Cérémonie laïque intimiste dans la bibliothèque. Lecture de textes choisis par nos proches.</p>
+            <p>Cérémonie laïque intimiste dans le jardin de l'hôtel. Lecture de textes choisis par nos proches, sous les palmiers.</p>
           </div>
         </div>
 
@@ -636,7 +970,7 @@
           </div>
           <div class="timeline-content">
             <h3>Repas gastronomique</h3>
-            <p>Dîner assis de cinq services par le Chef Julien Mercier. Accord mets et vins sélectionnés.</p>
+            <p>Dîner assis de cinq services : saveurs ivoiriennes revisitées et accord de vins sélectionnés.</p>
           </div>
         </div>
 
@@ -647,7 +981,7 @@
           </div>
           <div class="timeline-content">
             <h3>Première danse & soirée</h3>
-            <p>Bal jazz et électro-swing jusqu'à l'aube. DJ résident et piste de danse sous les lustres.</p>
+            <p>Bal jazz, highlife et coupé-décalé jusqu'à l'aube. DJ résident et piste de danse sous les lustres.</p>
           </div>
         </div>
 
@@ -657,7 +991,7 @@
             <span>Surprise</span>
           </div>
           <div class="timeline-content">
-            <h3>Minuit parisien</h3>
+            <h3>Minuit abidjanais</h3>
             <p>Une attention particulière pour clore la soirée. Laissez-vous surprendre.</p>
           </div>
         </div>
@@ -670,14 +1004,14 @@
     <div class="container">
       <div class="venue-grid">
         <div class="venue-img reveal">
-          <img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800&q=80" alt="Hôtel particulier parisien">
+          <img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800&q=80" alt="Terrasse de l'Hôtel Ivoire à Cocody">
         </div>
         <div class="venue-info reveal">
-          <h2>L'Hôtel de Sévigné</h2>
-          <p>Un hôtel particulier du XVIIIe siècle niché au cœur du Marais. Salons classés, bibliothèque d'époque et verrière contemporaine pour une soirée hors du temps.</p>
-          <p>Accessible en métro (ligne 1, arrêt Saint-Paul) ou en taxi. Un service voiturier sera à votre disposition.</p>
-          <div class="venue-name">Hôtel de Sévigné</div>
-          <div class="venue-address">12 rue de Turenne, 75004 Paris</div>
+          <h2>L'Hôtel Ivoire</h2>
+          <p>L'adresse mythique de Cocody, face à la lagune. Ses salons, ses jardins et sa vue dégagée en font un cadre à la fois urbain et intime pour une soirée qui s'étire jusqu'au petit matin.</p>
+          <p>Accessible en voiture depuis le Plateau ou l'aéroport Félix-Houphouët-Boigny. Un service voiturier sera à votre disposition.</p>
+          <div class="venue-name">Sofitel Abidjan Hôtel Ivoire</div>
+          <div class="venue-address">Boulevard Hassan II, Cocody, Abidjan</div>
           <a href="https://maps.google.com" target="_blank" rel="noopener">Voir l'itinéraire</a>
         </div>
       </div>
@@ -734,9 +1068,9 @@
 
   <!-- FOOTER -->
   <footer class="footer">
-    <div class="footer-monogram">S & A</div>
-    <div class="footer-date">21 · 09 · 2027 · PARIS</div>
-    <div class="footer-credits">Template Minuit à Paris</div>
+    <div class="footer-monogram">A & Y</div>
+    <div class="footer-date">21 · 09 · 2027 · ABIDJAN</div>
+    <div class="footer-credits">Template Minuit à Abidjan</div>
   </footer>
 
   <script>
